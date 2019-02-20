@@ -8,12 +8,15 @@ public class CharacterMovement : MonoBehaviour
     public Joystick rightstick;
     private Rigidbody rb;
     private CharacterController pc;
+    private CharacterDataController cdc;
+    private float speed = 5.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         pc = GetComponent<CharacterController>();
+        cdc = GetComponent<CharacterDataController>();
     }
 
     // Update is called once per frame
@@ -36,15 +39,19 @@ public class CharacterMovement : MonoBehaviour
             Vector3 newvec = new Vector3(transform.eulerAngles.x,
                                                 Mathf.Atan2(x2, y2) * Mathf.Rad2Deg,
                                                 transform.eulerAngles.z);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(newvec), 0.8f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(newvec), 0.2f);
         }
 
-        movement = new Vector3(x1, 0, y1) * distance * 5;
+        movement = new Vector3(x1, 0, y1) * distance * speed;
         //movement.y = rb.velocity.y;
         //rb.velocity = movement;
-
         //pc.Move(movement);
         pc.SimpleMove(movement);
         
+    }
+
+    private void LateUpdate()
+    {
+        speed = cdc.character.GetMoveSpeed();
     }
 }

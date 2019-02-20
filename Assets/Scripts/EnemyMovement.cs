@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     private CharacterController cc;
+    private CharacterDataController cdc;
     private GameObject player;
     private float speed = 2.5f;
 
@@ -16,7 +17,8 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         cc = GetComponent<CharacterController>();
-        player = GameObject.Find("Player");
+        cdc = GetComponent<CharacterDataController>();
+        player = GameObject.Find(Character.char_names[1]); //"player"
         target = player.transform;
     }
 
@@ -29,5 +31,10 @@ public class EnemyMovement : MonoBehaviour
         //Vector3 playerposition = player.transform.position;
         //transform.forward = Vector3.Lerp(transform.forward, playerposition, 1f);
         cc.SimpleMove(transform.forward);
+    }
+
+    private void LateUpdate()
+    {
+        speed = cdc.character.GetMoveSpeed();
     }
 }
