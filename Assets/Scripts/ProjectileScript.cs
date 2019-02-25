@@ -4,46 +4,35 @@ using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour
 {
-    private float speed = 50;
+    private float speed = 150;
     private float time;
-    private float minSpeed = 1;
+    private float minSpeed = 20;
     private float accelerationTime = 20;
     Rigidbody rb;
     GameObject player;
-    Weapon w;
-    Collider c;
+    Weapon weapon;
+    Collider closestCollider;
 
     void Start()
     {
         time = 0;
         rb = GetComponent<Rigidbody>();
         player = GameObject.Find(Character.char_names[1]);
-        c = player.GetComponentInChildren<AimTrigger>().GetClosestCollider();
-        w = player.GetComponent<WeaponManager>().GetCurrentWeapon();
-        rb.velocity = (c.transform.position - rb.position).normalized;
-        rb.transform.LookAt(c.transform);
+        closestCollider = player.GetComponentInChildren<AimTrigger>().GetClosestCollider();
+        weapon = player.GetComponent<WeaponManager>().GetCurrentWeapon();
+        rb.transform.LookAt(closestCollider.transform);
         rb.transform.rotation *= Quaternion.Euler(0, -90f, 0);
 
-        if (w.weapon_name == Weapon.weapons[0]) //shotgun
+        if (weapon.weapon_name == Weapon.weapons[3]) //grenadelauncher
         {
-            rb.velocity = ((c.transform.position - rb.position).normalized + AddNoiseOnAngle(0, 15)) * speed;
-            Destroy(gameObject, 1f);
-        }
-        else if (w.weapon_name == Weapon.weapons[1]) //autorifle
-        {
-            rb.velocity = ((c.transform.position - rb.position).normalized + AddNoiseOnAngle(0, 5)) * speed;
-            Destroy(gameObject, 1f);
-        }
-        else if (w.weapon_name == Weapon.weapons[2]) //lasercannon
-        {
-            rb.velocity = ((c.transform.position - rb.position).normalized + AddNoiseOnAngle(0, 1)) * speed;
-            Destroy(gameObject, 1f);
-        }
-        else if (w.weapon_name == Weapon.weapons[3]) //grenadelauncher
-        {
+            rb.velocity = (closestCollider.transform.position - rb.position).normalized;
             speed = 2000;
             rb.useGravity = false;
             Destroy(gameObject, 5f);
+        } else
+        {
+            rb.velocity = ((closestCollider.transform.position - rb.position).normalized + AddNoiseOnAngle(-weapon.weapon_spread, weapon.weapon_spread)) * speed;
+            Destroy(gameObject, 1f);
         }
     }
 
@@ -54,10 +43,10 @@ public class ProjectileScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (w.weapon_name == Weapon.weapons[3]) //increase projectile speed
+        if (weapon.weapon_name == Weapon.weapons[3]) //increase projectile speed
         {
             float currentSpeed = Mathf.SmoothStep(minSpeed, speed, time / accelerationTime);
-            rb.velocity = (c.transform.position - rb.position).normalized * currentSpeed;
+            rb.velocity = (closestCollider.transform.position - rb.position).normalized * currentSpeed;
             time += Time.deltaTime;
             RaycastHit hit;
             Debug.DrawRay(transform.position, transform.right, Color.black);
@@ -65,11 +54,22 @@ public class ProjectileScript : MonoBehaviour
             {
                 if (hit.collider)
                 {
+                    if (hit.collider.gameObject.name.StartsWith("aim_angle"))
+                        return;
                     Debug.Log("ROCKET HIT");
+                    try
+                    {
+                        hit.collider.gameObject.GetComponent<CharacterDataController>().character.DamageCharacter(weapon.damage_per_shot);
+                    }
+                    catch (MissingReferenceException e)
+                    {
+                        return;
+                    }
                     Destroy(gameObject);
                 }
             }
-        } else
+        }
+        else
         {
             RaycastHit hit;
             Debug.DrawRay(transform.position, transform.right, Color.black);
@@ -77,7 +77,17 @@ public class ProjectileScript : MonoBehaviour
             {
                 if (hit.collider)
                 {
+                    if (hit.collider.gameObject.name.StartsWith("aim_angle"))
+                        return;
                     Debug.Log("BULLET HIT");
+                    try
+                    {
+                        hit.collider.gameObject.GetComponent<CharacterDataController>().character.DamageCharacter(weapon.damage_per_shot);
+                    }
+                    catch (MissingReferenceException e)
+                    {
+                        return;
+                    }
                     Destroy(gameObject);
                 }
             }
@@ -86,9 +96,14 @@ public class ProjectileScript : MonoBehaviour
 
     Vector3 AddNoiseOnAngle(float min, float max)
     {
+        //return new Vector3(
+        //  Mathf.Sin(2 * Mathf.PI * Random.Range(min, max) / 360),
+        //  Mathf.Sin(2 * Mathf.PI * Random.Range(min, max) / 360),
+        //  Mathf.Sin(2 * Mathf.PI * Random.Range(min, max) / 360)
+        //);
         return new Vector3(
           Mathf.Sin(2 * Mathf.PI * Random.Range(min, max) / 360),
-          Mathf.Sin(2 * Mathf.PI * Random.Range(min, max) / 360),
+          0,
           Mathf.Sin(2 * Mathf.PI * Random.Range(min, max) / 360)
         );
     }
@@ -98,6 +113,6 @@ public class ProjectileScript : MonoBehaviour
  public class Projectile
 {
     public float speed;
-    public float projectile_scale;
+    public Vector3 projectile_scale;
     public GameObject projectile_object;
 }

@@ -60,6 +60,11 @@ public class WeaponManager : MonoBehaviour
     public void SwitchWeapon(Weapon weapon)
     {
         currentWeapon = weapon;
+        Transform aim = aim_angle.gameObject.transform;
+        aim.localScale = weapon.aim_angle_size;
+        aim.localPosition = weapon.aim_angle_location;
+        weapon.p.projectile_object.transform.localScale = weapon.p.projectile_scale;
+        //gameObject.transform.localScale = weapon.p.projectile_scale;
     }
 }
 
@@ -75,11 +80,12 @@ abstract public class Weapon
     public GameObject bullet;
 
     public string weapon_name;
-    public float damage_per_shot;
+    public int damage_per_shot;
     public float rate_of_fire;
     public float weapon_lock_time;
+    public float weapon_spread;
 
-    public abstract void ShootWeapon(Vector3 at);
+    abstract public void ShootWeapon(Vector3 at);
 }
 
 public class Shotgun : Weapon
@@ -89,10 +95,11 @@ public class Shotgun : Weapon
         aim_angle_size = new Vector3(800f, 450f, default_aim_angle_size.z);
         aim_angle_location = new Vector3(0f, 0f, 5.5f);
         weapon_name = "shotgun";
-        damage_per_shot = 20f;
+        damage_per_shot = 50;
         rate_of_fire = 1f;
         weapon_lock_time = 0.1f;
-        p.projectile_scale = 1f;
+        weapon_spread = 10f;
+        p.projectile_scale = new Vector3(3f, 3f, 3f);
         timer = new Stopwatch();
         timer.Start();
     }
@@ -108,17 +115,6 @@ public class Shotgun : Weapon
         Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
         Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
         Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
-
-        //Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
-        //Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
-        //Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
-        //Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
-
-        //Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
-        //Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
-        //Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
-        //Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
-
     }
 }
 
@@ -129,10 +125,11 @@ public class AutoRifle : Weapon
         aim_angle_size = default_aim_angle_size;
         aim_angle_location = default_aim_angle_location;
         weapon_name = "autorifle";
-        damage_per_shot = 25f;
+        damage_per_shot = 25;
         rate_of_fire = 0.2f;
         weapon_lock_time = 1f;
-        p.projectile_scale = 1f;
+        weapon_spread = 2.5f;
+        p.projectile_scale = new Vector3(3f, 3f, 3f);
         timer = new Stopwatch();
         timer.Start();
     }
@@ -150,10 +147,11 @@ public class LaserCannon : Weapon
         aim_angle_size = new Vector3(250f, 900f, default_aim_angle_size.z);
         aim_angle_location = default_aim_angle_location;
         weapon_name = "lasercannon";
-        damage_per_shot = 25f;
-        rate_of_fire = 0.25f;
+        damage_per_shot = 100;
+        rate_of_fire = 2f;
         weapon_lock_time = 1f;
-        p.projectile_scale = 1f;
+        weapon_spread = 0.5f;
+        p.projectile_scale = new Vector3(6f, 6f, 6f);
         timer = new Stopwatch();
         timer.Start();
     }
@@ -171,11 +169,12 @@ public class GrenadeLauncher : Weapon
         aim_angle_size = new Vector3(150f, 1500f, default_aim_angle_size.z);
         aim_angle_location = new Vector3(0f, 0f, 16f);
         weapon_name = "grenadelauncher";
-        damage_per_shot = 2000f;
+        damage_per_shot = 2000;
         //rate_of_fire = 10f;
         rate_of_fire = 5f;
         weapon_lock_time = 4f;
-        p.projectile_scale = 1f;
+        weapon_spread = 0f;
+        p.projectile_scale = new Vector3(1f, 1f, 1f);
         timer = new Stopwatch();
         timer.Start();
     }

@@ -7,12 +7,11 @@ using UnityEngine;
 public class CharacterDataController : MonoBehaviour
 {
     public Character character;
-    private float HealthCheckTime = 1f;
+    private float HealthCheckTime = 0.2f;
 
     void Start()
     {
         character = Character.CreateCharacter(name);
-        //StartCoroutine(CheckHealth());
     }
 
     void Update()
@@ -30,7 +29,10 @@ public class CharacterDataController : MonoBehaviour
         while(true)
         {
             if (character.health <= 0)
+            {
+                GameObject.Find("aim_angle").GetComponent<AimTrigger>().GetColliderList().Remove(gameObject.GetComponent<Collider>());
                 Destroy(gameObject);
+            }
             yield return new WaitForSeconds(HealthCheckTime);
         }
     }
