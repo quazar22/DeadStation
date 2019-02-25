@@ -6,15 +6,20 @@ using UnityEngine;
 public class AimTrigger : MonoBehaviour
 {
     GameObject player;
-    List<Collider> ColliderList;
-    // Start is called before the first frame update
+    static List<Collider> ColliderList;
+    static Collider ClosestCollider = null;
+    static List<Collider> ignoreList = null;
+    WeaponManager wm;
+
     void Start()
     {
         ColliderList = new List<Collider>();
+        ignoreList = new List<Collider>();
+        //weapon_list = new List<Weapon>(new Weapon[] { new AutoRifle(), new Shotgun(), new LaserCannon(), new GrenadeLauncher() });
         player = GameObject.Find(Character.char_names[1]);
+        wm = GetComponentInParent<WeaponManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -25,9 +30,14 @@ public class AimTrigger : MonoBehaviour
         ColliderList.Add(other);
     }
 
+    public Collider GetClosestCollider()
+    {
+        return ClosestCollider;
+    }
+
     private void OnTriggerStay(Collider other)
     {
-        Collider ClosestCollider = ColliderList[0];
+        ClosestCollider = ColliderList[0];
 
         foreach (Collider c in ColliderList) //find closest collider
         {
@@ -39,18 +49,22 @@ public class AimTrigger : MonoBehaviour
         }
 
         Debug.DrawLine(player.transform.position, ClosestCollider.transform.position, Color.red);
-        Character cdc = ClosestCollider.GetComponent<CharacterDataController>().character;
-        cdc.DamageCharacter(1);
+        Character cdc = ClosestCollider.GetComponent<CharacterDataController>().character; ;
+        wm.FireWeapon();
+        //change weapon firing mechanism :(
 
-        if (cdc.GetHealth() <= 0)
-        {
-            ColliderList.Remove(ClosestCollider);
-        }
+        //if (cdc.GetHealth() <= 0)
+        //{
+        //    ColliderList.Remove(ClosestCollider);
+        //}
     }
 
     private void OnTriggerExit(Collider other)
     {
         ColliderList.Remove(other);
+        if(ColliderList.Count == 0)
+        {
+            ClosestCollider = null;
+        }
     }
-
 }

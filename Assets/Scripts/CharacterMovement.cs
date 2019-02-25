@@ -10,16 +10,17 @@ public class CharacterMovement : MonoBehaviour
     private CharacterController pc;
     private CharacterDataController cdc;
     private float speed = 5.0f;
+    private float interpspeed = 0.2f;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         pc = GetComponent<CharacterController>();
         cdc = GetComponent<CharacterDataController>();
+        interpspeed = cdc.character.GetInterpSpeed();
+        speed = cdc.character.GetMoveSpeed();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -36,10 +37,8 @@ public class CharacterMovement : MonoBehaviour
         Vector3 movement;
         if (x2 != 0f && y2 != 0f)
         {
-            Vector3 newvec = new Vector3(transform.eulerAngles.x,
-                                                Mathf.Atan2(x2, y2) * Mathf.Rad2Deg,
-                                                transform.eulerAngles.z);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(newvec), 0.2f);
+            Vector3 newvec = new Vector3(transform.eulerAngles.x, Mathf.Atan2(x2, y2) * Mathf.Rad2Deg, transform.eulerAngles.z);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(newvec), interpspeed);
         }
 
         movement = new Vector3(x1, 0, y1) * distance * speed;
@@ -50,8 +49,10 @@ public class CharacterMovement : MonoBehaviour
         
     }
 
-    private void LateUpdate()
-    {
-        speed = cdc.character.GetMoveSpeed();
-    }
+    //private void LateUpdate()
+    //{
+    //    speed = cdc.character.GetMoveSpeed();
+    //}
+    //maybe use later in case I want to change move speed?
+    //should probably just change it once instead of every frame though
 }

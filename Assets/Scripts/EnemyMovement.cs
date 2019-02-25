@@ -13,7 +13,6 @@ public class EnemyMovement : MonoBehaviour
     private Quaternion lookRotation;
     private Vector3 direction;
 
-    // Start is called before the first frame update
     void Start()
     {
         cc = GetComponent<CharacterController>();
@@ -22,14 +21,11 @@ public class EnemyMovement : MonoBehaviour
         target = player.transform;
     }
 
-    // Update is called once per frame
     void Update()
     {
         direction = (target.position - transform.position).normalized;
         lookRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * speed);
-        //Vector3 playerposition = player.transform.position;
-        //transform.forward = Vector3.Lerp(transform.forward, playerposition, 1f);
         cc.SimpleMove(transform.forward);
     }
 
@@ -37,4 +33,5 @@ public class EnemyMovement : MonoBehaviour
     {
         speed = cdc.character.GetMoveSpeed();
     }
+
 }

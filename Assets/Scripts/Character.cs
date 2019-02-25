@@ -11,35 +11,12 @@ abstract public class Character
     public float interpspeed;
     public List<Animation> animations;
 
-    public void DamageCharacter(int damage)
-    {
-        health -= damage;
-    }
-
-    public void HealCharacter(int heal)
-    {
-        health += heal;
-    }
-
-    public List<Animation> GetAnimationStates()
-    {
-        return animations;
-    }
-
-    public float GetInterpSpeed()
-    {
-        return interpspeed;
-    }
-
-    public float GetMoveSpeed()
-    {
-        return movespeed;
-    }
-
-    public int GetHealth()
-    {
-        return health;
-    }
+    public void DamageCharacter(int damage)     { health -= damage; }
+    public void HealCharacter(int heal)         { health += heal; }
+    public List<Animation> GetAnimationStates() { return animations; }
+    public float GetInterpSpeed()               { return interpspeed; }
+    public float GetMoveSpeed()                 { return movespeed; }
+    public int GetHealth()                      { return health; }
 
     public static Character CreateCharacter(string name)
     {
@@ -58,7 +35,6 @@ abstract public class Character
 
         return return_character;
     }
-
 }
 
 public class Zombie : Character
@@ -77,7 +53,7 @@ public class Player : Character
     public Player()
     {
         health = 1000;
-        interpspeed = 0.2f;
+        interpspeed = 0.1f;
         movespeed = 5.0f;
     }
 
