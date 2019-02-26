@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
 using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour
@@ -56,7 +58,6 @@ public class ProjectileScript : MonoBehaviour
                 {
                     if (hit.collider.gameObject.name.StartsWith("aim_angle"))
                         return;
-                    Debug.Log("ROCKET HIT");
                     try
                     {
                         hit.collider.gameObject.GetComponent<CharacterDataController>().character.DamageCharacter(weapon.damage_per_shot);
@@ -79,7 +80,11 @@ public class ProjectileScript : MonoBehaviour
                 {
                     if (hit.collider.gameObject.name.StartsWith("aim_angle"))
                         return;
-                    Debug.Log("BULLET HIT");
+                    if (hit.collider.tag.StartsWith("wall"))
+                    {
+                        Destroy(gameObject);
+                        return;
+                    }
                     try
                     {
                         hit.collider.gameObject.GetComponent<CharacterDataController>().character.DamageCharacter(weapon.damage_per_shot);

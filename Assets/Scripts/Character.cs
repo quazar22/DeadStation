@@ -10,6 +10,7 @@ abstract public class Character
     public float movespeed;
     public float interpspeed;
     public List<Animation> animations;
+    public string char_name;
 
     public void DamageCharacter(int damage)     { health -= damage; }
     public void HealCharacter(int heal)         { health += heal; }
@@ -41,6 +42,7 @@ public class Zombie : Character
 {
     public Zombie()
     {
+        char_name = "zombie";
         health = 100;
         interpspeed = 0.05f;
         movespeed = 2.5f;
@@ -52,8 +54,9 @@ public class Player : Character
 {
     public Player()
     {
+        char_name = "player";
         health = 1000;
-        interpspeed = 0.1f;
+        interpspeed = 0.05f;
         movespeed = 5.0f;
     }
 
@@ -63,6 +66,7 @@ public class Boss : Character
 {
     public Boss()
     {
+        char_name = "boss";
         health = 5000;
         interpspeed = 0.2f;
         movespeed = 3.5f;

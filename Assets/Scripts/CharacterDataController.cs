@@ -12,11 +12,12 @@ public class CharacterDataController : MonoBehaviour
     void Start()
     {
         character = Character.CreateCharacter(name);
+        StartCoroutine(CheckHealth());
     }
 
     void Update()
     {
-        StartCoroutine(CheckHealth());
+
     }
 
     private void FixedUpdate()
@@ -24,11 +25,16 @@ public class CharacterDataController : MonoBehaviour
         
     }
 
+    private void OnApplicationQuit()
+    {
+        StopAllCoroutines();
+    }
+
     IEnumerator CheckHealth()
     {
         while(true)
         {
-            if (character.health <= 0)
+            if (character.health <= 0 && character.char_name.StartsWith("zombie"))
             {
                 GameObject.Find("aim_angle").GetComponent<AimTrigger>().GetColliderList().Remove(gameObject.GetComponent<Collider>());
                 Destroy(gameObject);

@@ -46,7 +46,6 @@ public class CharacterMovement : MonoBehaviour
         //rb.velocity = movement;
         //pc.Move(movement);
         pc.SimpleMove(movement);
-        
     }
 
     //private void LateUpdate()

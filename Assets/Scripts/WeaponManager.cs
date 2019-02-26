@@ -64,7 +64,6 @@ public class WeaponManager : MonoBehaviour
         aim.localScale = weapon.aim_angle_size;
         aim.localPosition = weapon.aim_angle_location;
         weapon.p.projectile_object.transform.localScale = weapon.p.projectile_scale;
-        //gameObject.transform.localScale = weapon.p.projectile_scale;
     }
 }
 
@@ -72,7 +71,9 @@ abstract public class Weapon
 {
     public static string[] weapons = { "shotgun", "autorifle", "lasercannon", "grenadelauncher" };
     static public Vector3 default_aim_angle_size = new Vector3(300f, 900f, 50f);
-    static public Vector3 default_aim_angle_location = new Vector3(0f, 0f, 10f);
+    static public Vector3 default_aim_angle_location = new Vector3(0.27f, 0f, 9.6f);
+    static public Vector3 default_fire_pos = new Vector3(0.25f, 0f, 1.3f);
+
     public Vector3 aim_angle_size;
     public Vector3 aim_angle_location;
     public Projectile p = new Projectile();
@@ -93,7 +94,7 @@ public class Shotgun : Weapon
     public Shotgun()
     {
         aim_angle_size = new Vector3(800f, 450f, default_aim_angle_size.z);
-        aim_angle_location = new Vector3(0f, 0f, 5.5f);
+        aim_angle_location = new Vector3(0.27f, 0f, 5.1f);
         weapon_name = "shotgun";
         damage_per_shot = 50;
         rate_of_fire = 1f;
@@ -167,11 +168,10 @@ public class GrenadeLauncher : Weapon
     public GrenadeLauncher()
     {
         aim_angle_size = new Vector3(150f, 1500f, default_aim_angle_size.z);
-        aim_angle_location = new Vector3(0f, 0f, 16f);
+        aim_angle_location = new Vector3(0.27f, 0f, 15.6f);
         weapon_name = "grenadelauncher";
         damage_per_shot = 2000;
-        //rate_of_fire = 10f;
-        rate_of_fire = 5f;
+        rate_of_fire = 10f;
         weapon_lock_time = 4f;
         weapon_spread = 0f;
         p.projectile_scale = new Vector3(1f, 1f, 1f);

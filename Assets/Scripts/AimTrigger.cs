@@ -1,31 +1,104 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Debug = UnityEngine.Debug;
 using UnityEngine;
 
 public class AimTrigger : MonoBehaviour
 {
     GameObject player;
-    static List<Collider> ColliderList;
-    static Collider ClosestCollider = null;
+    List<Collider> ColliderList;
+    Collider ClosestCollider = null;
     WeaponManager wm;
+    GameObject fireposition;
+
 
     void Start()
     {
         ColliderList = new List<Collider>();
-        //weapon_list = new List<Weapon>(new Weapon[] { new AutoRifle(), new Shotgun(), new LaserCannon(), new GrenadeLauncher() });
         player = GameObject.Find(Character.char_names[1]);
         wm = GetComponentInParent<WeaponManager>();
+        fireposition = GameObject.Find("fire_position");
+
+        //StartCoroutine(FindClosestCollider());
     }
 
     void Update()
     {
+        bool broken = false;
+        Collider tmpCollider = null;
+
+        if (ColliderList.Count > 0)
+            ClosestCollider = ColliderList[0];
+        else
+            return;
+
+        foreach (Collider c in ColliderList) //find closest collider
+        {
+            //if (c == null)
+            //{
+            //    tmpCollider = c;
+            //    broken = true;
+            //    break;
+            //}
+            if (c == null || c.gameObject.GetComponent<CharacterDataController>().character.health <= 0 && ColliderList.Contains(c))
+            {
+                tmpCollider = c;
+                broken = true;
+                break;
+            }
+            if (Vector3.Distance(player.transform.position, c.transform.position) < Vector3.Distance(player.transform.position, ClosestCollider.transform.position))
+            {
+                ClosestCollider = c;
+            }
+            
+        }
+
+        if (broken)
+        {
+            ColliderList.Remove(tmpCollider);
+            return;
+        }
+
+        Debug.DrawLine(fireposition.transform.position, ClosestCollider.transform.position, Color.red);
+
+        RaycastHit hit;
+        if (Physics.Linecast(fireposition.transform.position, ClosestCollider.transform.position, out hit))
+        {
+            if (hit.collider)
+            {
+                //Debug.Log("hit: " + hit.collider.tag);
+                if (hit.collider.tag.StartsWith("wall"))
+                {
+                    return;
+                }
+            }
+        }
+
+        wm.FireWeapon();
+    }
+
+    private void FixedUpdate()
+    {
         
     }
 
-    private void OnTriggerEnter(Collider other)
+   void RaycastEnemies()
     {
-        ColliderList.Add(other);
+        Debug.DrawLine(fireposition.transform.position, ClosestCollider.transform.position, Color.red);
+
+        RaycastHit hit;
+        if (Physics.Linecast(fireposition.transform.position, ClosestCollider.transform.position, out hit))
+        {
+            if (hit.collider)
+            {
+                Debug.Log("hit: " + hit.collider.tag);
+                if (hit.collider.tag.StartsWith("wall"))
+                {
+                    return;
+                }
+            }
+        }
     }
 
     public Collider GetClosestCollider()
@@ -38,7 +111,7 @@ public class AimTrigger : MonoBehaviour
         return ColliderList;
     }
 
-    private void OnTriggerStay(Collider other)
+    void FindClosestCollider()
     {
         bool broken = false;
         Collider tmpCollider = null;
@@ -48,10 +121,11 @@ public class AimTrigger : MonoBehaviour
         else
             return;
 
+        if (!ClosestCollider) { return; }
+
         foreach (Collider c in ColliderList) //find closest collider
         {
-            //if(c == null) { ColliderList.Remove(c); }
-            if(c == null)
+            if (c == null)
             {
                 tmpCollider = c;
                 broken = true;
@@ -61,7 +135,7 @@ public class AimTrigger : MonoBehaviour
             {
                 ClosestCollider = c;
             }
-            if(c.gameObject.GetComponent<CharacterDataController>().character.health <= 0 && ColliderList.Contains(c))
+            if (c.gameObject.GetComponent<CharacterDataController>().character.health <= 0 && ColliderList.Contains(c))
             {
                 tmpCollider = c;
                 broken = true;
@@ -69,30 +143,43 @@ public class AimTrigger : MonoBehaviour
             }
         }
 
-        if(broken)
+        if (broken)
         {
             ColliderList.Remove(tmpCollider);
             return;
         }
 
-        Debug.DrawLine(player.transform.position, ClosestCollider.transform.position, Color.red);
-        Character cdc = ClosestCollider.GetComponent<CharacterDataController>().character; ;
+        Debug.DrawLine(fireposition.transform.position, ClosestCollider.transform.position, Color.red);
+
+        RaycastHit hit;
+        if (Physics.Linecast(fireposition.transform.position, ClosestCollider.transform.position, out hit))
+        {
+            if (hit.collider)
+            {
+                Debug.Log("hit: " + hit.collider.tag);
+                if (hit.collider.tag.StartsWith("wall"))
+                {
+                    return;
+                }
+            }
+        }
+
         wm.FireWeapon();
+    }
 
-        //change weapon firing mechanism :(
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag.StartsWith("wall")) { return; }
+        ColliderList.Add(other);
 
-        //if (cdc.GetHealth() <= 0)
-        //{
-        //    ColliderList.Remove(ClosestCollider);
-        //}
+        if (ColliderList.Count == 1)
+        {
+            ClosestCollider = other;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         ColliderList.Remove(other);
-        if(ColliderList.Count == 0)
-        {
-            ClosestCollider = null;
-        }
     }
 }
