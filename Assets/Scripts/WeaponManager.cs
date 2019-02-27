@@ -10,6 +10,7 @@ public class WeaponManager : MonoBehaviour
     Weapon currentWeapon; //manage dis 
 
     GameObject aim_angle;
+    GameObject aim_cone;
     GameObject player;
     List<Weapon> weapon_list;
     GameObject laser;
@@ -19,6 +20,13 @@ public class WeaponManager : MonoBehaviour
     void Start()
     {
         aim_angle = GameObject.Find("aim_angle");
+        try
+        {
+            aim_cone = GameObject.Find("aim_cone_blue");
+        } catch(System.NullReferenceException e)
+        {
+            aim_cone = GameObject.Find("aim_cone_blue_dotted");
+        }
         player = GameObject.Find(Character.char_names[1]);
         laser = Resources.Load<GameObject>("Prefabs/Projectiles/Laser");
         rocket = Resources.Load<GameObject>("Prefabs/Projectiles/Rocket");
@@ -61,8 +69,9 @@ public class WeaponManager : MonoBehaviour
     {
         currentWeapon = weapon;
         Transform aim = aim_angle.gameObject.transform;
-        aim.localScale = weapon.aim_angle_size;
-        aim.localPosition = weapon.aim_angle_location;
+        Transform player_aim_cone = aim_cone.gameObject.transform;
+        aim.localScale = player_aim_cone.localScale = weapon.aim_angle_size;
+        aim.localPosition = player_aim_cone.localPosition = weapon.aim_angle_location;
         weapon.p.projectile_object.transform.localScale = weapon.p.projectile_scale;
     }
 }

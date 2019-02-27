@@ -10,7 +10,9 @@ public class AimTrigger : MonoBehaviour
     Collider ClosestCollider = null;
     WeaponManager wm;
     GameObject fireposition;
-
+    Renderer aim_cone;
+    Color blue;
+    Color red;
 
     void Start()
     {
@@ -18,7 +20,27 @@ public class AimTrigger : MonoBehaviour
         player = GameObject.Find(Character.char_names[1]);
         wm = GetComponentInParent<WeaponManager>();
         fireposition = GameObject.Find("fire_position");
-
+        try
+        {
+            aim_cone = GameObject.Find("aim_cone_blue").GetComponent<Renderer>();
+        } catch(NullReferenceException e)
+        {
+            aim_cone = GameObject.Find("aim_cone_blue_dotted").GetComponent<Renderer>();
+        }
+        blue = new Color
+        {
+            r = 0,
+            g = 0.1176f,
+            b = 1f,
+            a = 0.4705f
+        };
+        red = new Color
+        {
+            r = 1f,
+            g = 0.1176f,
+            b = 0,
+            a = 0.4705f
+        };
     }
 
     void Update()
@@ -69,9 +91,27 @@ public class AimTrigger : MonoBehaviour
         wm.FireWeapon();
     }
 
+    private void SetAimConeToBlue()
+    {
+        aim_cone.material.color = blue;
+    }
+
+    private void SetAimConeToRed()
+    {
+        aim_cone.material.color = red;
+
+    }
+
     private void FixedUpdate()
     {
-        
+        if (ColliderList.Count > 0)
+        {
+            SetAimConeToRed();
+        }
+        else
+        {
+            SetAimConeToBlue();
+        }
     }
 
     public Collider GetClosestCollider()
