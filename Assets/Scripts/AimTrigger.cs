@@ -126,6 +126,7 @@ public class AimTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Entered!");
         if (other.tag.StartsWith("wall")) { return; }
         ColliderList.Add(other);
 

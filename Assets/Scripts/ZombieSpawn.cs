@@ -14,7 +14,7 @@ public class ZombieSpawn : MonoBehaviour
         spawns.Add(GameObject.Find("ZombieSpawn1"));
         spawns.Add(GameObject.Find("ZombieSpawn2"));
         spawns.Add(GameObject.Find("ZombieSpawn3"));
-        zombie = Resources.Load<GameObject>("Prefabs/zombie");
+        zombie = Resources.Load<GameObject>("Prefabs/Characters/zombie");
         StartCoroutine(SpawnZombie());
     }
 

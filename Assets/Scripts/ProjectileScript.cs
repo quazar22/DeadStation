@@ -14,6 +14,8 @@ public class ProjectileScript : MonoBehaviour
     GameObject player;
     Weapon weapon;
     Collider closestCollider;
+    GameObject explosion;
+    WeaponManager wm;
 
     void Start()
     {
@@ -21,7 +23,9 @@ public class ProjectileScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         player = GameObject.Find(Character.char_names[1]);
         closestCollider = player.GetComponentInChildren<AimTrigger>().GetClosestCollider();
-        weapon = player.GetComponent<WeaponManager>().GetCurrentWeapon();
+        wm = player.GetComponent<WeaponManager>();
+        weapon = wm.GetCurrentWeapon();
+        explosion = wm.GetExplosionRadius();
         rb.transform.LookAt(closestCollider.transform);
         rb.transform.rotation *= Quaternion.Euler(0, -90f, 0);
 
@@ -60,7 +64,9 @@ public class ProjectileScript : MonoBehaviour
                         return;
                     try
                     {
-                        hit.collider.gameObject.GetComponent<CharacterDataController>().character.DamageCharacter(weapon.damage_per_shot);
+                        //hit.collider.gameObject.GetComponent<CharacterDataController>().character.DamageCharacter(weapon.damage_per_shot);
+                        //Instantiate(explosion, hit.collider.transform.position, Quaternion.identity);
+                        ExplosionDamage(hit.point, 5f);
                     }
                     catch (MissingReferenceException e)
                     {
@@ -111,6 +117,18 @@ public class ProjectileScript : MonoBehaviour
           0,
           Mathf.Sin(2 * Mathf.PI * Random.Range(min, max) / 360)
         );
+    }
+
+    void ExplosionDamage(Vector3 center, float radius)
+    {
+        Collider[] colliders = Physics.OverlapSphere(center, radius);
+        for(int i = 0;  i < colliders.Length; i++)
+        {
+            if(!colliders[i].tag.StartsWith(Character.char_names[0])) { return; }
+            float distance = Vector3.Distance(center, colliders[i].transform.position);
+            float damage = -380 * distance + 2000;
+            colliders[i].GetComponent<CharacterDataController>().character.DamageCharacter(2000);
+        }
     }
 
 }

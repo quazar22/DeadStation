@@ -16,6 +16,7 @@ public class WeaponManager : MonoBehaviour
     GameObject laser;
     GameObject rocket;
     Transform fireposition;
+    GameObject explosion_radius;
 
     void Start()
     {
@@ -30,11 +31,17 @@ public class WeaponManager : MonoBehaviour
         player = GameObject.Find(Character.char_names[1]);
         laser = Resources.Load<GameObject>("Prefabs/Projectiles/Laser");
         rocket = Resources.Load<GameObject>("Prefabs/Projectiles/Rocket");
+        explosion_radius = Resources.Load<GameObject>("Prefabs/Explosions/explosion_area");
         fireposition = GameObject.Find("fire_position").transform;
         weapon_list = new List<Weapon>(new Weapon[] { new AutoRifle(), new Shotgun(), new LaserCannon(), new GrenadeLauncher() });
         weapon_list[0].p.projectile_object = weapon_list[1].p.projectile_object = weapon_list[2].p.projectile_object = laser;
         weapon_list[3].p.projectile_object = rocket;
         currentWeapon = weapon_list[0];
+    }
+
+    public GameObject GetExplosionRadius()
+    {
+        return explosion_radius;
     }
 
     void Update()
@@ -192,6 +199,7 @@ public class GrenadeLauncher : Weapon
     {
         Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
     }
+
 }
 
 
