@@ -25,6 +25,7 @@ public class CharacterDataController : MonoBehaviour
         
     }
 
+    //never called on mobile, probably doesn't matter
     private void OnApplicationQuit()
     {
         StopAllCoroutines();

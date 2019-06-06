@@ -124,7 +124,7 @@ public class ProjectileScript : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(center, radius);
         for(int i = 0;  i < colliders.Length; i++)
         {
-            if(!colliders[i].tag.StartsWith(Character.char_names[0])) { return; }
+            if(!colliders[i].tag.StartsWith(Character.char_names[0])) { continue; }
             float distance = Vector3.Distance(center, colliders[i].transform.position);
             float damage = -380 * distance + 2000;
             colliders[i].GetComponent<CharacterDataController>().character.DamageCharacter(2000);
