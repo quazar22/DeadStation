@@ -86,7 +86,7 @@ public class ProjectileScript : MonoBehaviour
                 {
                     if (hit.collider.gameObject.name.StartsWith("aim_angle"))
                         return;
-                    if (hit.collider.tag.StartsWith("wall"))
+                    if (!hit.collider.tag.StartsWith("zombie"))
                     {
                         Destroy(gameObject);
                         return;

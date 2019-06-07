@@ -11,6 +11,7 @@ public class CharacterMovement : MonoBehaviour
     private CharacterDataController cdc;
     private float speed = 5.0f;
     private float interpspeed = 0.2f;
+    private Animator anim;
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class CharacterMovement : MonoBehaviour
         cdc = GetComponent<CharacterDataController>();
         interpspeed = cdc.character.GetInterpSpeed();
         speed = cdc.character.GetMoveSpeed();
+        anim = GetComponent<Animator>();    
     }
 
     void Update()
@@ -41,11 +43,18 @@ public class CharacterMovement : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(newvec), interpspeed);
         }
 
-        movement = new Vector3(x1, 0, y1) * distance * speed;
-        //movement.y = rb.velocity.y;
-        //rb.velocity = movement;
-        //pc.Move(movement);
-        pc.SimpleMove(movement);
+        if(x1 != 0 || y1 != 0)
+        {
+            movement = new Vector3(x1, 0, y1) * distance * speed;
+            //movement.y = rb.velocity.y;
+            //rb.velocity = movement;
+            //pc.Move(movement);
+            pc.SimpleMove(movement);
+            anim.SetInteger("AnimState", 1);
+        } else
+        {
+            anim.SetInteger("AnimState", 0);
+        }
     }
 
     //private void LateUpdate()
