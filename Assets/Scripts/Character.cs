@@ -11,6 +11,7 @@ abstract public class Character
     public float interpspeed;
     public List<Animation> animations;
     public string char_name;
+    public GameObject playerobject;
 
     public void DamageCharacter(int damage)     { health -= damage; }
     public void HealCharacter(int heal)         { health += heal; }
@@ -36,6 +37,7 @@ abstract public class Character
 
         return return_character;
     }
+
 }
 
 public class Zombie : Character
@@ -57,7 +59,7 @@ public class Player : Character
         char_name = "player";
         health = 1000;
         interpspeed = 0.05f;
-        movespeed = 5.0f;
+        movespeed = 8.0f;
     }
 
 }

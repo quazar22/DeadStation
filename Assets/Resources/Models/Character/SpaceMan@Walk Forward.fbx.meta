@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f189c3293ebc5b042a9f499ca3e579d1
+guid: 6dca0eac3b538a84c9609173f0ce520d
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -154,7 +154,7 @@ ModelImporter:
     4300002: Cube
     4300004: Icosphere
     4300006: Cylinder
-    7400000: Running
+    7400000: Walk Forward
     9500000: //RootNode
     13700000: Cube
     13700002: Cube.001
@@ -189,10 +189,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Running
+      name: Walk Forward
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 21
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
