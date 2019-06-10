@@ -37,9 +37,6 @@ public class CharacterMovement : MonoBehaviour
         float x2 = rightstick.Horizontal();
         float y2 = rightstick.Vertical();
 
-        Debug.Log("x1 = " + x1);
-        Debug.Log("y1 = " + y1);
-
         float distance = Mathf.Sqrt(Mathf.Pow(x1, 2) + Mathf.Pow(y1, 2));
         Vector3 movement = new Vector3(x1, 0, y1);
         if (x2 != 0f && y2 != 0f)
@@ -47,28 +44,23 @@ public class CharacterMovement : MonoBehaviour
             Vector3 newvec = new Vector3(transform.eulerAngles.x, Mathf.Atan2(x2, y2) * Mathf.Rad2Deg, transform.eulerAngles.z);
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(newvec), interpspeed);
         }
-        //if y1 > 0 and aim_angle_forward y > 0, run forward  -- y1 * y = +
-        //if y1 < 0 and aim_angle_forward y < 0, run forward  -- y1 * y = +
-        //if y1 > 0 and aim_angle_forward y < 0, run backward -- y1 * y = -
-        //if y1 < 0 and aim_angle_forward y > 0, run backward -- y1 * y = - 
-
-        //1) decide if forward or backward movement
-        //2) decide if running or walking
-        //3) decide which one to play
 
         if (distance != 0f)
         {
-            float direction = fire_position.transform.forward.y * y1; //positive means forward movement, negative means backward
-            int speedMultiplier = distance >= 0.5f ? 2 : 1;
-            int stateNum = Mathf.RoundToInt(direction) * speedMultiplier; //doesn't work like this
-            
+            float y_component_radians = gameObject.transform.rotation.eulerAngles.y * Mathf.Deg2Rad;
+            float cos = Mathf.Cos(y_component_radians);
+            float sin = Mathf.Sin(y_component_radians);
+            float direction_y = y1 * cos + x1 * sin; //positive means forward movement, negative means backward
+            float direction_x = x1 * cos - y1 * sin; //negative means strafe left, positive means strafe right
+            anim.SetFloat("direction_y", direction_y);
+            anim.SetFloat("direction_x", direction_x);
         } else
         {
-            anim.SetInteger("AnimState", 0);
+            anim.SetFloat("direction_y", 0);
+            anim.SetFloat("direction_x", 0);
         }
         movement *= distance * speed;
         pc.SimpleMove(movement);
-
     }
 
     //private void LateUpdate()

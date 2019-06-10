@@ -1462,7 +1462,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 858766523}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac8b48933a6a2104ba354a7bbbe570aa, type: 3}
   m_Name: 
@@ -1505,7 +1505,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 972558204}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac8b48933a6a2104ba354a7bbbe570aa, type: 3}
   m_Name: 
@@ -2096,7 +2096,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1655597476}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac8b48933a6a2104ba354a7bbbe570aa, type: 3}
   m_Name: 
@@ -2392,7 +2392,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982818857}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac8b48933a6a2104ba354a7bbbe570aa, type: 3}
   m_Name: 
@@ -2810,6 +2810,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6628191541709090978, guid: ba38497ad7c448b468e0bbf69af1cf25,
+        type: 3}
+      propertyPath: m_Name
+      value: player(old)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6628191541709090978, guid: ba38497ad7c448b468e0bbf69af1cf25,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6403691364641738165, guid: ba38497ad7c448b468e0bbf69af1cf25,
         type: 3}
       propertyPath: m_Name
@@ -2895,16 +2905,6 @@ PrefabInstance:
       propertyPath: rightstick
       value: 
       objectReference: {fileID: 1048769876}
-    - target: {fileID: 6628191541709090978, guid: ba38497ad7c448b468e0bbf69af1cf25,
-        type: 3}
-      propertyPath: m_Name
-      value: player(old)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6628191541709090978, guid: ba38497ad7c448b468e0bbf69af1cf25,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6628191541709384834, guid: ba38497ad7c448b468e0bbf69af1cf25,
         type: 3}
       propertyPath: m_RootOrder
