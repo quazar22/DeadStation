@@ -1,0 +1,44 @@
+unity networking idea:
+
+Networking on separate thread
+
+with a thread-safe queue of function pointers to run on the main thread.
+Another thread-safe queue in this networking object that holds parameters for these functions.
+
+Need to revamp messaging system.
+
+Instead of using strings, read and write raw bytes. This would eliminate costly conversions, like string to int and string to float.
+This might be better for the future.
+
+Create a simple script that can be attached to an object (that needs to be networked) that sends position/necessary information to server
+
+
+DeadStation ideas:
+
+Shotgun - reduce number of instantiations when fired. Maybe just one instantiation in a non random spawn pattern? or just a couple of animations?
+where does the difficulty with this game lie?
+	1) Strategic weapon upgrades?
+	2) Story finding?
+	3) Time based runs?
+	4) Item finding? (RNG drops?)
+	5) Could be other abilities... based on a player type, like ROR2
+	6) Could pick up different abilities, like a skill tree? Could be unlocked with findable items, or by leveling up?
+	7) Combination of item abilities, natural player abilities, and unlocked abilities
+	8) Build trees?
+	
+There are also story items that players can pick up and read that might give just cool story info or lockbox combinations
+	
+Story - Let's follow the Hero's Journey
+You are a part of the security personnel for a space station orbiting an alien planet. A zombie outbreak occurs on the station, and it is up to the player
+to solve the crisis and find out why it occurred.
+
+You are waiting around the office on break when a call for a commotion is heard. It's coming from the cafeteria. All of your colleagues are already there. Your captain says it is an emergency.
+You leave your office to go investigate. You have a little bit of a walk here, just so the player can see SOME of the rooms and hallways in the game.
+
+You travel down some hallways and elevators and arrive at the floor with the disturbance. There are zombies everywhere, too many to fight and they are approaching you fast. Might not even have a gun at this point.
+Two possibilities after this:
+
+1) You decide to run to safety and escape into a separate working elevator. The elevator starts shaking and begins to fall, it crashes and you awake some time later. Your captain's voice awakes you,
+telling you that he sees your vitals and to respond/wake up.
+
+2) You attempt to go back to the elevator, but it is gone and zombies are coming fast. You run to the next room,
