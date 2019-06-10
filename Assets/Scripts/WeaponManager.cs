@@ -86,9 +86,9 @@ public class WeaponManager : MonoBehaviour
 abstract public class Weapon
 {
     public static string[] weapons = { "shotgun", "autorifle", "lasercannon", "grenadelauncher" };
-    static public Vector3 default_aim_angle_size = new Vector3(600f, 1800f, 100f);
-    static public Vector3 default_aim_angle_location = new Vector3(0.54f, 2f, 21f);
-    static public Vector3 default_fire_pos = new Vector3(0.25f, 0f, 1.3f);
+    static public Vector3 default_aim_angle_size = new Vector3(300f, 900f, 50f);
+    static public Vector3 default_aim_angle_location = new Vector3(16.56f, 0.57f, 8.79f);
+    static public Vector3 default_fire_pos = new Vector3(16.56f, 3.2f, -0.6f);
 
     public Vector3 aim_angle_size;
     public Vector3 aim_angle_location;
@@ -109,13 +109,13 @@ public class Shotgun : Weapon
 {
     public Shotgun()
     {
-        aim_angle_size = new Vector3(1600f, 900f, default_aim_angle_size.z);
-        aim_angle_location = new Vector3(0.27f, 2f, 11.8f);
+        aim_angle_size = new Vector3(800f, 450f, default_aim_angle_size.z);
+        aim_angle_location = new Vector3(16.56f, 2f, 4f);
         weapon_name = "shotgun";
         damage_per_shot = 50;
         rate_of_fire = 1f;
         weapon_lock_time = 0.1f;
-        weapon_spread = 10f;
+        weapon_spread = 15f;
         p.projectile_scale = new Vector3(3f, 3f, 3f);
         timer = new Stopwatch();
         timer.Start();
@@ -161,7 +161,7 @@ public class LaserCannon : Weapon
 {
     public LaserCannon()
     {
-        aim_angle_size = new Vector3(500f, 1800f, default_aim_angle_size.z);
+        aim_angle_size = new Vector3(250f, 900f, default_aim_angle_size.z);
         aim_angle_location = default_aim_angle_location;
         weapon_name = "lasercannon";
         damage_per_shot = 100;
@@ -183,8 +183,8 @@ public class GrenadeLauncher : Weapon
 {
     public GrenadeLauncher()
     {
-        aim_angle_size = new Vector3(300f, 3000f, default_aim_angle_size.z);
-        aim_angle_location = new Vector3(0.54f, 2f, 33f);
+        aim_angle_size = new Vector3(150f, 1500f, default_aim_angle_size.z);
+        aim_angle_location = new Vector3(16.56f, default_aim_angle_location.y, 14.88f);
         weapon_name = "grenadelauncher";
         damage_per_shot = 2000;
         rate_of_fire = 10f;

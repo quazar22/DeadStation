@@ -11,28 +11,38 @@ public class CharacterMovement : MonoBehaviour
     private CharacterDataController cdc;
     private float speed = 2.0f;
     private float interpspeed = 0.2f;
-    private Animator anim;
+    private Animator anim; //potentially replace with a new class called AnimationController
     private Transform fire_position;
+    private bool shouldWalk;
+    private GameObject ll;
+    private GameObject rl;
+
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        shouldWalk = false;
+        //rb = GetComponent<Rigidbody>();
         pc = GetComponent<CharacterController>();
         cdc = GetComponent<CharacterDataController>();
         interpspeed = cdc.character.GetInterpSpeed();
         speed = cdc.character.GetMoveSpeed();
-        anim = GetComponent<Animator>();
-        fire_position = gameObject.transform.Find("fire_position");
+        anim = GetComponentInChildren<Animator>();
+        fire_position = gameObject.transform.Find("player/fire_position");
+        ll = GameObject.Find("player/SpaceMan@Rifle Aiming Idle/mixamorig:Hips/mixamorig:LeftUpLeg/mixamorig:LeftLeg/mixamorig:LeftFoot/mixamorig:LeftToeBase");
+        rl = GameObject.Find("player/SpaceMan@Rifle Aiming Idle/mixamorig:Hips/mixamorig:RightUpLeg/mixamorig:RightLeg/mixamorig:RightFoot/mixamorig:RightToeBase");
     }
 
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            UnityEditor.EditorApplication.isPaused = true;
+        }
     }
 
     private void FixedUpdate()
     {
-        float x1 = leftstick.Horizontal() * -1F;
+        float x1 = leftstick.Horizontal();
         float y1 = leftstick.Vertical();
         float x2 = rightstick.Horizontal();
         float y2 = rightstick.Vertical();
@@ -52,6 +62,11 @@ public class CharacterMovement : MonoBehaviour
             float sin = Mathf.Sin(y_component_radians);
             float direction_y = y1 * cos + x1 * sin; //positive means forward movement, negative means backward
             float direction_x = x1 * cos - y1 * sin; //negative means strafe left, positive means strafe right
+            if(shouldWalk)
+            {
+                direction_y = Mathf.Clamp(direction_y, -0.5f, 0.5f);
+                direction_x = Mathf.Clamp(direction_x, -0.5f, 0.5f);
+            }
             anim.SetFloat("direction_y", direction_y);
             anim.SetFloat("direction_x", direction_x);
         } else
@@ -59,8 +74,23 @@ public class CharacterMovement : MonoBehaviour
             anim.SetFloat("direction_y", 0);
             anim.SetFloat("direction_x", 0);
         }
+        Debug.Log("step distance = " + Vector3.Distance(ll.transform.position, rl.transform.position));
         movement *= distance * speed;
         pc.SimpleMove(movement);
+    }
+
+    public static Vector3 ClampMagnitude(Vector3 v, float max, float min)
+    {
+        double sm = v.sqrMagnitude;
+        if (sm > max * max)
+        {
+            return v.normalized * max;
+        }
+        else if (sm < min * min)
+        {
+            return v.normalized * min;
+        }
+        return v;
     }
 
     //private void LateUpdate()

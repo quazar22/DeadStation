@@ -8,9 +8,11 @@ public class CharacterDataController : MonoBehaviour
 {
     public Character character;
     private float HealthCheckTime = 0.2f;
+    private AimTrigger at;
 
     void Start()
     {
+        at = GameObject.Find("aim_angle").GetComponent<AimTrigger>();
         character = Character.CreateCharacter(name);
         StartCoroutine(CheckHealth());
     }
@@ -37,7 +39,7 @@ public class CharacterDataController : MonoBehaviour
         {
             if (character.health <= 0 && character.char_name.StartsWith("zombie"))
             {
-                GameObject.Find("aim_angle").GetComponent<AimTrigger>().GetColliderList().Remove(gameObject.GetComponent<Collider>());
+                at.GetColliderList().Remove(gameObject.GetComponent<Collider>());
                 Destroy(gameObject);
             }
             yield return new WaitForSeconds(HealthCheckTime);

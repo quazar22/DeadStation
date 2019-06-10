@@ -19,17 +19,17 @@ public class AimTrigger : MonoBehaviour
         ColliderList = new List<Collider>();
         player = GameObject.Find(Character.char_names[1]);
         wm = GetComponentInParent<WeaponManager>();
-        fireposition = GameObject.Find("fire_position");
+        fireposition = GameObject.Find("player/fire_position");
         try
         {
-            aim_cone = GameObject.Find("aim_cone_blue").GetComponent<Renderer>();
+            aim_cone = GameObject.Find("player/aim_cone_blue").GetComponent<Renderer>();
         } catch(NullReferenceException e)
         {
-            aim_cone = GameObject.Find("aim_cone_blue_dotted").GetComponent<Renderer>();
+            aim_cone = GameObject.Find("player/aim_cone_blue_dotted").GetComponent<Renderer>();
         }
         blue = new Color
         {
-            r = 0,
+            r = 0f,
             g = 0.1176f,
             b = 1f,
             a = 0.4705f
@@ -38,7 +38,7 @@ public class AimTrigger : MonoBehaviour
         {
             r = 1f,
             g = 0.1176f,
-            b = 0,
+            b = 0f,
             a = 0.4705f
         };
     }

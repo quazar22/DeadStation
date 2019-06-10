@@ -56,9 +56,9 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
     public float Horizontal()
     {
         if (inVector.x != 0)
-            return inVector.x;
+            return inVector.x * StickSide;
         else
-            return Input.GetAxis("Horizontal");
+            return Input.GetAxis("Horizontal") * StickSide;
     }
 
     public float Vertical()
