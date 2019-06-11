@@ -12,6 +12,8 @@ This might be better for the future.
 
 Create a simple script that can be attached to an object (that needs to be networked) that sends position/necessary information to server
 
+Might be better to implement a simple tick system on the server, rather than just forwarding bytes between server and client. This way things can
+be done without overloading the client with data. 
 
 DeadStation ideas:
 
@@ -25,6 +27,8 @@ where does the difficulty with this game lie?
 	6) Could pick up different abilities, like a skill tree? Could be unlocked with findable items, or by leveling up?
 	7) Combination of item abilities, natural player abilities, and unlocked abilities
 	8) Build trees?
+	9) health management?
+	10) inventory management? (no ammo)
 	
 There are also story items that players can pick up and read that might give just cool story info or lockbox combinations
 	
@@ -42,3 +46,16 @@ Two possibilities after this:
 telling you that he sees your vitals and to respond/wake up.
 
 2) You attempt to go back to the elevator, but it is gone and zombies are coming fast. You run to the next room,
+
+==== ORDINARY WORLD ====
+==== CALL TO ADVENTURE ====
+==== REFUSAL OF THE CALL ====
+==== MEETING THE MENTOR ====
+==== CROSSING THE THRESHOLD ====
+==== TESTS, ALLIES, ENEMIES ====
+==== APPROACH TO THE INMOST CAVE ====
+==== ORDEAL, DEATH, AND REIRTH ====
+==== REWARD, SEIZING THE SWORD ====
+==== THE ROAD BACK ====
+==== RESURRECTION ====
+==== RETURN WITH ELIXIR ====
