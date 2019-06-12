@@ -59,17 +59,11 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
-        //pc.SimpleMove(fmovement);
+        
     }
 
     private void FixedUpdate()
     {
-        //framerate printing
-        //deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
-        //float fps = 1.0f / deltaTime;
-        ////fpsText.text = Mathf.Ceil(fps).ToString();
-        //Debug.Log(Mathf.Ceil(fps));
-
         float x1 = leftstick.Horizontal();
         float y1 = leftstick.Vertical();
         float x2 = rightstick.Horizontal();
@@ -90,6 +84,9 @@ public class CharacterMovement : MonoBehaviour
             float sin = Mathf.Sin(y_component_radians);
             float direction_y = y1 * cos + x1 * sin; //positive means forward movement, negative means backward
             float direction_x = x1 * cos - y1 * sin; //negative means strafe left, positive means strafe right
+
+            float angle = Mathf.Atan2(direction_y, direction_x) * Mathf.Rad2Deg;
+            
             if (shouldWalk)
             {
                 direction_y = Mathf.Clamp(direction_y, -0.5f, 0.5f);
@@ -97,15 +94,17 @@ public class CharacterMovement : MonoBehaviour
             }
             anim.SetFloat("direction_y", direction_y);
             anim.SetFloat("direction_x", direction_x);
+            anim.SetFloat("angle", angle);
+            anim.SetFloat("distance", distance);
         }
         else
         {
             anim.SetFloat("direction_y", 0);
             anim.SetFloat("direction_x", 0);
+            anim.SetFloat("angle", 0);
+            anim.SetFloat("distance", 0);
         }
         //Debug.Log("step distance = " + Vector3.Distance(ll.transform.position, rl.transform.position));
-        //joystick_distance(float) * speed(float) * joystick_direction(vector)?
-        //probably calculate atan(y1/x1) here for better animation transitions
         if(distance > 0.5f)
         {
             movement *= speed;
@@ -113,9 +112,7 @@ public class CharacterMovement : MonoBehaviour
         {
             movement *= speed * 0.75f;
         }
-        //movement *= speed * distance;
         pc.SimpleMove(movement);
-        //fmovement = movement;
     }
 
     //returns movement in units/second
