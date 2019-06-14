@@ -59,7 +59,7 @@ public class Player : Character
         char_name = "player";
         health = 1000;
         interpspeed = 0.05f;
-        movespeed = 8.0f;
+        movespeed = 6.0f;
     }
 
 }

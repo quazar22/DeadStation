@@ -86,8 +86,8 @@ public class WeaponManager : MonoBehaviour
 abstract public class Weapon
 {
     public static string[] weapons = { "shotgun", "autorifle", "lasercannon", "grenadelauncher" };
-    static public Vector3 default_aim_angle_size = new Vector3(300f, 900f, 50f);
-    static public Vector3 default_aim_angle_location = new Vector3(16.56f, 0.57f, 8.79f);
+    static public Vector3 default_aim_angle_size = new Vector3(300f, 900f, 15f);
+    static public Vector3 default_aim_angle_location = new Vector3(16.56f, 0.28f, 8.79f);
     static public Vector3 default_fire_pos = new Vector3(16.56f, 3.2f, -0.6f);
 
     public Vector3 aim_angle_size;
@@ -110,7 +110,7 @@ public class Shotgun : Weapon
     public Shotgun()
     {
         aim_angle_size = new Vector3(800f, 450f, default_aim_angle_size.z);
-        aim_angle_location = new Vector3(16.56f, 2f, 4f);
+        aim_angle_location = new Vector3(16.56f, 0.28f, 4f);
         weapon_name = "shotgun";
         damage_per_shot = 50;
         rate_of_fire = 1f;

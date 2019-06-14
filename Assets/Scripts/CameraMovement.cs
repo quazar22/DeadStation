@@ -19,7 +19,7 @@ public class CameraMovement : MonoBehaviour {
     {
         //offset = transform.position - player.transform.position;
         pos = GameObject.Find("player").transform.GetChild(0).transform; //player must be first in the hierarchy
-        Debug.Log(transform.position - pos.position);
+        //Debug.Log(transform.position - pos.position);
 	}
 	
 	void FixedUpdate () 

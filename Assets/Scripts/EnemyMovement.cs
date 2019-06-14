@@ -20,7 +20,7 @@ public class EnemyMovement : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
         cdc = GetComponent<CharacterDataController>();
-        player = GameObject.Find(Character.char_names[1]); //"player"
+        player = GameObject.Find(Character.char_names[1]+ "/SpaceMan@Rifle Aiming Idle"); //"player"
         //target = player.transform;
 
         agent = GetComponent<NavMeshAgent>();

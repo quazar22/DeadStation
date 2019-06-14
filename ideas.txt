@@ -28,33 +28,53 @@ where does the difficulty with this game lie?
 	7) Combination of item abilities, natural player abilities, and unlocked abilities
 	8) Build trees?
 	9) health management?
-	10) inventory management? (no ammo)
+	10) Inventory management? (no ammo)
+	11) Temporary powerups, like old school arcade shooters?
 	
 There are also story items that players can pick up and read that might give just cool story info or lockbox combinations
 	
+	
+The Story of Holden Maxwell
+
 Story - Let's follow the Hero's Journey
-You are a part of the security personnel for a space station orbiting an alien planet. A zombie outbreak occurs on the station, and it is up to the player
-to solve the crisis and find out why it occurred.
-
-You are waiting around the office on break when a call for a commotion is heard. It's coming from the cafeteria. All of your colleagues are already there. Your captain says it is an emergency.
-You leave your office to go investigate. You have a little bit of a walk here, just so the player can see SOME of the rooms and hallways in the game.
-
-You travel down some hallways and elevators and arrive at the floor with the disturbance. There are zombies everywhere, too many to fight and they are approaching you fast. Might not even have a gun at this point.
-Two possibilities after this:
-
-1) You decide to run to safety and escape into a separate working elevator. The elevator starts shaking and begins to fall, it crashes and you awake some time later. Your captain's voice awakes you,
-telling you that he sees your vitals and to respond/wake up.
-
-2) You attempt to go back to the elevator, but it is gone and zombies are coming fast. You run to the next room,
 
 ==== ORDINARY WORLD ====
+You are apart of the security personnel for a space station, stationed above a planet for the purposes of studying the planet and assessing potential resources that can be
+harvested from it before resource excavation ships come in and harvest the resources. Since most of the inhabitants of the station are academics, the job is fairly boring, 
+bordering on a useless position. There are 5 of you on the entire ship, including the captain.
+
+After some of the scientists return from the planet after a routine survey (ship instruments can't pick up everything), one of the scientists becomes ill. He is sent to the infirmary where he is deemed fine
+and he is sent on his way. Later in the cafeteria, the scientist becomes violently ill, vomits blood, then dies on the spot. After trying to revive him without success, it seems that he is dead. The coworkers are
+stunned. He begins to move only minutes later as a medical team shows up. The main person on the medical team is bit by the person. Seconds after he is bit, his eyes roll into the back of his head and he lets out a scream,
+as he too vomits blood. Biting left and right ensues, this is the beginning of the outbreak. As would-be heros attempt to stop the biting, they end up getting bit as well. The horde grows quickly as people can't 
+leave the cafeteria fast enough, and the infection spreads like wildfire.
+
 ==== CALL TO ADVENTURE ====
+You awake from your midday nap on the job to blaring alarms and shouting over the radios. The captain is yelling at you as other officer's screams and gunfire can be heard over the radios.
+Now awake in front of the camera monitor, you begin taking a look at the carnage taking place in the space station. You see officer's getting bit from behind as they try to fight off the
+undead, some die helping others, some die running away, even the captain gets surrounded before the camera goes dead.
+
 ==== REFUSAL OF THE CALL ====
+Seeing your fellow officers being maimed and killed in front of you, you decide to make your way to the evacuation pods as quickly as possible.
+On the way there, you get a radio transmission from a survivor begging for help. He sees your life signs and recognizes your suit to belong to security. He states that he and a group of people 
+need help. You respond that you are the last of the security team left, and they would be better off taking their chances on the way to the evac pods.
+"We need your help!"
+"Are you serious? These things are crazy! We need to make our way to the evac pods now!"
+"We don't have that option - we're barricaded in the gym with those things on the other side of all our doors."
+"Shit! Well what do I do then?"
+"We need you to come take care of the dead outside so that we can make it to the evac pods - please hurry, they know we're in here and are about to break through our door!" 
+As soon as you get there, the doors are open and everyone inside is dead. You fight the dead and kill them off. You silently curse to yourself. You now go to the evac pod room, but there are too many zombies 
+and they are too strong to battle with your current weapon. 
+
 ==== MEETING THE MENTOR ====
+A voice appears in your helmet. 
+"Run! Down the hall!"
+You meet the scientist
+
 ==== CROSSING THE THRESHOLD ====
 ==== TESTS, ALLIES, ENEMIES ====
 ==== APPROACH TO THE INMOST CAVE ====
-==== ORDEAL, DEATH, AND REIRTH ====
+==== ORDEAL, DEATH, AND REBIRTH ====
 ==== REWARD, SEIZING THE SWORD ====
 ==== THE ROAD BACK ====
 ==== RESURRECTION ====

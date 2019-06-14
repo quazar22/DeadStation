@@ -124,9 +124,14 @@ public class AimTrigger : MonoBehaviour
         return ColliderList;
     }
 
+    public void RemoveFromList(Collider c)
+    {
+        ColliderList.Remove(c);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Entered!");
+        //Debug.Log("Entered!");
         if (other.tag.StartsWith("wall")) { return; }
         ColliderList.Add(other);
 

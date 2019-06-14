@@ -27,17 +27,18 @@ public class ProjectileScript : MonoBehaviour
         weapon = wm.GetCurrentWeapon();
         explosion = wm.GetExplosionRadius();
         rb.transform.LookAt(closestCollider.transform);
-        rb.transform.rotation *= Quaternion.Euler(0, -90f, 0);
 
         if (weapon.weapon_name == Weapon.weapons[3]) //grenadelauncher
         {
             rb.velocity = (closestCollider.transform.position - rb.position).normalized;
+            rb.transform.rotation *= Quaternion.Euler(0, -90f, 0);
             speed = 2000;
             rb.useGravity = false;
             Destroy(gameObject, 5f);
         } else
         {
             rb.velocity = ((closestCollider.transform.position - rb.position).normalized + AddNoiseOnAngle(-weapon.weapon_spread, weapon.weapon_spread)) * speed;
+            rb.transform.rotation *= Quaternion.Euler(90f, 0, 0);
             Destroy(gameObject, 1f);
         }
     }
@@ -79,18 +80,22 @@ public class ProjectileScript : MonoBehaviour
         else
         {
             RaycastHit hit;
-            Debug.DrawRay(transform.position, transform.right, Color.black);
-            if (Physics.Raycast(transform.position, transform.right, out hit, 1f))
+            Debug.DrawRay(gameObject.transform.position, transform.up, Color.black);
+            if (Physics.Raycast(gameObject.transform.position, transform.up, out hit, 3f))
             {
-                if (hit.collider)
+                if (hit.collider.tag.StartsWith("zombie"))
                 {
-                    if (hit.collider.gameObject.name.StartsWith("aim_angle"))
-                        return;
-                    if (!hit.collider.tag.StartsWith("zombie"))
-                    {
-                        Destroy(gameObject);
-                        return;
-                    }
+                    Debug.Log("hit");
+                    //if (hit.collider.gameObject.name.StartsWith("aim_angle"))
+                    //{
+                    //    return;
+                    //}
+                    //if (hit.collider.tag.StartsWith("wall"))
+                    //{
+                    //    Debug.Log("hit aim_angle");
+                    //    Destroy(gameObject);
+                    //    return;
+                    //}
                     try
                     {
                         hit.collider.gameObject.GetComponent<CharacterDataController>().character.DamageCharacter(weapon.damage_per_shot);
@@ -99,6 +104,9 @@ public class ProjectileScript : MonoBehaviour
                     {
                         return;
                     }
+                    //Destroy(gameObject);
+                } else if (hit.collider.tag.StartsWith("wall"))
+                {
                     Destroy(gameObject);
                 }
             }

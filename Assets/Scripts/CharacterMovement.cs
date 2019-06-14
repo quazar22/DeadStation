@@ -43,7 +43,7 @@ public class CharacterMovement : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("fr = " + Application.targetFrameRate);
+        //Debug.Log("fr = " + Application.targetFrameRate);
         shouldWalk = false;
         //rb = GetComponent<Rigidbody>();
         pc = GetComponent<CharacterController>();
@@ -107,10 +107,12 @@ public class CharacterMovement : MonoBehaviour
         //Debug.Log("step distance = " + Vector3.Distance(ll.transform.position, rl.transform.position));
         if(distance > 0.5f)
         {
-            movement *= speed;
+            anim.speed = 1;
+            movement = movement.normalized * speed;
         } else if(distance < 0.5f && distance > 0f)
         {
-            movement *= speed * 0.75f;
+            anim.speed = distance * 2f;
+            movement = movement.normalized * speed * 0.25f;
         }
         pc.SimpleMove(movement);
     }
