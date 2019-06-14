@@ -81,7 +81,7 @@ public class ProjectileScript : MonoBehaviour
         {
             RaycastHit hit;
             Debug.DrawRay(gameObject.transform.position, transform.up, Color.black);
-            if (Physics.Raycast(gameObject.transform.position, transform.up, out hit, 3f))
+            if (Physics.Raycast(gameObject.transform.position, transform.up, out hit, 4f))
             {
                 if (hit.collider.tag.StartsWith("zombie"))
                 {
