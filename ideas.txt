@@ -32,7 +32,57 @@ where does the difficulty with this game lie?
 	11) Temporary powerups, like old school arcade shooters?
 	
 There are also story items that players can pick up and read that might give just cool story info or lockbox combinations
+
+List of Rooms:
+	1) Gym
+		a) Basketball court
+		b) Tennis court
+		c) Weight Room
+	2) Cafeteria
+	3) Research
+		a) Medical
+			i) Clean room
+			ii) lab
+		b) Robotics
+			i) Clean room
+			ii) lab
+		c) Planetary Resources
+			i) Planet scanning interfaces
+		d) Xenobiology
+			i) Clean room
+			ii) lab
+	4) Engineering/Power Generation
+	5) Engines
+	6) Bridge
+	7) Offices
+		a) Meeting rooms
+		b) Administration offices
+		c) Briefing Room
+	8) Crew Quarters
+	9) Security
+		a) Armory
+		b) Gun range
+		c) jail cells
+	10) Hangar
+	11) Communications
+	12) Life Support
+	13) Food generation (farm)
+	14) Hospital
+	15) Movie Theater
+	16) Evacuation pod room
+	17) Lounge
+	18) Observation Deck
+	19) Cockpit
+	20) Mechanic Workshop
 	
+Floors - 6 total?
+
+Top	1) Communications, Observation Deck, Bridge, Cockpit
+	2) Lounge, Movie Theater, Crew Quarters, Cafeteria, Gym
+	3) Offices, Research, Hospital
+	4) Engines, Engineering/Power Generation, Security, 
+	5) Life Support, Food Generation
+	6) Evacuation Pod Room, Hangar, Mechanic Workshop
 	
 The Story of Holden Maxwell
 
@@ -41,7 +91,7 @@ Story - Let's follow the Hero's Journey
 ==== ORDINARY WORLD ====
 You are apart of the security personnel for a space station, stationed above a planet for the purposes of studying the planet and assessing potential resources that can be
 harvested from it before resource excavation ships come in and harvest the resources. Since most of the inhabitants of the station are academics, the job is fairly boring, 
-bordering on a useless position. There are 5 of you on the entire ship, including the captain.
+bordering on a useless position. There are 10 of you on the entire ship, including the captain.
 
 After some of the scientists return from the planet after a routine survey (ship instruments can't pick up everything), one of the scientists becomes ill. He is sent to the infirmary where he is deemed fine
 and he is sent on his way. Later in the cafeteria, the scientist becomes violently ill, vomits blood, then dies on the spot. After trying to revive him without success, it seems that he is dead. The coworkers are
@@ -50,7 +100,7 @@ as he too vomits blood. Biting left and right ensues, this is the beginning of t
 leave the cafeteria fast enough, and the infection spreads like wildfire.
 
 ==== CALL TO ADVENTURE ====
-You awake from your midday nap on the job to blaring alarms and shouting over the radios. The captain is yelling at you as other officer's screams and gunfire can be heard over the radios.
+You awake from your midday nap on the job to blaring alarms and shouting over the radios. The captain is yelling as other officer's screams and gunfire can be heard over the radios.
 Now awake in front of the camera monitor, you begin taking a look at the carnage taking place in the space station. You see officer's getting bit from behind as they try to fight off the
 undead, some die helping others, some die running away, even the captain gets surrounded before the camera goes dead.
 
@@ -69,9 +119,19 @@ and they are too strong to battle with your current weapon.
 ==== MEETING THE MENTOR ====
 A voice appears in your helmet. 
 "Run! Down the hall!"
-You meet the scientist
+You meet the medical researcher Dean Wilkes
+You run down the hall as zombies begin to gain on you. The final door that you get through slams behind you.
+"Who are you?"
+"I'm Dr. Brian Wilkes. I'm a medical researcher in this facility working under the lead researcher, Dr. Martin. I need to meet with you in person. We have much to discuss if we plan on escaping this place with our lives.
+I am located in our secure clean room in research lab 12 - You'll need to take the elevator up to the offices, go through engineering, and then find my lab."
+"Ok Dr. Wilkes. I'm on my way"
+"Please, call me Brian. I'll see you soon, Holden. Be safe, watch your back, and whatever you do, do not get bit."
 
 ==== CROSSING THE THRESHOLD ====
+Your journey now begins. The first subtask of finding Dr. Wilkes is to get to the elevator from where you are now, which is close to the gym and the evacuation pods.
+Of course, however, there are plenty of zombies in your way. There are rooms to explore, items to pick up that enhance abilities, items to pick up that you can read (lore).
+Introduce grenades?
+
 ==== TESTS, ALLIES, ENEMIES ====
 ==== APPROACH TO THE INMOST CAVE ====
 ==== ORDEAL, DEATH, AND REBIRTH ====
