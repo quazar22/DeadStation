@@ -16,19 +16,19 @@ public class ProjectileScript : MonoBehaviour
     Collider closestCollider;
     GameObject explosion;
     WeaponManager wm;
+    private int penetrationDepth = 1;
 
     void Start()
     {
         time = 0;
         rb = GetComponent<Rigidbody>();
-        player = GameObject.Find(Character.char_names[1]);
+        player = GameObject.Find(Character.PLAYER);
         closestCollider = player.GetComponentInChildren<AimTrigger>().GetClosestCollider();
         wm = player.GetComponent<WeaponManager>();
         weapon = wm.GetCurrentWeapon();
-        explosion = wm.GetExplosionRadius();
         rb.transform.LookAt(closestCollider.transform);
 
-        if (weapon.weapon_name == Weapon.weapons[3]) //grenadelauncher
+        if (weapon is GrenadeLauncher) //grenadelauncher
         {
             rb.velocity = (closestCollider.transform.position - rb.position).normalized;
             rb.transform.rotation *= Quaternion.Euler(0, -90f, 0);
@@ -50,7 +50,7 @@ public class ProjectileScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (weapon.weapon_name == Weapon.weapons[3]) //increase projectile speed
+        if (weapon is GrenadeLauncher) //increase projectile speed
         {
             float currentSpeed = Mathf.SmoothStep(minSpeed, speed, time / accelerationTime);
             rb.velocity = (closestCollider.transform.position - rb.position).normalized * currentSpeed;
@@ -59,20 +59,19 @@ public class ProjectileScript : MonoBehaviour
             Debug.DrawRay(transform.position, transform.right, Color.black);
             if (Physics.Raycast(transform.position, transform.right, out hit, 1f))
             {
-                if (hit.collider)
+                if (hit.collider.tag.StartsWith(Character.ZOMBIE))
                 {
-                    if (hit.collider.gameObject.name.StartsWith("aim_angle"))
-                        return;
                     try
                     {
-                        //hit.collider.gameObject.GetComponent<CharacterDataController>().character.DamageCharacter(weapon.damage_per_shot);
-                        //Instantiate(explosion, hit.collider.transform.position, Quaternion.identity);
                         ExplosionDamage(hit.point, 5f);
                     }
                     catch (MissingReferenceException e)
                     {
                         return;
                     }
+                    Destroy(gameObject);
+                } else if(hit.collider.tag.StartsWith("wall"))
+                {
                     Destroy(gameObject);
                 }
             }
@@ -83,26 +82,19 @@ public class ProjectileScript : MonoBehaviour
             Debug.DrawRay(gameObject.transform.position, transform.up, Color.black);
             if (Physics.Raycast(gameObject.transform.position, transform.up, out hit, 4f))
             {
-                if (hit.collider.tag.StartsWith("zombie"))
+                if (hit.collider.tag.StartsWith(Character.ZOMBIE))
                 {
-                    Debug.Log("hit");
-                    //if (hit.collider.gameObject.name.StartsWith("aim_angle"))
-                    //{
-                    //    return;
-                    //}
-                    //if (hit.collider.tag.StartsWith("wall"))
-                    //{
-                    //    Debug.Log("hit aim_angle");
-                    //    Destroy(gameObject);
-                    //    return;
-                    //}
                     try
                     {
-                        hit.collider.gameObject.GetComponent<CharacterDataController>().character.DamageCharacter(weapon.damage_per_shot);
+                        hit.collider.gameObject.GetComponent<CharacterDataController>().character.DamageCharacter(weapon.damage_per_shot / penetrationDepth++);
                     }
                     catch (MissingReferenceException e)
                     {
                         return;
+                    }
+                    if(!(weapon is LaserCannon))
+                    {
+                        Destroy(gameObject);
                     }
                     //Destroy(gameObject);
                 } else if (hit.collider.tag.StartsWith("wall"))
@@ -115,11 +107,6 @@ public class ProjectileScript : MonoBehaviour
 
     Vector3 AddNoiseOnAngle(float min, float max)
     {
-        //return new Vector3(
-        //  Mathf.Sin(2 * Mathf.PI * Random.Range(min, max) / 360),
-        //  Mathf.Sin(2 * Mathf.PI * Random.Range(min, max) / 360),
-        //  Mathf.Sin(2 * Mathf.PI * Random.Range(min, max) / 360)
-        //);
         return new Vector3(
           Mathf.Sin(2 * Mathf.PI * Random.Range(min, max) / 360),
           0,
@@ -132,10 +119,10 @@ public class ProjectileScript : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(center, radius);
         for(int i = 0;  i < colliders.Length; i++)
         {
-            if(!colliders[i].tag.StartsWith(Character.char_names[0])) { continue; }
+            if(!colliders[i].tag.StartsWith(Character.ZOMBIE)) { continue; }
             float distance = Vector3.Distance(center, colliders[i].transform.position);
             float damage = -380 * distance + 2000;
-            colliders[i].GetComponent<CharacterDataController>().character.DamageCharacter(2000);
+            colliders[i].GetComponent<CharacterDataController>().character.DamageCharacter(wm.GetCurrentWeapon().damage_per_shot);
         }
     }
 
@@ -143,7 +130,7 @@ public class ProjectileScript : MonoBehaviour
 
  public class Projectile
 {
-    public float speed;
+    //public float speed;
     public Vector3 projectile_scale;
     public GameObject projectile_object;
 }

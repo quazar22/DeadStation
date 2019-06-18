@@ -17,7 +17,7 @@ public class AimTrigger : MonoBehaviour
     void Start()
     {
         ColliderList = new List<Collider>();
-        player = GameObject.Find(Character.char_names[1]);
+        player = GameObject.Find(Character.PLAYER);
         wm = GetComponentInParent<WeaponManager>();
         fireposition = GameObject.Find("player/fire_position");
         try
@@ -131,7 +131,6 @@ public class AimTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Entered!");
         if (other.tag.StartsWith("wall")) { return; }
         ColliderList.Add(other);
 

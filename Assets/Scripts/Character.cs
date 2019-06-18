@@ -4,7 +4,9 @@ using UnityEngine;
 
 abstract public class Character
 {
-    public static string[] char_names = {"zombie", "player", "boss"};
+    static public string ZOMBIE = "zombie";
+    static public string PLAYER = "player";
+    static public string BOSS = "boss";
 
     public int health;
     public float movespeed;
@@ -23,11 +25,10 @@ abstract public class Character
     public static Character CreateCharacter(string name)
     {
         Character return_character;
-
-        if(name.StartsWith(char_names[0]))
+        if(name.StartsWith(ZOMBIE))
         {
             return_character = new Zombie();
-        } else if(name.StartsWith(char_names[1]))
+        } else if(name.StartsWith(PLAYER))
         {
             return_character = new Player();
         } else
@@ -58,7 +59,7 @@ public class Player : Character
     {
         char_name = "player";
         health = 1000;
-        interpspeed = 0.05f;
+        interpspeed = 0.025f;
         movespeed = 6.0f;
     }
 

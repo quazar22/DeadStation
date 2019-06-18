@@ -14,52 +14,43 @@ public class CharacterMovement : MonoBehaviour
     private Animator anim; //potentially replace with a new class called AnimationController
     private Transform fire_position;
     private bool shouldWalk;
-    private GameObject ll;
-    private GameObject rl;
 
     //each animation runs at 30fps
-    private float RunForward = 2.661f; //22 frames, 2 steps, 0.733 seconds (30fps / (22frames / 2 strides))  = 2.72 strides/second * 2.661 units/stride = 7.237 units/second
-    private float WalkForward = 2.275f; //30 frames, 2 steps, 1 second     (30 fps / (30frames / 2 strides)) = 2.00 strides/second * 2.275 units/stride = 4.55 units/second
-    private float RunBackward = 1.68f; //16 frames, 2 steps, 0.533 seconds (30 fps / (16frames / 2 strides)) = 3.75 strides/second * 1.680 units/stride = 6.3 units/second
-    private float WalkBackward = 2.234f; //30 frames, 2 steps, 1 second    (30 fps / (30frames / 2 strides)) = 2.00 strides/second * 2.234 units/stride = 4.468 units/second
+    private float RunForward = 7.237f; //22 frames, 2 steps, 0.733 seconds (30fps / (22frames / 2 strides))  = 2.72 strides/second * 2.661 units/stride = 7.237 units/second
+    private float WalkForward = 4.55f; //30 frames, 2 steps, 1 second     (30 fps / (30frames / 2 strides)) = 2.00 strides/second * 2.275 units/stride = 4.55 units/second
+    private float RunBackward = 6.3f; //16 frames, 2 steps, 0.533 seconds (30 fps / (16frames / 2 strides)) = 3.75 strides/second * 1.680 units/stride = 6.3 units/second
+    private float WalkBackward = 4.468f; //30 frames, 2 steps, 1 second    (30 fps / (30frames / 2 strides)) = 2.00 strides/second * 2.234 units/stride = 4.468 units/second
 
-    private float RunStrafeRight = 1.818f; //16 frames, 2 steps, 0.533 seconds   (30 fps / (16frames / 2 strides)) = 3.75 strides/second * 1.818 units/stride = 6.8175 units/second
-    private float RunStrafeLeft = 1.814f; //16 frames, 2 steps, 0.533 seconds    (30 fps / (16frames / 2 strides)) = 3.75 strides/second * 1.814 units/stride = 6.8025 units/second
-    private float WalkStrafeLeft = 1.867f; //31 frames, 2 steps, 1.033 seconds   (30 fps / (31frames / 2 strides)) = 1.93 strides/second * 1.867 units/stride = 3.6033 units/second
-    private float WalkStrafeRight = 1.583f; //43 seconds, 2 steps, 1.433 seconds (30 fps / (43frames / 2 strides)) = 1.40 strides/second * 1.583 units/stride = 2.2162 units/second
+    private float RunStrafeRight = 6.8175f; //16 frames, 2 steps, 0.533 seconds   (30 fps / (16frames / 2 strides)) = 3.75 strides/second * 1.818 units/stride = 6.8175 units/second
+    private float RunStrafeLeft = 6.8025f; //16 frames, 2 steps, 0.533 seconds    (30 fps / (16frames / 2 strides)) = 3.75 strides/second * 1.814 units/stride = 6.8025 units/second
+    private float WalkStrafeLeft = 3.6033f; //31 frames, 2 steps, 1.033 seconds   (30 fps / (31frames / 2 strides)) = 1.93 strides/second * 1.867 units/stride = 3.6033 units/second
+    private float WalkStrafeRight = 2.2162f; //43 seconds, 2 steps, 1.433 seconds (30 fps / (43frames / 2 strides)) = 1.40 strides/second * 1.583 units/stride = 2.2162 units/second
 
-    private float RunForwardLeft = 2.659f; //15 frames, 2 steps, 0.5 seconds     (30 fps / (15frames / 2 strides)) = 4 strides/second * 2.659 units/stride = 10.636 units/second
-    private float RunForwardRight = 2.533f; //15 frames, 2 steps, 0.5 seconds    (30 fps / (15frames / 2 strides)) = 4 strides/second * 2.533 units/stride = 10.132 units/second
-    private float WalkForwardRight = 2.387f; //30 frames, 2 steps, 1 second      (30 fps / (30frames / 2 strides)) = 2 strides/second * 2.387 units/stride = 4.774 units/second
-    private float WalkForwardLeft = 2.355f; //30 frames, 2 steps, 1 second       (30 fps / (30frames / 2 strides)) = 2 strides/second * 2.355 units/stride = 4.710 units/second
+    private float RunForwardLeft = 10.636f; //15 frames, 2 steps, 0.5 seconds     (30 fps / (15frames / 2 strides)) = 4 strides/second * 2.659 units/stride = 10.636 units/second
+    private float RunForwardRight = 10.132f; //15 frames, 2 steps, 0.5 seconds    (30 fps / (15frames / 2 strides)) = 4 strides/second * 2.533 units/stride = 10.132 units/second
+    private float WalkForwardRight = 4.774f; //30 frames, 2 steps, 1 second      (30 fps / (30frames / 2 strides)) = 2 strides/second * 2.387 units/stride = 4.774 units/second
+    private float WalkForwardLeft = 4.710f; //30 frames, 2 steps, 1 second       (30 fps / (30frames / 2 strides)) = 2 strides/second * 2.355 units/stride = 4.710 units/second
 
-    private float RunBackwardLeft = 2.41f; //15 frames, 2 steps, 0.5 seconds     (30 fps / (15frames / 2 strides)) = 4 strides/second * 2.410 units/stride = 9.640 units/second
-    private float RunBackwardRight = 2.084f; //15 frames, 2 steps, 0.5 seconds   (30 fps / (15frames / 2 strides)) = 4 strides/second * 2.084 units/stride = 8.336 units/second
-    private float WalkBackwardRight = 2.356f; //30 frames, 2 steps, 1 second     (30 fps / (30frames / 2 strides)) = 2 strides/second * 2.356 units/stride = 4.712 units/second
-    private float WalkBackwardLeft = 2.335f; //30 frames, 2 steps, 1 second      (30 fps / (30frames / 2 strides)) = 2 strides/second * 2.335 units/stride = 4.67 units/second
-
-    public float deltaTime;
-    public Vector3 fmovement;
+    private float RunBackwardLeft = 9.640f; //15 frames, 2 steps, 0.5 seconds     (30 fps / (15frames / 2 strides)) = 4 strides/second * 2.410 units/stride = 9.640 units/second
+    private float RunBackwardRight = 8.336f; //15 frames, 2 steps, 0.5 seconds   (30 fps / (15frames / 2 strides)) = 4 strides/second * 2.084 units/stride = 8.336 units/second
+    private float WalkBackwardRight = 4.712f; //30 frames, 2 steps, 1 second     (30 fps / (30frames / 2 strides)) = 2 strides/second * 2.356 units/stride = 4.712 units/second
+    private float WalkBackwardLeft = 4.670f; //30 frames, 2 steps, 1 second      (30 fps / (30frames / 2 strides)) = 2 strides/second * 2.335 units/stride = 4.67 units/second
 
     void Start()
     {
-        //Debug.Log("fr = " + Application.targetFrameRate);
         shouldWalk = false;
-        //rb = GetComponent<Rigidbody>();
         pc = GetComponent<CharacterController>();
         cdc = GetComponent<CharacterDataController>();
         interpspeed = cdc.character.GetInterpSpeed();
         speed = cdc.character.GetMoveSpeed();
         anim = GetComponentInChildren<Animator>();
         fire_position = gameObject.transform.Find("player/fire_position");
-        ll = GameObject.Find("player/SpaceMan@Rifle Aiming Idle/mixamorig:Hips/mixamorig:LeftUpLeg/mixamorig:LeftLeg/mixamorig:LeftFoot/mixamorig:LeftToeBase");
-        rl = GameObject.Find("player/SpaceMan@Rifle Aiming Idle/mixamorig:Hips/mixamorig:RightUpLeg/mixamorig:RightLeg/mixamorig:RightFoot/mixamorig:RightToeBase");
       
     }
 
     void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
@@ -89,13 +80,14 @@ public class CharacterMovement : MonoBehaviour
             
             if (shouldWalk)
             {
-                direction_y = Mathf.Clamp(direction_y, -0.5f, 0.5f);
-                direction_x = Mathf.Clamp(direction_x, -0.5f, 0.5f);
+                distance = 0.5f;
             }
             anim.SetFloat("direction_y", direction_y);
             anim.SetFloat("direction_x", direction_x);
             anim.SetFloat("angle", angle);
             anim.SetFloat("distance", distance);
+            movement = ClampMagnitude(movement.normalized * GetWalkingMagnitude(angle, distance), 8f, 3f);
+            pc.SimpleMove(movement);
         }
         else
         {
@@ -103,88 +95,49 @@ public class CharacterMovement : MonoBehaviour
             anim.SetFloat("direction_x", 0);
             anim.SetFloat("angle", 0);
             anim.SetFloat("distance", 0);
+            pc.SimpleMove(new Vector3(0f, 0f, 0f));
         }
-        //Debug.Log("step distance = " + Vector3.Distance(ll.transform.position, rl.transform.position));
-        if(distance > 0.5f)
-        {
-            anim.speed = 1;
-            movement = movement.normalized * speed;
-        } else if(distance < 0.5f && distance > 0f)
-        {
-            anim.speed = distance * 2f;
-            movement = movement.normalized * speed * 0.25f;
-        }
-        pc.SimpleMove(movement);
+        //if(distance > 0.5f)
+        //{
+        //    anim.speed = 1;
+        //    movement = movement.normalized * speed;
+        //} else if(distance < 0.5f && distance > 0f)
+        //{
+        //    anim.speed = distance * 2f;
+        //    movement = movement.normalized * speed * 0.25f;
+        //}
     }
 
     //returns movement in units/second
-    float GetWalkingMagnitude()
+    float GetWalkingMagnitude(float angle, float distance)
     {
         float outFloat = 0f;
-        if(anim.GetCurrentAnimatorStateInfo(0).IsName("Run Forward"))
+        if(angle > 75f && angle < 105f)
         {
-            outFloat = 7.237f;
-        }
-        else if(anim.GetCurrentAnimatorStateInfo(0).IsName("Rifle Walk Forward"))
+            outFloat = distance > 0.5f ? RunForward : WalkForward;
+        } else if(angle < 15f && angle > -15f)
         {
-            outFloat = 4.55f;
-        }
-        else if(anim.GetCurrentAnimatorStateInfo(0).IsName("Walk Backward"))
+            outFloat = distance > 0.5f ? RunStrafeRight : WalkStrafeRight;
+        } else if(angle > 15f && angle < 75f)
         {
-            outFloat = 4.468f;
-        }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Run Backward"))
+            outFloat = distance > 0.5f ? RunForwardRight : WalkForwardRight;
+        } else if(angle > 105f && angle < 165f)
         {
-            outFloat = 6.3f;
-        }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Run Forward Left"))
+            outFloat = distance > 0.5f ? RunForwardLeft : WalkForwardLeft;
+        } else if(angle > 165f || angle < -165f)
         {
-            outFloat = 10.636f;
-        }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Run Forward Right"))
+            outFloat = distance > 0.5f ? RunStrafeLeft : WalkStrafeLeft;
+        } else if(angle > -165f && angle < -105f)
         {
-            outFloat = 10.132f;
-        }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Walk Forward Left"))
+            outFloat = distance > 0.5f ? RunBackwardLeft : WalkBackwardLeft;
+        } else if(angle > -105f && angle < -75f)
         {
-            outFloat = 4.710f;
-        }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Walk Forward Right"))
+            outFloat = distance > 0.5f ? RunBackward : WalkBackward;
+        } else if(angle > -75f && angle < -15f)
         {
-            outFloat = 4.774f;
+            outFloat = distance > 0.5f ? RunBackwardRight : WalkBackwardRight;
         }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Walk Strafe Left"))
-        {
-            outFloat = 3.6033f;
-        }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Walk Strafe Right"))
-        {
-            outFloat = 2.2162f;
-        }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Run Strafe Right"))
-        {
-            outFloat = 6.8175f;
-        }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Run Strafe Left"))
-        {
-            outFloat = 6.8025f;
-        }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Walk Backward Left"))
-        {
-            outFloat = 4.67f;
-        }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Walk Backward Right"))
-        {
-            outFloat = 4.712f;
-        }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Run Backward Right"))
-        {
-            outFloat = 8.336f;
-        }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Run Backward Left"))
-        {
-            outFloat = 9.640f;
-        }
+
         return outFloat;
     }
 
@@ -202,10 +155,4 @@ public class CharacterMovement : MonoBehaviour
         return v;
     }
 
-    //private void LateUpdate()
-    //{
-    //    speed = cdc.character.GetMoveSpeed();
-    //}
-    //maybe use later in case I want to change move speed?
-    //should probably just change it once instead of every frame though
 }

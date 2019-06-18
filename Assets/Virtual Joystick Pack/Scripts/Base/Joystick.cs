@@ -10,7 +10,6 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
     public Image joystickimg;
     private Vector3 inVector;
     private RectTransform canvas;
-    //private RectTransform jump;
     private RectTransform MenuCtrl;
     private float StickSide = 1f;
 
@@ -19,12 +18,9 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
         if(gameObject.name == "LeftStick")
             StickSide = -1f;
         //MenuCtrl = GameObject.Find("MenuCtrl").GetComponent<RectTransform>();
-        //jump = GameObject.Find("Fire").GetComponent<RectTransform>();
         canvas = GameObject.Find("Canvas").GetComponent<RectTransform>();
         bgImg.rectTransform.sizeDelta = new Vector2(canvas.rect.width * 0.15f, canvas.rect.width * 0.15f);
         joystickimg.rectTransform.sizeDelta = new Vector2(canvas.rect.width * 0.075f, canvas.rect.width * 0.075f);
-        //jump.sizeDelta = new Vector2(canvas.rect.width * 0.22f, canvas.rect.width * 0.22f);
-        //MenuCtrl.sizeDelta = new Vector2(canvas.rect.width * 0.06f, canvas.rect.width * 0.06f);
     }
 
     public virtual void OnDrag(PointerEventData eventData)

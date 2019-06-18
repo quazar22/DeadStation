@@ -739,8 +739,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftstick: {fileID: 1983294729}
   rightstick: {fileID: 1048769876}
-  deltaTime: 0
-  fmovement: {x: 0, y: 0, z: 0}
 --- !u!143 &325155656
 CharacterController:
   m_ObjectHideFlags: 0

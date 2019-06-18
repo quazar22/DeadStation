@@ -12,11 +12,8 @@ public class WeaponManager : MonoBehaviour
     GameObject aim_angle;
     GameObject aim_cone;
     GameObject player;
-    List<Weapon> weapon_list;
-    GameObject laser;
-    GameObject rocket;
+    public List<Weapon> weapon_list;
     Transform fireposition;
-    GameObject explosion_radius;
 
     void Start()
     {
@@ -28,20 +25,10 @@ public class WeaponManager : MonoBehaviour
         {
             aim_cone = GameObject.Find("aim_cone_blue_dotted");
         }
-        player = GameObject.Find(Character.char_names[1]);
-        laser = Resources.Load<GameObject>("Prefabs/Projectiles/Laser");
-        rocket = Resources.Load<GameObject>("Prefabs/Projectiles/Rocket");
-        explosion_radius = Resources.Load<GameObject>("Prefabs/Explosions/explosion_area");
+        player = GameObject.Find(Character.PLAYER);
         fireposition = GameObject.Find("fire_position").transform;
         weapon_list = new List<Weapon>(new Weapon[] { new AutoRifle(), new Shotgun(), new LaserCannon(), new GrenadeLauncher() });
-        weapon_list[0].p.projectile_object = weapon_list[1].p.projectile_object = weapon_list[2].p.projectile_object = laser;
-        weapon_list[3].p.projectile_object = rocket;
-        currentWeapon = weapon_list[0];
-    }
-
-    public GameObject GetExplosionRadius()
-    {
-        return explosion_radius;
+        SwitchWeapon(weapon_list[Weapon.AUTORIFLE]);
     }
 
     void Update()
@@ -94,13 +81,17 @@ abstract public class Weapon
     public Vector3 aim_angle_location;
     public Projectile p = new Projectile();
     public Stopwatch timer;
-    public GameObject bullet;
 
     public string weapon_name;
     public int damage_per_shot;
     public float rate_of_fire;
     public float weapon_lock_time;
     public float weapon_spread;
+
+    public static int AUTORIFLE = 0;
+    public static int SHOTGUN = 1;
+    public static int LASERCANNON = 2;
+    public static int GRENADELAUNCHER = 3;
 
     abstract public void ShootWeapon(Vector3 at);
 }
@@ -109,14 +100,15 @@ public class Shotgun : Weapon
 {
     public Shotgun()
     {
-        aim_angle_size = new Vector3(800f, 450f, default_aim_angle_size.z);
+        aim_angle_size = new Vector3(400f, 450f, default_aim_angle_size.z);
         aim_angle_location = new Vector3(16.56f, 0.28f, 4f);
         weapon_name = "shotgun";
-        damage_per_shot = 50;
+        damage_per_shot = 25;
         rate_of_fire = 1f;
         weapon_lock_time = 0.1f;
         weapon_spread = 15f;
-        p.projectile_scale = new Vector3(3f, 3f, 3f);
+        p.projectile_object = Resources.Load<GameObject>("Prefabs/Projectiles/Laser");
+        p.projectile_scale = new Vector3(5f, 5f, 5f);
         timer = new Stopwatch();
         timer.Start();
     }
@@ -145,8 +137,9 @@ public class AutoRifle : Weapon
         damage_per_shot = 25;
         rate_of_fire = 0.2f;
         weapon_lock_time = 1f;
-        weapon_spread = 2.5f;
-        p.projectile_scale = new Vector3(3f, 3f, 3f);
+        weapon_spread = 3f;
+        p.projectile_object = Resources.Load<GameObject>("Prefabs/Projectiles/Laser");
+        p.projectile_scale = new Vector3(5f, 5f, 5f);
         timer = new Stopwatch();
         timer.Start();
     }
@@ -165,10 +158,11 @@ public class LaserCannon : Weapon
         aim_angle_location = default_aim_angle_location;
         weapon_name = "lasercannon";
         damage_per_shot = 100;
-        rate_of_fire = 2f;
+        rate_of_fire = 1.5f;
         weapon_lock_time = 1f;
         weapon_spread = 0.5f;
-        p.projectile_scale = new Vector3(6f, 6f, 6f);
+        p.projectile_object = Resources.Load<GameObject>("Prefabs/Projectiles/Laser");
+        p.projectile_scale = new Vector3(8f, 8f, 8f);
         timer = new Stopwatch();
         timer.Start();
     }
@@ -190,6 +184,7 @@ public class GrenadeLauncher : Weapon
         rate_of_fire = 10f;
         weapon_lock_time = 4f;
         weapon_spread = 0f;
+        p.projectile_object = Resources.Load<GameObject>("Prefabs/Projectiles/Rocket");
         p.projectile_scale = new Vector3(1f, 1f, 1f);
         timer = new Stopwatch();
         timer.Start();

@@ -39,7 +39,7 @@ public class CharacterDataController : MonoBehaviour
     {
         while(true)
         {
-            if (character.health <= 0 && character.char_name.StartsWith("zombie"))
+            if (character.health <= 0 && character is Zombie)
             {
                 at.RemoveFromList(c);
                 Destroy(gameObject);

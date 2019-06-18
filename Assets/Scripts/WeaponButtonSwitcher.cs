@@ -13,7 +13,7 @@ public class WeaponButtonSwitcher : MonoBehaviour
     {
         if(!player || !wm)
         {
-            player = GameObject.Find(Character.char_names[1]);
+            player = GameObject.Find(Character.PLAYER);
             wm = player.GetComponent<WeaponManager>();
         }
 
@@ -21,23 +21,18 @@ public class WeaponButtonSwitcher : MonoBehaviour
         switch(name)
         {
             case "ShotgunButton":
-                button.onClick.AddListener(() => wm.SwitchWeapon(wm.GetWeapon(Weapon.weapons[0])));
+                button.onClick.AddListener(() => wm.SwitchWeapon(wm.weapon_list[Weapon.SHOTGUN]));
                 break;
             case "AutoRifleButton":
-                button.onClick.AddListener(() => wm.SwitchWeapon(wm.GetWeapon(Weapon.weapons[1])));
+                button.onClick.AddListener(() => wm.SwitchWeapon(wm.weapon_list[Weapon.AUTORIFLE]));
                 break;
             case "LaserCannon":
-                button.onClick.AddListener(() => wm.SwitchWeapon(wm.GetWeapon(Weapon.weapons[2])));
+                button.onClick.AddListener(() => wm.SwitchWeapon(wm.weapon_list[Weapon.LASERCANNON]));
                 break;
             case "GrenadeLauncher":
-                button.onClick.AddListener(() => wm.SwitchWeapon(wm.GetWeapon(Weapon.weapons[3])));
+                button.onClick.AddListener(() => wm.SwitchWeapon(wm.weapon_list[Weapon.GRENADELAUNCHER]));
                 break;
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
