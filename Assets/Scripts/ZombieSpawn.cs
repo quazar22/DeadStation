@@ -29,7 +29,7 @@ public class ZombieSpawn : MonoBehaviour
         while(true)
         {
             ///Instantiate(zombie, spawns[Random.Range(0, 3)].transform.position, Quaternion.identity);
-            Instantiate(zombie, spawns[1].transform.position, Quaternion.identity);
+            Instantiate(zombie, spawns[0].transform.position, Quaternion.identity);
             yield return new WaitForSeconds(5f);
         }
     }

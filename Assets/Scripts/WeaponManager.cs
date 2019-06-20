@@ -6,27 +6,27 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-
-    Weapon currentWeapon; //manage dis 
-
+    Weapon currentWeapon;
     GameObject aim_angle;
     GameObject aim_cone;
     GameObject player;
     public List<Weapon> weapon_list;
     Transform fireposition;
+    bool CanFire;
 
     void Start()
     {
-        aim_angle = GameObject.Find("aim_angle");
+        CanFire = true;
+        aim_angle = GameObject.Find("player/aim_angle");
         try
         {
-            aim_cone = GameObject.Find("aim_cone_blue");
+            aim_cone = GameObject.Find("player/aim_cone_blue");
         } catch(System.NullReferenceException e)
         {
-            aim_cone = GameObject.Find("aim_cone_blue_dotted");
+            aim_cone = GameObject.Find("player/aim_cone_blue_dotted");
         }
         player = GameObject.Find(Character.PLAYER);
-        fireposition = GameObject.Find("fire_position").transform;
+        fireposition = GameObject.Find("player/fire_position").transform;
         weapon_list = new List<Weapon>(new Weapon[] { new AutoRifle(), new Shotgun(), new LaserCannon(), new GrenadeLauncher() });
         SwitchWeapon(weapon_list[Weapon.AUTORIFLE]);
     }
@@ -40,8 +40,11 @@ public class WeaponManager : MonoBehaviour
     {
         if(currentWeapon.timer.ElapsedMilliseconds >= currentWeapon.rate_of_fire * 1000f)
         {
-            currentWeapon.ShootWeapon(fireposition.position);
-            currentWeapon.timer.Restart();
+            if (CanFire)
+            {
+                currentWeapon.ShootWeapon(fireposition.position);
+                currentWeapon.timer.Restart();
+            }
         }
     }
 
@@ -68,6 +71,12 @@ public class WeaponManager : MonoBehaviour
         aim.localPosition = player_aim_cone.localPosition = weapon.aim_angle_location;
         weapon.p.projectile_object.transform.localScale = weapon.p.projectile_scale;
     }
+
+    public void SetCanFire(bool canFire)
+    {
+        CanFire = canFire;
+    }
+
 }
 
 abstract public class Weapon

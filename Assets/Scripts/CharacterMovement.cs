@@ -97,15 +97,6 @@ public class CharacterMovement : MonoBehaviour
             anim.SetFloat("distance", 0);
             pc.SimpleMove(new Vector3(0f, 0f, 0f));
         }
-        //if(distance > 0.5f)
-        //{
-        //    anim.speed = 1;
-        //    movement = movement.normalized * speed;
-        //} else if(distance < 0.5f && distance > 0f)
-        //{
-        //    anim.speed = distance * 2f;
-        //    movement = movement.normalized * speed * 0.25f;
-        //}
     }
 
     //returns movement in units/second

@@ -14,6 +14,7 @@ public class ProjectileScript : MonoBehaviour
     GameObject player;
     Weapon weapon;
     Collider closestCollider;
+    Vector3 colliderPos;
     GameObject explosion;
     WeaponManager wm;
     private int penetrationDepth = 1;
@@ -23,21 +24,30 @@ public class ProjectileScript : MonoBehaviour
         time = 0;
         rb = GetComponent<Rigidbody>();
         player = GameObject.Find(Character.PLAYER);
+
         closestCollider = player.GetComponentInChildren<AimTrigger>().GetClosestCollider();
+        if (closestCollider == null)
+        {
+            colliderPos = player.transform.GetChild(0).position + player.transform.GetChild(0).forward * 10f + new Vector3(0f, 3.2f, 0f);
+        } else
+        {
+            colliderPos = closestCollider.transform.position;
+        }
+
         wm = player.GetComponent<WeaponManager>();
         weapon = wm.GetCurrentWeapon();
-        rb.transform.LookAt(closestCollider.transform);
+        rb.transform.LookAt(colliderPos);
 
         if (weapon is GrenadeLauncher) //grenadelauncher
         {
-            rb.velocity = (closestCollider.transform.position - rb.position).normalized;
+            rb.velocity = (colliderPos - rb.position).normalized;
             rb.transform.rotation *= Quaternion.Euler(0, -90f, 0);
             speed = 2000;
             rb.useGravity = false;
             Destroy(gameObject, 5f);
         } else
         {
-            rb.velocity = ((closestCollider.transform.position - rb.position).normalized + AddNoiseOnAngle(-weapon.weapon_spread, weapon.weapon_spread)) * speed;
+            rb.velocity = ((colliderPos - rb.position).normalized + AddNoiseOnAngle(-weapon.weapon_spread, weapon.weapon_spread)) * speed;
             rb.transform.rotation *= Quaternion.Euler(90f, 0, 0);
             Destroy(gameObject, 1f);
         }
@@ -53,7 +63,7 @@ public class ProjectileScript : MonoBehaviour
         if (weapon is GrenadeLauncher) //increase projectile speed
         {
             float currentSpeed = Mathf.SmoothStep(minSpeed, speed, time / accelerationTime);
-            rb.velocity = (closestCollider.transform.position - rb.position).normalized * currentSpeed;
+            rb.velocity = (colliderPos - rb.position).normalized * currentSpeed;
             time += Time.deltaTime;
             RaycastHit hit;
             Debug.DrawRay(transform.position, transform.right, Color.black);

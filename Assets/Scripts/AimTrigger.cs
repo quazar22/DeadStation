@@ -9,7 +9,7 @@ public class AimTrigger : MonoBehaviour
     List<Collider> ColliderList;
     Collider ClosestCollider = null;
     WeaponManager wm;
-    GameObject fireposition;
+    GameObject top;
     Renderer aim_cone;
     Color blue;
     Color red;
@@ -19,7 +19,7 @@ public class AimTrigger : MonoBehaviour
         ColliderList = new List<Collider>();
         player = GameObject.Find(Character.PLAYER);
         wm = GetComponentInParent<WeaponManager>();
-        fireposition = GameObject.Find("player/fire_position");
+        top = GameObject.Find("player/top");
         try
         {
             aim_cone = GameObject.Find("player/aim_cone_blue").GetComponent<Renderer>();
@@ -65,7 +65,6 @@ public class AimTrigger : MonoBehaviour
             {
                 ClosestCollider = c;
             }
-            
         }
 
         if (broken)
@@ -74,10 +73,9 @@ public class AimTrigger : MonoBehaviour
             return;
         }
 
-        Debug.DrawLine(fireposition.transform.position, ClosestCollider.transform.position, Color.red);
 
         RaycastHit hit;
-        if (Physics.Linecast(fireposition.transform.position, ClosestCollider.transform.position, out hit))
+        if (Physics.Linecast(top.transform.position, ClosestCollider.transform.position, out hit))
         {
             if (hit.collider)
             {
@@ -106,7 +104,19 @@ public class AimTrigger : MonoBehaviour
     {
         if (ColliderList.Count > 0)
         {
-            SetAimConeToRed();
+            if (ClosestCollider == null)
+                return;
+            RaycastHit hit;
+            if(Physics.Linecast(top.transform.position, ClosestCollider.transform.position, out hit))
+            {
+                if(!hit.collider.tag.StartsWith("wall"))
+                {
+                    SetAimConeToRed();
+                } else
+                {
+                    SetAimConeToBlue();
+                }
+            }
         }
         else
         {
@@ -131,7 +141,8 @@ public class AimTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.StartsWith("wall")) { return; }
+        if (!other.tag.StartsWith(Character.ZOMBIE)) { return; }
+
         ColliderList.Add(other);
 
         if (ColliderList.Count == 1)
