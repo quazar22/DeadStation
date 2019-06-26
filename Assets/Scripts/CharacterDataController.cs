@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 //this class should be used for controlling what a character should do given changes to their Character() object

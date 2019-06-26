@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using Random = UnityEngine.Random;
 using UnityEngine;
 
@@ -43,7 +41,6 @@ public class ProjectileScript : MonoBehaviour
             rb.velocity = (colliderPos - rb.position).normalized;
             rb.transform.rotation *= Quaternion.Euler(0, -90f, 0);
             speed = 2000;
-            rb.useGravity = false;
             Destroy(gameObject, 5f);
         } else
         {
@@ -51,6 +48,7 @@ public class ProjectileScript : MonoBehaviour
             rb.transform.rotation *= Quaternion.Euler(90f, 0, 0);
             Destroy(gameObject, 1f);
         }
+        rb.useGravity = false;
     }
 
     void Update()
