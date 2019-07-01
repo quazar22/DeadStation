@@ -86,7 +86,17 @@ public class CharacterMovement : MonoBehaviour
             anim.SetFloat("direction_x", direction_x);
             anim.SetFloat("angle", angle);
             anim.SetFloat("distance", distance);
-            movement = ClampMagnitude(movement.normalized * GetWalkingMagnitude(angle, distance), 8f, 3f);
+            float walking_magnitude = GetWalkingMagnitude(angle, distance);
+            movement = ClampMagnitude(movement.normalized * walking_magnitude, 9f, 3f);
+            if (walking_magnitude > 7.5f)
+            {
+                anim.speed = 0.75f;
+                movement *= 0.75f;
+            }
+            else
+            {
+                anim.speed = 1f;
+            }
             pc.SimpleMove(movement);
         }
         else

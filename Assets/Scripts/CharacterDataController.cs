@@ -9,13 +9,16 @@ public class CharacterDataController : MonoBehaviour
     private float HealthCheckTime = 0.2f;
     private AimTrigger at;
     private Collider c;
+    private Animator anim;
+    private Coroutine healthCheck;
 
     void Start()
     {
         c = gameObject.GetComponent<Collider>();
+        anim = GetComponentInChildren<Animator>();
         at = GameObject.Find("aim_angle").GetComponent<AimTrigger>();
-        character = Character.CreateCharacter(name);
-        StartCoroutine(CheckHealth());
+        character = Character.CreateCharacter(name, gameObject);
+        healthCheck = StartCoroutine("CheckHealth");
     }
 
     void Update()
@@ -38,10 +41,13 @@ public class CharacterDataController : MonoBehaviour
     {
         while(true)
         {
-            if (character.health <= 0 && character is Zombie)
+            //if (character.health <= 0 && character is Zombie)
+            if (character.health <= 0)
             {
                 at.RemoveFromList(c);
-                Destroy(gameObject);
+                character.Die();
+                StopCoroutine("CheckHealth");
+                Destroy(gameObject, 10f);
             }
             yield return new WaitForSeconds(HealthCheckTime);
         }
