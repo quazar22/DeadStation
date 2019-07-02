@@ -6,6 +6,7 @@ public class ZombieSpawn : MonoBehaviour
 {
     static GameObject[] zombie_list = null;
     static List<Material> skin_material_list = null;
+    float SpawnSpeed = 5f;
     
     // Start is called before the first frame update
     void Start()
@@ -28,13 +29,17 @@ public class ZombieSpawn : MonoBehaviour
                 }
             }
         }
-        StartCoroutine(BeginSpawnZombie());
+        StartCoroutine("BeginSpawnZombie");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetSpawnSpeed(float speed)
     {
-        
+        SpawnSpeed = speed;
+    }
+
+    public void StopSpawning()
+    {
+        StopCoroutine("BeginSpawnZombie");
     }
 
     IEnumerator BeginSpawnZombie()
@@ -56,6 +61,8 @@ public class ZombieSpawn : MonoBehaviour
         Material m = new Material(r[1].sharedMaterial);
         m.color = new Color() {r = Random.Range(0f,0.5f), a = Random.Range(0.5f, 1f), b = Random.Range(0f, 0.5f), g = Random.Range(0f, 0.5f) };
 
+        //skin material is located in first [0] component under the character (in the zombie prefab)
+        //clothing material is located in second [1] component 
         r[0].sharedMaterial = skin_material_list[Random.Range(0, skin_material_list.Count)];
         r[1].sharedMaterial = m;
     }

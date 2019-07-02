@@ -86,7 +86,7 @@ public class AimTrigger : MonoBehaviour
             }
         }
 
-        //wm.FireWeapon();
+        wm.FireWeapon();
     }
 
     private void SetAimConeToBlue()
