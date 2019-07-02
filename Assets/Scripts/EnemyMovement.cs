@@ -25,22 +25,24 @@ public class EnemyMovement : MonoBehaviour
 
         if (anim_state == 2)
         {
-            float multiplier = Random.Range(0.75f, 1f);
+            float multiplier = Random.Range(0.75f, 1.25f);
+            multiplier = 1f;
             anim.speed = 2f * multiplier;
             agent.speed = 1.6f * multiplier;
         } else if(anim_state == 5)
         {
-            anim.speed = 1f;
-            agent.speed = 4.5f;
+            float multiplier = Random.Range(.75f, 1f);
+            anim.speed = 1f * multiplier;
+            agent.speed = 4.5f * multiplier;
         } else if(anim_state == 4)
         {
-            float multiplier = Random.Range(1f, 1.5f);
+            float multiplier = Random.Range(.75f, 1.5f);
             anim.speed = 1f * multiplier;
             agent.speed = 1.5f * multiplier;
         }
         else
         {
-            float multiplier = Random.Range(1f, 1.5f);
+            float multiplier = Random.Range(.8f, 1.25f);
             anim.speed = 0.75f * multiplier;
             agent.speed = 4.5f * multiplier;
         }

@@ -636,11 +636,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231785679660084590}
   m_LocalRotation: {x: 0.00000008146034, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 1231785681096800435}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &1231785679660084588
 SkinnedMeshRenderer:
@@ -1692,7 +1692,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 1231785681096800435}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &1231785680582095488
 SkinnedMeshRenderer:
@@ -2198,7 +2198,7 @@ GameObject:
   - component: {fileID: 1231785681004167157}
   - component: {fileID: 1231785681004167154}
   m_Layer: 0
-  m_Name: humanMesh
+  m_Name: white_human_male_white_short_shirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2212,11 +2212,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231785681004167156}
   m_LocalRotation: {x: 0.00000008146034, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 1231785681096800435}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &1231785681004167154
 SkinnedMeshRenderer:
@@ -2437,9 +2437,9 @@ Transform:
   m_LocalPosition: {x: 0, y: -1.75, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
-  - {fileID: 1231785680582095491}
   - {fileID: 1231785681004167157}
   - {fileID: 1231785679660084591}
+  - {fileID: 1231785680582095491}
   - {fileID: 1231785680617065447}
   - {fileID: 1231785679236061450}
   - {fileID: 1231785680073336613}
