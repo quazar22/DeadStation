@@ -129,7 +129,8 @@ public class ProjectileScript : MonoBehaviour
         {
             if(!colliders[i].tag.StartsWith(Character.ZOMBIE)) { continue; }
             float distance = Vector3.Distance(center, colliders[i].transform.position);
-            float damage = -380 * distance + 2000;
+            //float damage = -380 * distance + 2000;
+            float damage = -80f * Mathf.Pow(distance, 2f) + 2000f;
             colliders[i].GetComponent<CharacterDataController>().character.DamageCharacter(wm.GetCurrentWeapon().damage_per_shot);
         }
     }

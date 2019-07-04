@@ -38,15 +38,20 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-        if(agent.enabled)
+        FollowPlayerAndAttack();
+    }
+
+    public void FollowPlayerAndAttack()
+    {
+        if (agent.enabled)
         {
             agent.destination = player.transform.position;
             float distance = Vector3.Distance(agent.transform.position, player.transform.position);
 
-            if (distance < 4.5f)
+            if (distance < 4f)
             {
                 inside_range_time += Time.deltaTime;
-                if(WeightScalar < 1f)
+                if (WeightScalar < 1f)
                 {
                     if (WeightScalar < 0.1f)
                     {
@@ -54,18 +59,19 @@ public class EnemyMovement : MonoBehaviour
                         anim.SetInteger("AttackState", attack_state); //attack_left/right = 79 frames, attack both = 139 frames
                                                                       //damage_cooldown is calculated time until next attack will hit
 
-                        //attack both = 4.633 seconds, 4.633/2 = 2.3165 seconds of playback. 2.3165 seconds of playback is 69.495 frames of animation
+                        //attack both = 4.633 seconds, 4.633/2 = 2.3165 seconds of playback.
                         //attack happens at frame 44/139 for the animations
                         //attack happens at 2.3165 * 44/139 seconds of playback
 
-                        //attack_left/right = 2.633 seconds, 2.633/2 = 1.3165 seconds of playback. 1.3165 seconds of playback is 39.495 frames of animation
+                        //attack_left/right = 2.633 seconds, 2.633/2 = 1.3165 seconds of playback.
+                        //attack happens at frame 32/79 for the animations
                         //attack happens at 1.3165 * 32/79 seconds of playback
                         damage_cooldown = attack_state == 0 || attack_state == 1 ? (32f / 79f) * RL_attack_time : (44f / 139f) * both_attack_time;
                     }
                     WeightScalar += Time.deltaTime * 2f;
                     anim.SetLayerWeight(1, WeightScalar);
                 }
-                if(distance < 3.5f)
+                if (distance < 3f)
                 {
                     StandStill();
                     if (inside_range_time > damage_cooldown)
@@ -74,10 +80,11 @@ public class EnemyMovement : MonoBehaviour
                         inside_range_time -= attack_state == 1 || attack_state == 0 ? RL_attack_time : both_attack_time;
                     }
                 }
-            } else
+            }
+            else
             {
                 inside_range_time = 0f;
-                if(WeightScalar > 0f)
+                if (WeightScalar > 0f)
                 {
                     WeightScalar -= Time.deltaTime * 2f;
                     anim.SetLayerWeight(1, WeightScalar);

@@ -143,7 +143,7 @@ public class AutoRifle : Weapon
         aim_angle_size = default_aim_angle_size;
         aim_angle_location = default_aim_angle_location;
         weapon_name = "autorifle";
-        damage_per_shot = 25;
+        damage_per_shot = 10;
         rate_of_fire = 0.2f;
         weapon_lock_time = 1f;
         weapon_spread = 3f;

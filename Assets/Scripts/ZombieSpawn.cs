@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ZombieSpawn : MonoBehaviour
 {
-    static GameObject[] zombie_list = null;
+    static GameObject[] zombie_prefab_list = null;
     static List<Material> skin_material_list = null;
+    static List<GameObject> alive_zombies;
     float SpawnSpeed = 5f;
     
     // Start is called before the first frame update
@@ -13,13 +14,14 @@ public class ZombieSpawn : MonoBehaviour
     {
         //get list of all acceptable skin materials to choose from
         //randomly choose one of those at runtime
-        if(zombie_list == null && skin_material_list == null)
+        if(zombie_prefab_list == null && skin_material_list == null)
         {
+            alive_zombies = new List<GameObject>();
             skin_material_list = new List<Material>();
-            zombie_list = Resources.LoadAll<GameObject>("Prefabs/Zombies");
-            for(int i = 0; i < zombie_list.Length; i++)
+            zombie_prefab_list = Resources.LoadAll<GameObject>("Prefabs/Zombies");
+            for(int i = 0; i < zombie_prefab_list.Length; i++)
             {
-                Renderer[] rendererList = zombie_list[i].GetComponentsInChildren<Renderer>();
+                Renderer[] rendererList = zombie_prefab_list[i].GetComponentsInChildren<Renderer>();
                 foreach(Renderer r in rendererList)
                 {
                     if(r.name.Contains("white") || r.name.Contains("black"))
@@ -53,7 +55,7 @@ public class ZombieSpawn : MonoBehaviour
 
     void SpawnZombie()
     {
-        GameObject zombie = zombie_list[Random.Range(0, zombie_list.Length)];
+        GameObject zombie = zombie_prefab_list[Random.Range(0, zombie_prefab_list.Length)];
         zombie = Instantiate(zombie, gameObject.transform.position, Quaternion.identity);
 
         Renderer[] r = zombie.GetComponentsInChildren<Renderer>();
@@ -65,6 +67,7 @@ public class ZombieSpawn : MonoBehaviour
         //clothing material is located in second [1] component 
         r[0].sharedMaterial = skin_material_list[Random.Range(0, skin_material_list.Count)];
         r[1].sharedMaterial = m;
+        alive_zombies.Add(zombie);
     }
 
 }
