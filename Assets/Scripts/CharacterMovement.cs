@@ -38,6 +38,7 @@ public class CharacterMovement : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 30;
         shouldWalk = false;
         pc = GetComponent<CharacterController>();
         cdc = GetComponent<CharacterDataController>();
