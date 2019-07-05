@@ -46,7 +46,6 @@ public class CharacterMovement : MonoBehaviour
         speed = cdc.character.GetMoveSpeed();
         anim = GetComponentInChildren<Animator>();
         fire_position = gameObject.transform.Find("player/fire_position");
-      
     }
 
     void Update()
@@ -63,10 +62,11 @@ public class CharacterMovement : MonoBehaviour
 
         float distance = Mathf.Sqrt(Mathf.Pow(x1, 2) + Mathf.Pow(y1, 2));
         Vector3 movement = new Vector3(x1, 0, y1);
+
         if (x2 != 0f && y2 != 0f)
         {
             Vector3 newvec = new Vector3(transform.eulerAngles.x, Mathf.Atan2(x2, y2) * Mathf.Rad2Deg, transform.eulerAngles.z);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(newvec), interpspeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(newvec), 0.05f);
         }
 
         if (distance != 0f)
@@ -83,12 +83,16 @@ public class CharacterMovement : MonoBehaviour
             {
                 distance = 0.5f;
             }
+
             anim.SetFloat("direction_y", direction_y);
             anim.SetFloat("direction_x", direction_x);
             anim.SetFloat("angle", angle);
             anim.SetFloat("distance", distance);
+
             float walking_magnitude = GetWalkingMagnitude(angle, distance);
+
             movement = ClampMagnitude(movement.normalized * walking_magnitude, 9f, 3f);
+
             if (walking_magnitude > 7.5f)
             {
                 anim.speed = 0.75f;
