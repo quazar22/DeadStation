@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    public Joystick leftstick;
-    public Joystick rightstick;
+    //public Joystick leftstick;
+    //public Joystick rightstick;
+    public JoystickLocationChanger leftstick;
+    public JoystickLocationChanger rightstick;
+
     private Rigidbody rb;
     private CharacterController pc;
     private CharacterDataController cdc;
@@ -66,7 +69,7 @@ public class CharacterMovement : MonoBehaviour
         if (x2 != 0f && y2 != 0f)
         {
             Vector3 newvec = new Vector3(transform.eulerAngles.x, Mathf.Atan2(x2, y2) * Mathf.Rad2Deg, transform.eulerAngles.z);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(newvec), 0.05f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(newvec), .7f);
         }
 
         if (distance != 0f)

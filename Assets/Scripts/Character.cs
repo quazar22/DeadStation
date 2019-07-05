@@ -87,7 +87,7 @@ public class Player : Character
     {
         char_name = "player";
         health = 1000;
-        interpspeed = 0.025f;
+        interpspeed = 0.02f;
         movespeed = 6.0f;
         isStanding = true;
     }
