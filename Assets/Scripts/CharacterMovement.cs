@@ -13,21 +13,22 @@ public class CharacterMovement : MonoBehaviour
     private CharacterController pc;
     private CharacterDataController cdc;
     private float speed = 2.0f;
-    private float interpspeed = 0.2f;
+    //[Range(0.0f, 1.0f)]
+    private float interpspeed = 0.1f;
     private Animator anim; //potentially replace with a new class called AnimationController
     private Transform fire_position;
     private bool shouldWalk;
 
     //each animation runs at 30fps
-    private float RunForward = 7.237f; //22 frames, 2 steps, 0.733 seconds (30fps / (22frames / 2 strides))  = 2.72 strides/second * 2.661 units/stride = 7.237 units/second
+    private float RunForward = 9f; //22 frames, 2 steps, 0.733 seconds (30fps / (22frames / 2 strides))  = 2.72 strides/second * 2.661 units/stride = 7.237 units/second
     private float WalkForward = 4.55f; //30 frames, 2 steps, 1 second     (30 fps / (30frames / 2 strides)) = 2.00 strides/second * 2.275 units/stride = 4.55 units/second
-    private float RunBackward = 6.3f; //16 frames, 2 steps, 0.533 seconds (30 fps / (16frames / 2 strides)) = 3.75 strides/second * 1.680 units/stride = 6.3 units/second
+    private float RunBackward = 9f; //16 frames, 2 steps, 0.533 seconds (30 fps / (16frames / 2 strides)) = 3.75 strides/second * 1.680 units/stride = 6.3 units/second
     private float WalkBackward = 4.468f; //30 frames, 2 steps, 1 second    (30 fps / (30frames / 2 strides)) = 2.00 strides/second * 2.234 units/stride = 4.468 units/second
 
-    private float RunStrafeRight = 6.8175f; //16 frames, 2 steps, 0.533 seconds   (30 fps / (16frames / 2 strides)) = 3.75 strides/second * 1.818 units/stride = 6.8175 units/second
-    private float RunStrafeLeft = 6.8025f; //16 frames, 2 steps, 0.533 seconds    (30 fps / (16frames / 2 strides)) = 3.75 strides/second * 1.814 units/stride = 6.8025 units/second
-    private float WalkStrafeLeft = 3.6033f; //31 frames, 2 steps, 1.033 seconds   (30 fps / (31frames / 2 strides)) = 1.93 strides/second * 1.867 units/stride = 3.6033 units/second
-    private float WalkStrafeRight = 2.2162f; //43 seconds, 2 steps, 1.433 seconds (30 fps / (43frames / 2 strides)) = 1.40 strides/second * 1.583 units/stride = 2.2162 units/second
+    private float RunStrafeRight = 9f; //16 frames, 2 steps, 0.533 seconds   (30 fps / (16frames / 2 strides)) = 3.75 strides/second * 1.818 units/stride = 6.8175 units/second
+    private float RunStrafeLeft = 9f; //16 frames, 2 steps, 0.533 seconds    (30 fps / (16frames / 2 strides)) = 3.75 strides/second * 1.814 units/stride = 6.8025 units/second
+    private float WalkStrafeLeft = 4.55f; //31 frames, 2 steps, 1.033 seconds   (30 fps / (31frames / 2 strides)) = 1.93 strides/second * 1.867 units/stride = 3.6033 units/second
+    private float WalkStrafeRight = 4.55f; //43 seconds, 2 steps, 1.433 seconds (30 fps / (43frames / 2 strides)) = 1.40 strides/second * 1.583 units/stride = 2.2162 units/second
 
     private float RunForwardLeft = 10.636f; //15 frames, 2 steps, 0.5 seconds     (30 fps / (15frames / 2 strides)) = 4 strides/second * 2.659 units/stride = 10.636 units/second
     private float RunForwardRight = 10.132f; //15 frames, 2 steps, 0.5 seconds    (30 fps / (15frames / 2 strides)) = 4 strides/second * 2.533 units/stride = 10.132 units/second
@@ -69,7 +70,7 @@ public class CharacterMovement : MonoBehaviour
         if (x2 != 0f && y2 != 0f)
         {
             Vector3 newvec = new Vector3(transform.eulerAngles.x, Mathf.Atan2(x2, y2) * Mathf.Rad2Deg, transform.eulerAngles.z);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(newvec), .7f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(newvec), interpspeed);
         }
 
         if (distance != 0f)

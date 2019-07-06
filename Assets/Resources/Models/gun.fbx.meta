@@ -1,0 +1,175 @@
+fileFormatVersion: 2
+guid: e85a0b62db5c86545829d7d853d285ff
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Bone001
+    100002: Bone001_end
+    100004: //RootNode
+    100006: m4a1_bolt
+    100008: m4a1_front sight
+    100010: m4a1_lower receiver
+    100012: m4a1_magazine
+    100014: m4a1_troy_rear_base
+    100016: m4a1_troy_rear_post
+    100018: m4a1_upper receiver
+    400000: Bone001
+    400002: Bone001_end
+    400004: //RootNode
+    400006: m4a1_bolt
+    400008: m4a1_front sight
+    400010: m4a1_lower receiver
+    400012: m4a1_magazine
+    400014: m4a1_troy_rear_base
+    400016: m4a1_troy_rear_post
+    400018: m4a1_upper receiver
+    2100000: No Name
+    2100002: Metal Aluminum Anodized - Black
+    2100004: Plastic LED - Green On
+    2100006: Metallic Paint Satin - Black
+    2100008: Metallic Paint Satin - Olive Green
+    2100010: Metallic Paint Satin - Silver
+    2100012: Plastic Textured - Dark Green Matte
+    2300000: m4a1_bolt
+    2300002: m4a1_front sight
+    2300004: m4a1_lower receiver
+    2300006: m4a1_magazine
+    2300008: m4a1_troy_rear_base
+    2300010: m4a1_troy_rear_post
+    2300012: m4a1_upper receiver
+    3300000: m4a1_bolt
+    3300002: m4a1_front sight
+    3300004: m4a1_lower receiver
+    3300006: m4a1_magazine
+    3300008: m4a1_troy_rear_base
+    3300010: m4a1_troy_rear_post
+    3300012: m4a1_upper receiver
+    4300000: m4a1_magazine
+    4300002: m4a1_bolt
+    4300004: m4a1_troy_rear_post
+    4300006: m4a1_troy_rear_base
+    4300008: m4a1_front sight
+    4300010: m4a1_upper receiver
+    4300012: m4a1_lower receiver
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal Aluminum Anodized - Black
+    second: {fileID: 2100000, guid: e2e3e62dea0d5a441866f9761658b833, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metallic Paint Satin - Black
+    second: {fileID: 2100000, guid: bf496a4a28f0f164cb496b8c54d8ea8d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metallic Paint Satin - Olive Green
+    second: {fileID: 2100000, guid: 9d43b8e5e969e1149beb2a8ac08397b3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metallic Paint Satin - Silver
+    second: {fileID: 2100000, guid: 8a1bf9d368ed1d3429589bcecf7d7db6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: f71e5e086b2e8ef45828959595bad65e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plastic LED - Green On
+    second: {fileID: 2100000, guid: 1e2a2b1fd25a4d548b6828c1f1b05cca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plastic Textured - Dark Green Matte
+    second: {fileID: 2100000, guid: 913ddab61055ff94f83c67f7731fdb9a, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

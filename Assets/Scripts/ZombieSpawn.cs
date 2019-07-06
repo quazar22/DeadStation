@@ -8,6 +8,8 @@ public class ZombieSpawn : MonoBehaviour
     static List<Material> skin_material_list = null;
     static List<GameObject> alive_zombies;
     float SpawnSpeed = 5f;
+
+    public bool shouldSpawn;
     
     // Start is called before the first frame update
     void Start()
@@ -46,7 +48,7 @@ public class ZombieSpawn : MonoBehaviour
 
     IEnumerator BeginSpawnZombie()
     {
-        while(true)
+        while(true && shouldSpawn)
         {
             SpawnZombie();
             yield return new WaitForSeconds(5f);

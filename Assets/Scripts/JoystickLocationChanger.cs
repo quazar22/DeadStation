@@ -31,7 +31,6 @@ public class JoystickLocationChanger : MonoBehaviour, IPointerUpHandler, IPointe
         }
 
         stick_original_location = bgImg.rectTransform.position;
-        Debug.Log(stick_original_location);
         original_bgimg_color = bgImg.color;
         original_stick_color = stick.color;
         bgImg.color = new Color() { a = 0f };
