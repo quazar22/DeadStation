@@ -6,6 +6,8 @@ using UnityEngine;
 public class AimTrigger : MonoBehaviour
 {
     GameObject player;
+    Character character;
+
     List<Collider> ColliderList;
     Collider ClosestCollider = null;
     WeaponManager wm;
@@ -18,6 +20,8 @@ public class AimTrigger : MonoBehaviour
     {
         ColliderList = new List<Collider>();
         player = GameObject.Find(Character.PLAYER);
+        character = player.GetComponent<CharacterDataController>().character;
+
         wm = GetComponentInParent<WeaponManager>();
         top = GameObject.Find("player/top");
         try
@@ -112,16 +116,36 @@ public class AimTrigger : MonoBehaviour
                 if(!hit.collider.tag.StartsWith("wall"))
                 {
                     SetAimConeToRed();
+                    //character.anim.SetInteger("UpperBodyAnimState", wm.GetCurrentWeapon().recoilCount);
+                    BeginShooting();
                 } else
                 {
                     SetAimConeToBlue();
+                    //character.anim.SetInteger("UpperBodyAnimState", 0);
+                    ResetToIdleAnim();
                 }
             }
         }
         else
         {
             SetAimConeToBlue();
+            //character.anim.SetInteger("UpperBodyAnimState", 0);
+            ResetToIdleAnim();
         }
+    }
+
+    public void BeginShooting()
+    {
+        if(character.anim.GetInteger("UpperBodyAnimState") == 3 && character.AnimPlayTime.ElapsedMilliseconds > 0.15f * 1000f)
+            character.anim.SetInteger("UpperBodyAnimState", wm.GetCurrentWeapon().recoilCount);
+        else if(character.anim.GetInteger("UpperBodyAnimState") == 0)
+            character.anim.SetInteger("UpperBodyAnimState", wm.GetCurrentWeapon().recoilCount);
+
+    }
+
+    public void ResetToIdleAnim()
+    {
+        character.anim.SetInteger("UpperBodyAnimState", 0);
     }
 
     public Collider GetClosestCollider()

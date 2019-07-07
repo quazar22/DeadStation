@@ -5,7 +5,9 @@ public class EnemyMovement : MonoBehaviour
 {
     private CharacterController cc;
     private CharacterDataController cdc;
+    private CharacterMovement cm;
     private GameObject player;
+    private Character player_char;
     NavMeshAgent agent;
 
     private Vector3 direction;
@@ -27,11 +29,13 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
-        //cc = GetComponent<CharacterController>(); //wary of deleting
+        cc = GetComponent<CharacterController>(); //wary of deleting
+        cm = GameObject.Find(Character.PLAYER).GetComponent<CharacterMovement>();
         cdc = GetComponent<CharacterDataController>();
         player = GameObject.Find(Character.PLAYER).transform.GetChild(0).gameObject; //"player"
         agent = GetComponent<NavMeshAgent>();
         fps = Application.targetFrameRate;
+        player_char = GameObject.Find(Character.PLAYER).GetComponent<CharacterDataController>().character;
 
         StartWithRandomAnim();
     }
@@ -57,15 +61,6 @@ public class EnemyMovement : MonoBehaviour
                     {
                         attack_state = Random.Range(0, 3);
                         anim.SetInteger("AttackState", attack_state); //attack_left/right = 79 frames, attack both = 139 frames
-                                                                      //damage_cooldown is calculated time until next attack will hit
-
-                        //attack both = 4.633 seconds, 4.633/2 = 2.3165 seconds of playback.
-                        //attack happens at frame 44/139 for the animations
-                        //attack happens at 2.3165 * 44/139 seconds of playback
-
-                        //attack_left/right = 2.633 seconds, 2.633/2 = 1.3165 seconds of playback.
-                        //attack happens at frame 32/79 for the animations
-                        //attack happens at 1.3165 * 32/79 seconds of playback
                         damage_cooldown = attack_state == 0 || attack_state == 1 ? (32f / 79f) * RL_attack_time : (44f / 139f) * both_attack_time;
                     }
                     WeightScalar += Time.deltaTime * 2f;
@@ -73,10 +68,12 @@ public class EnemyMovement : MonoBehaviour
                 }
                 if (distance < 3f)
                 {
-                    StandStill();
+                    if(!(cm.GetMovementMagnitude() > 0f))
+                        StandStill();
                     if (inside_range_time > damage_cooldown)
                     {
-                        Debug.Log("Damage Taken!");
+                        //Damage character
+                        player_char.DamageCharacter(0);
                         inside_range_time -= attack_state == 1 || attack_state == 0 ? RL_attack_time : both_attack_time;
                     }
                 }

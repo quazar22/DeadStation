@@ -13,6 +13,7 @@ public class WeaponManager : MonoBehaviour
     public List<Weapon> weapon_list;
     Transform fireposition;
     bool CanFire;
+    Animator anim;
 
     void Start()
     {
@@ -28,6 +29,9 @@ public class WeaponManager : MonoBehaviour
         player = GameObject.Find(Character.PLAYER);
         fireposition = GameObject.Find("player/fire_position").transform;
         weapon_list = new List<Weapon>(new Weapon[] { new AutoRifle(), new Shotgun(), new LaserCannon(), new GrenadeLauncher() });
+
+        anim = GameObject.Find(Character.PLAYER).GetComponentInChildren<Animator>();
+
         SwitchWeapon(weapon_list[Weapon.AUTORIFLE]);
     }
 
@@ -42,6 +46,7 @@ public class WeaponManager : MonoBehaviour
         {
             if (CanFire)
             {
+                //anim.SetInteger("UpperBodyAnimState", currentWeapon.recoilCount);
                 currentWeapon.ShootWeapon(fireposition.position);
                 currentWeapon.timer.Restart();
             }
@@ -83,13 +88,16 @@ abstract public class Weapon
 {
     public static string[] weapons = { "shotgun", "autorifle", "lasercannon", "grenadelauncher" };
     static public Vector3 default_aim_angle_size = new Vector3(300f, 900f, 15f);
-    static public Vector3 default_aim_angle_location = new Vector3(16.56f, 0.28f, 8.79f);
+    static public Vector3 default_aim_angle_location = new Vector3(16.56f, 0.28f, 7.93f);
     static public Vector3 default_fire_pos = new Vector3(16.56f, 3.2f, -0.6f);
 
     public Vector3 aim_angle_size;
     public Vector3 aim_angle_location;
     public Projectile p = new Projectile();
     public Stopwatch timer;
+
+    public int recoilCount;
+    public float animPlayTime;
 
     public string weapon_name;
     public int damage_per_shot;
@@ -110,7 +118,7 @@ public class Shotgun : Weapon
     public Shotgun()
     {
         aim_angle_size = new Vector3(400f, 450f, default_aim_angle_size.z);
-        aim_angle_location = new Vector3(16.56f, 0.28f, 4f);
+        aim_angle_location = new Vector3(16.56f, 0.28f, 3.43f);
         weapon_name = "shotgun";
         damage_per_shot = 25;
         rate_of_fire = 1f;
@@ -118,6 +126,8 @@ public class Shotgun : Weapon
         weapon_spread = 15f;
         p.projectile_object = Resources.Load<GameObject>("Prefabs/Projectiles/Laser");
         p.projectile_scale = new Vector3(5f, 5f, 5f);
+        recoilCount = 1;
+        animPlayTime = 0.933f;
         timer = new Stopwatch();
         timer.Start();
     }
@@ -149,6 +159,8 @@ public class AutoRifle : Weapon
         weapon_spread = 3f;
         p.projectile_object = Resources.Load<GameObject>("Prefabs/Projectiles/Laser");
         p.projectile_scale = new Vector3(5f, 5f, 5f);
+        recoilCount = 2;
+        animPlayTime = 0.267f;
         timer = new Stopwatch();
         timer.Start();
     }
@@ -172,6 +184,8 @@ public class LaserCannon : Weapon
         weapon_spread = 0.5f;
         p.projectile_object = Resources.Load<GameObject>("Prefabs/Projectiles/Laser");
         p.projectile_scale = new Vector3(8f, 8f, 8f);
+        recoilCount = 1;
+        animPlayTime = 0.933f;
         timer = new Stopwatch();
         timer.Start();
     }
@@ -187,7 +201,7 @@ public class GrenadeLauncher : Weapon
     public GrenadeLauncher()
     {
         aim_angle_size = new Vector3(150f, 1500f, default_aim_angle_size.z);
-        aim_angle_location = new Vector3(16.56f, default_aim_angle_location.y, 14.88f);
+        aim_angle_location = new Vector3(16.56f, default_aim_angle_location.y, 14.03f);
         weapon_name = "grenadelauncher";
         damage_per_shot = 2000;
         rate_of_fire = 10f;
@@ -195,6 +209,8 @@ public class GrenadeLauncher : Weapon
         weapon_spread = 0f;
         p.projectile_object = Resources.Load<GameObject>("Prefabs/Projectiles/Rocket");
         p.projectile_scale = new Vector3(1f, 1f, 1f);
+        recoilCount = 1;
+        animPlayTime = 0.933f;
         timer = new Stopwatch();
         timer.Start();
     }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//movement and player animation handler
 public class CharacterMovement : MonoBehaviour
 {
     //public Joystick leftstick;
@@ -14,10 +16,11 @@ public class CharacterMovement : MonoBehaviour
     private CharacterDataController cdc;
     private float speed = 2.0f;
     //[Range(0.0f, 1.0f)]
-    private float interpspeed = 0.1f;
+    private float interpspeed = 0.15f;
     private Animator anim; //potentially replace with a new class called AnimationController
     private Transform fire_position;
     private bool shouldWalk;
+    Vector3 movement;
 
     //each animation runs at 30fps
     private float RunForward = 9f; //22 frames, 2 steps, 0.733 seconds (30fps / (22frames / 2 strides))  = 2.72 strides/second * 2.661 units/stride = 7.237 units/second
@@ -65,7 +68,7 @@ public class CharacterMovement : MonoBehaviour
         float y2 = rightstick.Vertical();
 
         float distance = Mathf.Sqrt(Mathf.Pow(x1, 2) + Mathf.Pow(y1, 2));
-        Vector3 movement = new Vector3(x1, 0, y1);
+        movement = new Vector3(x1, 0, y1);
 
         if (x2 != 0f && y2 != 0f)
         {
@@ -115,6 +118,22 @@ public class CharacterMovement : MonoBehaviour
             anim.SetFloat("angle", 0);
             anim.SetFloat("distance", 0);
             pc.SimpleMove(new Vector3(0f, 0f, 0f));
+        }
+
+        HandleUpperBodyAnimations();
+    }
+
+    public float GetMovementMagnitude()
+    {
+        return movement.magnitude;
+    }
+
+    public void HandleUpperBodyAnimations()
+    {
+        if (anim.GetInteger("UpperBodyAnimState") == 3 && cdc.character.AnimPlayTime.ElapsedMilliseconds > 0.55f * 1000f)
+        {
+            anim.SetInteger("UpperBodyAnimState", 0);
+            cdc.character.AnimPlayTime.Reset();
         }
     }
 

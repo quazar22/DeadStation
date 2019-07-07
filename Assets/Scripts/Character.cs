@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.AI;
 
+//generic attributes and animations handling and storage
 abstract public class Character
 {
     static public string ZOMBIE = "zombie";
@@ -18,8 +20,8 @@ abstract public class Character
     public Animator anim;
     public NavMeshAgent nma;
     public CharacterController cc;
+    public Stopwatch AnimPlayTime;
 
-    public void DamageCharacter(int damage)     { health -= damage; }
     public void HealCharacter(int heal)         { health += heal; }
     public float GetInterpSpeed()               { return interpspeed; }
     public float GetMoveSpeed()                 { return movespeed; }
@@ -43,6 +45,7 @@ abstract public class Character
         return_character.anim = go.GetComponentInChildren<Animator>();
         return_character.nma = go.GetComponent<NavMeshAgent>();
         return_character.cc = go.GetComponent<CharacterController>();
+        return_character.AnimPlayTime = new Stopwatch();
 
         return return_character;
     }
@@ -53,6 +56,7 @@ abstract public class Character
 
     }
 
+    //might just want to make everything below here abstract
     public void Die()
     {
         if (!(this is Player))
@@ -63,6 +67,20 @@ abstract public class Character
             cc.enabled = false;
         }
         anim.SetBool("Alive", false);
+    }
+
+    public void DamageCharacter(int damage)
+    {
+        health -= damage;
+        if(this is Player)
+        {
+            if(anim.GetLayerWeight(1) < 1f)
+            {
+                anim.SetLayerWeight(1, 1f);
+            }
+            anim.SetInteger("UpperBodyAnimState", 3);
+        }
+        AnimPlayTime.Start();
     }
 
 }
@@ -86,7 +104,7 @@ public class Player : Character
     public Player()
     {
         char_name = "player";
-        health = 1000;
+        health = 100;
         interpspeed = 0.02f;
         movespeed = 6.0f;
         isStanding = true;

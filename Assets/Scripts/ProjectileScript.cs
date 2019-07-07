@@ -78,7 +78,7 @@ public class ProjectileScript : MonoBehaviour
                         return;
                     }
                     Destroy(gameObject);
-                } else if(hit.collider.tag.StartsWith("wall"))
+                } else if(hit.collider.tag == "wall")
                 {
                     Destroy(gameObject);
                 }
