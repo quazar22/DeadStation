@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class ZombieSpawn : MonoBehaviour
@@ -48,11 +49,16 @@ public class ZombieSpawn : MonoBehaviour
 
     IEnumerator BeginSpawnZombie()
     {
-        while(true && shouldSpawn)
+        while(shouldSpawn && !(Time.fixedTime > 5f))
         {
             SpawnZombie();
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(1f);
         }
+    }
+
+    private void Update()
+    {
+        
     }
 
     void SpawnZombie()
@@ -69,7 +75,7 @@ public class ZombieSpawn : MonoBehaviour
         //clothing material is located in second [1] component 
         r[0].sharedMaterial = skin_material_list[Random.Range(0, skin_material_list.Count)];
         r[1].sharedMaterial = m;
-        alive_zombies.Add(zombie);
+        //alive_zombies.Add(zombie);
     }
 
 }

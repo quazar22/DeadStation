@@ -113,15 +113,13 @@ public class AimTrigger : MonoBehaviour
             RaycastHit hit;
             if(Physics.Linecast(top.transform.position, ClosestCollider.transform.position, out hit))
             {
-                if(!hit.collider.tag.StartsWith("wall"))
+                if(!hit.collider.tag.StartsWith("wall") && wm.CanFire)
                 {
                     SetAimConeToRed();
-                    //character.anim.SetInteger("UpperBodyAnimState", wm.GetCurrentWeapon().recoilCount);
                     BeginShooting();
                 } else
                 {
                     SetAimConeToBlue();
-                    //character.anim.SetInteger("UpperBodyAnimState", 0);
                     ResetToIdleAnim();
                 }
             }
@@ -129,18 +127,19 @@ public class AimTrigger : MonoBehaviour
         else
         {
             SetAimConeToBlue();
-            //character.anim.SetInteger("UpperBodyAnimState", 0);
             ResetToIdleAnim();
         }
     }
 
     public void BeginShooting()
     {
-        if(character.anim.GetInteger("UpperBodyAnimState") == 3 && character.AnimPlayTime.ElapsedMilliseconds > 0.15f * 1000f)
+        if(character.anim.GetInteger("UpperBodyAnimState") == 0 && wm.GetCurrentWeapon().timer.ElapsedMilliseconds >= wm.GetCurrentWeapon().rate_of_fire * 1000f)
+        {
             character.anim.SetInteger("UpperBodyAnimState", wm.GetCurrentWeapon().recoilCount);
-        else if(character.anim.GetInteger("UpperBodyAnimState") == 0)
-            character.anim.SetInteger("UpperBodyAnimState", wm.GetCurrentWeapon().recoilCount);
-
+        } else if(character.anim.GetInteger("UpperBodyAnimState") == 0)
+        {
+            character.anim.SetInteger("UpperBodyAnimState", 0);
+        }
     }
 
     public void ResetToIdleAnim()

@@ -12,7 +12,7 @@ public class WeaponManager : MonoBehaviour
     GameObject player;
     public List<Weapon> weapon_list;
     Transform fireposition;
-    bool CanFire;
+    public bool CanFire;
     Animator anim;
     private Light laser_flash;
     private Stopwatch flash_timer;
@@ -54,7 +54,7 @@ public class WeaponManager : MonoBehaviour
         {
             if (CanFire)
             {
-                //anim.SetInteger("UpperBodyAnimState", currentWeapon.recoilCount);
+                anim.SetInteger("UpperBodyAnimState", currentWeapon.recoilCount);
                 laser_flash.intensity = 1f;
                 currentWeapon.ShootWeapon(fireposition.position);
                 currentWeapon.timer.Restart();
@@ -134,7 +134,7 @@ public class Shotgun : Weapon
         weapon_lock_time = 0.1f;
         weapon_spread = 15f;
         p.projectile_object = Resources.Load<GameObject>("Prefabs/Projectiles/Laser");
-        p.projectile_scale = new Vector3(5f, 5f, 5f);
+        p.projectile_scale = new Vector3(0.025f, 0.025f, 0.025f);
         recoilCount = 1;
         animPlayTime = 0.933f;
         timer = new Stopwatch();
@@ -143,15 +143,15 @@ public class Shotgun : Weapon
 
     public override void ShootWeapon(Vector3 at)
     {
-        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
-        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
-        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
-        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
+        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 0, 0));
+        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 0, 0));
+        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 0, 0));
+        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 0, 0));
 
-        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
-        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
-        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
-        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
+        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 0, 0));
+        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 0, 0));
+        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 0, 0));
+        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 0, 0));
     }
 }
 
@@ -167,7 +167,7 @@ public class AutoRifle : Weapon
         weapon_lock_time = 1f;
         weapon_spread = 3f;
         p.projectile_object = Resources.Load<GameObject>("Prefabs/Projectiles/Laser");
-        p.projectile_scale = new Vector3(5f, 5f, 5f);
+        p.projectile_scale = new Vector3(0.05f, 0.05f, 0.05f);
         recoilCount = 2;
         animPlayTime = 0.267f;
         timer = new Stopwatch();
@@ -176,7 +176,7 @@ public class AutoRifle : Weapon
 
     public override void ShootWeapon(Vector3 at)
     {
-        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
+        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 0, 0));
     }
 }
 
@@ -192,7 +192,7 @@ public class LaserCannon : Weapon
         weapon_lock_time = 1f;
         weapon_spread = 0.5f;
         p.projectile_object = Resources.Load<GameObject>("Prefabs/Projectiles/Laser");
-        p.projectile_scale = new Vector3(8f, 8f, 8f);
+        p.projectile_scale = new Vector3(0.1f, 0.1f, 0.1f);
         recoilCount = 1;
         animPlayTime = 0.933f;
         timer = new Stopwatch();
@@ -201,7 +201,7 @@ public class LaserCannon : Weapon
 
     public override void ShootWeapon(Vector3 at)
     {
-        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
+        Object.Instantiate(p.projectile_object, at, Quaternion.identity);
     }
 }
 
@@ -213,11 +213,11 @@ public class GrenadeLauncher : Weapon
         aim_angle_location = new Vector3(16.56f, default_aim_angle_location.y, 14.03f);
         weapon_name = "grenadelauncher";
         damage_per_shot = 2000;
-        rate_of_fire = 10f;
+        rate_of_fire = 4f;
         weapon_lock_time = 4f;
         weapon_spread = 0f;
         p.projectile_object = Resources.Load<GameObject>("Prefabs/Projectiles/Rocket");
-        p.projectile_scale = new Vector3(1f, 1f, 1f);
+        p.projectile_scale = new Vector3(0.1f, 0.2f, 0.1f);
         recoilCount = 1;
         animPlayTime = 0.933f;
         timer = new Stopwatch();
@@ -226,7 +226,7 @@ public class GrenadeLauncher : Weapon
 
     public override void ShootWeapon(Vector3 at)
     {
-        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 90, 0));
+        Object.Instantiate(p.projectile_object, at, Quaternion.Euler(0, 0, 0));
     }
 
 }

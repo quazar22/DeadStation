@@ -13,6 +13,9 @@ public class EnemyMovement : MonoBehaviour
     private Vector3 direction;
     private Animator anim;
 
+    private int idle_anim;
+    private int attack_anim;
+
     private float WeightScalar = 0f;
     private int anim_state;
     private int attack_state;
@@ -37,12 +40,13 @@ public class EnemyMovement : MonoBehaviour
         fps = Application.targetFrameRate;
         player_char = GameObject.Find(Character.PLAYER).GetComponent<CharacterDataController>().character;
 
-        StartWithRandomAnim();
+        BeginIdleAnimation();
+        //StartWithRandomAnim();
     }
 
     void Update()
     {
-        FollowPlayerAndAttack();
+        //FollowPlayerAndAttack();
     }
 
     public void FollowPlayerAndAttack()
@@ -114,10 +118,17 @@ public class EnemyMovement : MonoBehaviour
         //speed = cdc.character.GetMoveSpeed();
     }
 
-    public void StartWithRandomAnim()
+    public void BeginIdleAnimation()
     {
-        anim_state = Random.Range(2, 6);
-        anim.SetInteger("AnimState", anim_state);
+        idle_anim = Random.Range(0, 2);
+        anim.SetInteger("AnimState", idle_anim);
+        anim.speed = Random.Range(0.75f, 1.5f);
+    }
+
+    public void RandomAttackAnim()
+    {
+        attack_anim = anim_state = Random.Range(2, 6);
+        //anim.SetInteger("AnimState", anim_state);
 
         if (anim_state == 2)
         {
@@ -143,7 +154,7 @@ public class EnemyMovement : MonoBehaviour
             anim_speed = anim.speed = 0.75f * multiplier;
             agent_speed = agent.speed = 4.5f * multiplier;
         }
-        anim.SetFloat("AttackSpeed", 2f / anim_speed);
+        //anim.SetFloat("AttackSpeed", 2f / anim_speed);
     }
 
 }

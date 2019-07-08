@@ -34,21 +34,18 @@ public class ProjectileScript : MonoBehaviour
 
         wm = player.GetComponent<WeaponManager>();
         weapon = wm.GetCurrentWeapon();
-        rb.transform.LookAt(colliderPos);
 
         if (weapon is GrenadeLauncher) //grenadelauncher
         {
             rb.velocity = (colliderPos - rb.position).normalized;
-            rb.transform.rotation *= Quaternion.Euler(0, -90f, 0);
             speed = 2000;
             Destroy(gameObject, 5f);
         } else
         {
             rb.velocity = ((colliderPos - rb.position).normalized + AddNoiseOnAngle(-weapon.weapon_spread, weapon.weapon_spread)) * speed;
-            rb.transform.rotation *= Quaternion.Euler(90f, 0, 0);
             Destroy(gameObject, 1f);
         }
-        rb.useGravity = false;
+        rb.transform.rotation = Quaternion.LookRotation(rb.velocity);
     }
 
     void Update()
@@ -64,8 +61,8 @@ public class ProjectileScript : MonoBehaviour
             rb.velocity = (colliderPos - rb.position).normalized * currentSpeed;
             time += Time.deltaTime;
             RaycastHit hit;
-            Debug.DrawRay(transform.position, transform.right, Color.black);
-            if (Physics.Raycast(transform.position, transform.right, out hit, 1f))
+            Debug.DrawRay(transform.position, transform.forward, Color.black);
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 1f))
             {
                 if (hit.collider.tag.StartsWith(Character.ZOMBIE))
                 {
@@ -87,8 +84,8 @@ public class ProjectileScript : MonoBehaviour
         else
         {
             RaycastHit hit;
-            Debug.DrawRay(gameObject.transform.position, transform.up, Color.black);
-            if (Physics.Raycast(gameObject.transform.position, transform.up, out hit, 4f))
+            Debug.DrawRay(gameObject.transform.position, transform.forward, Color.black);
+            if (Physics.Raycast(gameObject.transform.position, transform.forward, out hit, 4f))
             {
                 if (hit.collider.tag.StartsWith(Character.ZOMBIE))
                 {
