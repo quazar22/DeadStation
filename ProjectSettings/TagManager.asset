@@ -6,6 +6,7 @@ TagManager:
   tags:
   - wall
   - zombie
+  - aim_trigger
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - PostProcessing
   - 
   - wall
-  - 
+  - aim_trigger
   - 
   - 
   - 

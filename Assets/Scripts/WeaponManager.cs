@@ -14,6 +14,8 @@ public class WeaponManager : MonoBehaviour
     Transform fireposition;
     bool CanFire;
     Animator anim;
+    private Light laser_flash;
+    private Stopwatch flash_timer;
 
     void Start()
     {
@@ -28,6 +30,9 @@ public class WeaponManager : MonoBehaviour
         }
         player = GameObject.Find(Character.PLAYER);
         fireposition = GameObject.Find("player/fire_position").transform;
+        laser_flash = fireposition.GetComponent<Light>();
+        laser_flash.intensity = 0f;
+
         weapon_list = new List<Weapon>(new Weapon[] { new AutoRifle(), new Shotgun(), new LaserCannon(), new GrenadeLauncher() });
 
         anim = GameObject.Find(Character.PLAYER).GetComponentInChildren<Animator>();
@@ -37,7 +42,10 @@ public class WeaponManager : MonoBehaviour
 
     void Update()
     {
-        
+        if(currentWeapon.timer.ElapsedMilliseconds >= currentWeapon.rate_of_fire * 500f)
+        {
+            laser_flash.intensity = 0f;
+        }
     }
 
     public void FireWeapon()
@@ -47,6 +55,7 @@ public class WeaponManager : MonoBehaviour
             if (CanFire)
             {
                 //anim.SetInteger("UpperBodyAnimState", currentWeapon.recoilCount);
+                laser_flash.intensity = 1f;
                 currentWeapon.ShootWeapon(fireposition.position);
                 currentWeapon.timer.Restart();
             }
