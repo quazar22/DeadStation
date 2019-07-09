@@ -28,6 +28,7 @@ public class EnemyMovement : MonoBehaviour
     private float both_attack_time = 2.3165f;
 
     private int fps;
+    
 
     void Start()
     {
