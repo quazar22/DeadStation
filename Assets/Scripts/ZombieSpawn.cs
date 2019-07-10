@@ -72,8 +72,7 @@ public class ZombieSpawn : MonoBehaviour
 
     void SpawnZombie()
     {
-        //ZombieTextureData zombie = zombie_texture_data[Random.Range(0, zombie_texture_data.Count)];
-        ZombieTextureData zombie = zombie_texture_data[1];
+        ZombieTextureData zombie = zombie_texture_data[Random.Range(0, zombie_texture_data.Count)];
         GameObject zombie_obj = Instantiate(zombie.GetZombieObject(), gameObject.transform.position, Quaternion.identity);
 
         Renderer[] r = zombie_obj.GetComponentsInChildren<Renderer>();
