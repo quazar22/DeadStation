@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class ZombieSpawn : MonoBehaviour
 {
-    static GameObject[] zombie_prefab_list = null;
-    static List<Material> skin_material_list = null;
-    static List<GameObject> alive_zombies;
+    //static GameObject[] zombie_prefab_list = null;
+    internal static List<ZombieTextureData> zombie_texture_data = null;
     float SpawnSpeed = 5f;
 
     public bool shouldSpawn;
@@ -15,25 +14,35 @@ public class ZombieSpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //get list of all acceptable skin materials to choose from
-        //randomly choose one of those at runtime
-        if(zombie_prefab_list == null && skin_material_list == null)
+        //for each zombie, make possible skin array for that zombie, then make possible clothing array for it too
+        if (zombie_texture_data == null)
         {
-            alive_zombies = new List<GameObject>();
-            skin_material_list = new List<Material>();
-            zombie_prefab_list = Resources.LoadAll<GameObject>("Prefabs/Zombies");
-            for(int i = 0; i < zombie_prefab_list.Length; i++)
+            zombie_texture_data = new List<ZombieTextureData>();
+            GameObject[] zombie_prefabs = Resources.LoadAll<GameObject>("Prefabs/Zombies");
+            Material[] mats = Resources.LoadAll<Material>("Materials/ZombieMaterials");
+
+            for(int i = 0; i < zombie_prefabs.Length; i++)
             {
-                Renderer[] rendererList = zombie_prefab_list[i].GetComponentsInChildren<Renderer>();
-                foreach(Renderer r in rendererList)
+                zombie_texture_data.Add(new ZombieTextureData(zombie_prefabs[i]));
+            }
+
+            for(int i = 0; i < mats.Length; i++)
+            {
+                string s = mats[i].name;
+                if (s.StartsWith("skin"))
                 {
-                    if(r.name.Contains("white") || r.name.Contains("black"))
-                    {
-                        skin_material_list.Add(r.sharedMaterial);
-                    }
+                    ZombieTextureData.AddSkin(mats[i]);
+                }
+                else if (s.StartsWith("clothing"))
+                {
+                    int index = int.Parse(s.Substring(s.Length - 1));
+                    zombie_texture_data[index].AddClothing(mats[i]);
+                    UnityEngine.Debug.Log(s);
                 }
             }
         }
+
+
         StartCoroutine("BeginSpawnZombie");
     }
 
@@ -63,19 +72,51 @@ public class ZombieSpawn : MonoBehaviour
 
     void SpawnZombie()
     {
-        GameObject zombie = zombie_prefab_list[Random.Range(0, zombie_prefab_list.Length)];
-        zombie = Instantiate(zombie, gameObject.transform.position, Quaternion.identity);
+        //ZombieTextureData zombie = zombie_texture_data[Random.Range(0, zombie_texture_data.Count)];
+        ZombieTextureData zombie = zombie_texture_data[1];
+        GameObject zombie_obj = Instantiate(zombie.GetZombieObject(), gameObject.transform.position, Quaternion.identity);
 
-        Renderer[] r = zombie.GetComponentsInChildren<Renderer>();
+        Renderer[] r = zombie_obj.GetComponentsInChildren<Renderer>();
 
-        Material m = new Material(r[1].sharedMaterial);
-        m.color = new Color() {r = Random.Range(0f,0.5f), a = Random.Range(0.5f, 1f), b = Random.Range(0f, 0.5f), g = Random.Range(0f, 0.5f) };
+        Material m = new Material(r[1].sharedMaterial)
+        {
+            color = new Color() { r = Random.Range(0f, 0.5f), a = Random.Range(0.5f, 1f), b = Random.Range(0f, 0.5f), g = Random.Range(0f, 0.5f) }
+        };
 
-        //skin material is located in first [0] component under the character (in the zombie prefab)
-        //clothing material is located in second [1] component 
-        r[0].sharedMaterial = skin_material_list[Random.Range(0, skin_material_list.Count)];
-        r[1].sharedMaterial = m;
-        //alive_zombies.Add(zombie);
+        r[0].sharedMaterial = ZombieTextureData.skins[Random.Range(0, ZombieTextureData.skins.Count)];
+        r[1].sharedMaterial = zombie.clothes[Random.Range(0, zombie.clothes.Count)];
+
+    }
+
+    public class ZombieTextureData
+    {
+
+        public ZombieTextureData(GameObject zombie)
+        {
+            this.zombie = zombie;
+            clothes = new List<Material>();
+            if (skins == null)
+                skins = new List<Material>();
+        }
+
+        public static void AddSkin(Material skin)
+        {
+            skins.Add(skin);
+        }
+
+        public void AddClothing(Material clothing)
+        {
+            clothes.Add(clothing);
+        }
+
+        public GameObject GetZombieObject()
+        {
+            return zombie;
+        }
+
+        public GameObject zombie;
+        public List<Material> clothes;
+        public static List<Material> skins = null;
     }
 
 }

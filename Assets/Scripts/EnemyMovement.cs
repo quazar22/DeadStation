@@ -17,17 +17,19 @@ public class EnemyMovement : MonoBehaviour
     private int attack_anim;
 
     private float WeightScalar = 0f;
-    private int anim_state;
-    private int attack_state;
-    private float anim_speed;
-    private float agent_speed;
+
+    private int anim_state = -1;
+    private int attack_state = -1;
+    private float anim_speed = 0;
+    private float agent_speed = -1;
+
     private float inside_range_time = 0f;
     private float damage_cooldown = 0f;
 
     private float RL_attack_time = 1.3165f;
     private float both_attack_time = 2.3165f;
 
-    private int fps;
+    private bool shouldAttack;
     
 
     void Start()
@@ -38,16 +40,18 @@ public class EnemyMovement : MonoBehaviour
         cdc = GetComponent<CharacterDataController>();
         player = GameObject.Find(Character.PLAYER).transform.GetChild(0).gameObject; //"player"
         agent = GetComponent<NavMeshAgent>();
-        fps = Application.targetFrameRate;
         player_char = GameObject.Find(Character.PLAYER).GetComponent<CharacterDataController>().character;
 
+        shouldAttack = true;
+
         BeginIdleAnimation();
-        //StartWithRandomAnim();
+        RandomAttackAnim();
     }
 
     void Update()
     {
-        //FollowPlayerAndAttack();
+        if(shouldAttack)
+            FollowPlayerAndAttack();
     }
 
     public void FollowPlayerAndAttack()
@@ -128,34 +132,37 @@ public class EnemyMovement : MonoBehaviour
 
     public void RandomAttackAnim()
     {
-        attack_anim = anim_state = Random.Range(2, 6);
-        //anim.SetInteger("AnimState", anim_state);
+        if(anim_state < 0 && shouldAttack)
+        {
+            attack_anim = anim_state = Random.Range(2, 6);
+            anim.SetInteger("AnimState", anim_state);
 
-        if (anim_state == 2)
-        {
-            float multiplier = Random.Range(0.75f, 1.25f);
-            anim_speed = anim.speed = 2f * multiplier;
-            agent_speed = agent.speed = 1.6f * multiplier;
+            if (anim_state == 2)
+            {
+                float multiplier = Random.Range(0.75f, 1.25f);
+                anim_speed = anim.speed = 2f * multiplier;
+                agent_speed = agent.speed = 1.6f * multiplier;
+            }
+            else if (anim_state == 5)
+            {
+                float multiplier = Random.Range(.75f, 1f);
+                anim_speed = anim.speed = 1f * multiplier;
+                agent_speed = agent.speed = 4.5f * multiplier;
+            }
+            else if (anim_state == 4)
+            {
+                float multiplier = Random.Range(.75f, 1.5f);
+                anim_speed = anim.speed = 1f * multiplier;
+                agent_speed = agent.speed = 1.5f * multiplier;
+            }
+            else
+            {
+                float multiplier = Random.Range(.8f, 1.25f);
+                anim_speed = anim.speed = 0.75f * multiplier;
+                agent_speed = agent.speed = 4.5f * multiplier;
+            }
+            anim.SetFloat("AttackSpeed", 2f / anim_speed);
         }
-        else if (anim_state == 5)
-        {
-            float multiplier = Random.Range(.75f, 1f);
-            anim_speed = anim.speed = 1f * multiplier;
-            agent_speed = agent.speed = 4.5f * multiplier;
-        }
-        else if (anim_state == 4)
-        {
-            float multiplier = Random.Range(.75f, 1.5f);
-            anim_speed = anim.speed = 1f * multiplier;
-            agent_speed = agent.speed = 1.5f * multiplier;
-        }
-        else
-        {
-            float multiplier = Random.Range(.8f, 1.25f);
-            anim_speed = anim.speed = 0.75f * multiplier;
-            agent_speed = agent.speed = 4.5f * multiplier;
-        }
-        //anim.SetFloat("AttackSpeed", 2f / anim_speed);
     }
 
 }
