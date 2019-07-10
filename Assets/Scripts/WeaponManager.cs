@@ -84,6 +84,7 @@ public class WeaponManager : MonoBehaviour
         aim.localScale = player_aim_cone.localScale = weapon.aim_angle_size;
         aim.localPosition = player_aim_cone.localPosition = weapon.aim_angle_location;
         weapon.p.projectile_object.transform.localScale = weapon.p.projectile_scale;
+
     }
 
     public void SetCanFire(bool canFire)

@@ -801,6 +801,7 @@ GameObject:
   m_Component:
   - component: {fileID: 662167886159547286}
   - component: {fileID: 662167886159547287}
+  - component: {fileID: 1911310185571913432}
   m_Layer: 0
   m_Name: white_female_shorts
   m_TagString: Untagged
@@ -847,6 +848,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1911310185571913432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662167886159547281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e08100a81868c41bc333ec6a4d6a09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &662167886226716357
 GameObject:
   m_ObjectHideFlags: 0

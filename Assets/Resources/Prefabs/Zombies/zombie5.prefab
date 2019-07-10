@@ -1137,6 +1137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6344892390734746401}
   - component: {fileID: 6344892390734746400}
+  - component: {fileID: 9139849485405544464}
   m_Layer: 0
   m_Name: black_male_long_shirt
   m_TagString: Untagged
@@ -1182,6 +1183,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &9139849485405544464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6344892390734746402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e08100a81868c41bc333ec6a4d6a09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6344892390753433630
 GameObject:
   m_ObjectHideFlags: 0
