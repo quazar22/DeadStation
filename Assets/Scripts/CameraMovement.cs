@@ -13,7 +13,6 @@ public class CameraMovement : MonoBehaviour {
 	void Start ()
     {
         pos = GameObject.Find(Character.PLAYER).transform.GetChild(0).transform; //player object must be first in the hierarchy
-        Debug.Log(transform.position - pos.position);
 	}
 	
 	void FixedUpdate () 
