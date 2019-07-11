@@ -22,6 +22,9 @@ abstract public class Character
     public CharacterController cc;
     public Stopwatch AnimPlayTime;
 
+    //public CharacterAnimationManager cam = null;
+    //public ZombieAnimationManager zam = null;
+
     public void HealCharacter(int heal)         { health += heal; }
     public float GetInterpSpeed()               { return interpspeed; }
     public float GetMoveSpeed()                 { return movespeed; }
@@ -31,15 +34,15 @@ abstract public class Character
     {
         Character return_character;
 
-        if(name.StartsWith(ZOMBIE))
+        if (name.StartsWith(ZOMBIE))
         {
-            return_character = new Zombie();
+            return_character = new Zombie(go);
         } else if(name.StartsWith(PLAYER))
         {
-            return_character = new Player();
+            return_character = new Player(go);
         } else
         {
-            return_character = new Boss();
+            return_character = new Boss(go);
         }
 
         return_character.anim = go.GetComponentInChildren<Animator>();
@@ -56,40 +59,21 @@ abstract public class Character
 
     }
 
-    //might just want to make everything below here abstract
-    public void Die()
-    {
-        if (!(this is Player))
-        {
-            anim.SetInteger("AnimState", Random.Range(0, 2) * -1);
-            nma.speed = 0;
-            nma.enabled = false;
-            cc.enabled = false;
-        }
-        anim.SetBool("Alive", false);
-    }
-
-    public void DamageCharacter(int damage)
-    {
-        health -= damage;
-        if(this is Player)
-        {
-            if(anim.GetLayerWeight(1) < 1f)
-            {
-                anim.SetLayerWeight(1, 1f);
-            }
-            anim.SetInteger("UpperBodyAnimState", 3);
-        }
-        AnimPlayTime.Start();
-    }
+    abstract public void Die();
+    abstract public void DamageCharacter(int damage);
 
 }
 
 public class Zombie : Character
 {
+    private int damage;
+    private ZombieAnimationManager zam;
 
-    public Zombie()
+    public Zombie(GameObject character_object)
     {
+        playerobject = character_object;
+        zam = playerobject.GetComponentInChildren<ZombieAnimationManager>();
+        damage = Random.Range(8, 14);
         char_name = "zombie";
         health = 100;
         interpspeed = 0.05f;
@@ -97,12 +81,35 @@ public class Zombie : Character
         isStanding = true;
     }
 
+    public override void DamageCharacter(int damage)
+    {
+        health -= damage;
+    }
+    
+    public override void Die()
+    {
+        zam.BeginDeathAnimation();
+        nma.speed = 0;
+        nma.enabled = false;
+        cc.enabled = false;
+    }
+
+    public int GetDamage()
+    {
+        return damage;
+    }
+
 }
 
 public class Player : Character
 {
-    public Player()
+
+    private CharacterAnimationManager cam;
+
+    public Player(GameObject character_object)
     {
+        playerobject = character_object;
+        cam = playerobject.GetComponentInChildren<CharacterAnimationManager>();
         char_name = "player";
         health = 100;
         interpspeed = 0.02f;
@@ -110,12 +117,24 @@ public class Player : Character
         isStanding = true;
     }
 
+    public override void DamageCharacter(int damage)
+    {
+        health -= 0;
+        cam.TakeDamage();
+        AnimPlayTime.Start();
+    }
+
+    public override void Die()
+    {
+        cam.BeginDeathAnimation();
+    }
 }
 
 public class Boss : Character
 {
-    public Boss()
+    public Boss(GameObject character_object)
     {
+        playerobject = character_object;
         char_name = "boss";
         health = 5000;
         interpspeed = 0.2f;
@@ -123,4 +142,13 @@ public class Boss : Character
         isStanding = true;
     }
 
+    public override void DamageCharacter(int damage)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Die()
+    {
+        throw new System.NotImplementedException();
+    }
 }

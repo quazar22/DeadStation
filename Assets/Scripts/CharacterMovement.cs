@@ -6,8 +6,6 @@ using UnityEngine;
 //movement and player animation handler
 public class CharacterMovement : MonoBehaviour
 {
-    //public Joystick leftstick;
-    //public Joystick rightstick;
     public JoystickLocationChanger leftstick;
     public JoystickLocationChanger rightstick;
 
@@ -15,7 +13,7 @@ public class CharacterMovement : MonoBehaviour
     private CharacterController pc;
     private CharacterDataController cdc;
     private float speed = 2.0f;
-    //[Range(0.0f, 1.0f)]
+    
     private float interpspeed = 0.15f;
     private Animator anim; //potentially replace with a new class called AnimationController
     private Transform fire_position;
@@ -109,6 +107,14 @@ public class CharacterMovement : MonoBehaviour
             {
                 anim.speed = 1f;
             }
+
+            if(distance <= 0.5f)
+            {
+                anim.speed = distance * 2f;
+                movement *= distance * 2f;
+            }
+
+
             pc.SimpleMove(movement);
         }
         else
@@ -120,21 +126,11 @@ public class CharacterMovement : MonoBehaviour
             pc.SimpleMove(new Vector3(0f, 0f, 0f));
         }
 
-        HandleUpperBodyAnimations();
     }
 
     public float GetMovementMagnitude()
     {
         return movement.magnitude;
-    }
-
-    public void HandleUpperBodyAnimations()
-    {
-        if (anim.GetInteger("UpperBodyAnimState") == 3 && cdc.character.AnimPlayTime.ElapsedMilliseconds > 0.55f * 1000f)
-        {
-            anim.SetInteger("UpperBodyAnimState", 0);
-            cdc.character.AnimPlayTime.Reset();
-        }
     }
 
     //returns movement in units/second

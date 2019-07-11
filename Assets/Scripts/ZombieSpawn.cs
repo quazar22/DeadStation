@@ -37,11 +37,9 @@ public class ZombieSpawn : MonoBehaviour
                 {
                     int index = int.Parse(s.Substring(s.Length - 1));
                     zombie_texture_data[index].AddClothing(mats[i]);
-                    UnityEngine.Debug.Log(s);
                 }
             }
         }
-
 
         StartCoroutine("BeginSpawnZombie");
     }
@@ -58,7 +56,7 @@ public class ZombieSpawn : MonoBehaviour
 
     IEnumerator BeginSpawnZombie()
     {
-        while(shouldSpawn && !(Time.fixedTime > 5f))
+        while(shouldSpawn && !(Time.fixedTime > 15f))
         {
             SpawnZombie();
             yield return new WaitForSeconds(1f);
