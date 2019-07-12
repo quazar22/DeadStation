@@ -24,7 +24,7 @@ public class WeaponManager : MonoBehaviour
         try
         {
             aim_cone = GameObject.Find("player/aim_cone_blue");
-        } catch(System.NullReferenceException e)
+        } catch(System.NullReferenceException)
         {
             aim_cone = GameObject.Find("player/aim_cone_blue_dotted");
         }

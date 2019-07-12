@@ -111,6 +111,7 @@ public class CharacterMovement : MonoBehaviour
             if(distance <= 0.5f)
             {
                 anim.speed = distance * 2f;
+                anim.SetFloat("AnimMultiplier", 1f / anim.speed);
                 movement *= distance * 2f;
             }
 

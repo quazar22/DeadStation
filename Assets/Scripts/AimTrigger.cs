@@ -29,7 +29,7 @@ public class AimTrigger : MonoBehaviour
         try
         {
             aim_cone = GameObject.Find("player/aim_cone_blue").GetComponent<Renderer>();
-        } catch(NullReferenceException e)
+        } catch(NullReferenceException)
         {
             aim_cone = GameObject.Find("player/aim_cone_blue_dotted").GetComponent<Renderer>();
         }

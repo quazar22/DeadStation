@@ -70,7 +70,7 @@ public class ProjectileScript : MonoBehaviour
                     {
                         ExplosionDamage(hit.point, 5f);
                     }
-                    catch (MissingReferenceException e)
+                    catch (MissingReferenceException)
                     {
                         return;
                     }
@@ -93,7 +93,7 @@ public class ProjectileScript : MonoBehaviour
                     {
                         hit.collider.gameObject.GetComponent<CharacterDataController>().character.DamageCharacter(weapon.damage_per_shot / penetrationDepth++);
                     }
-                    catch (MissingReferenceException e)
+                    catch (MissingReferenceException)
                     {
                         return;
                     }
