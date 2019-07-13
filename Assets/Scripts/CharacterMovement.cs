@@ -9,7 +9,6 @@ public class CharacterMovement : MonoBehaviour
     public JoystickLocationChanger leftstick;
     public JoystickLocationChanger rightstick;
 
-    private Rigidbody rb;
     private CharacterController pc;
     private CharacterDataController cdc;
     private float speed = 2.0f;
@@ -65,6 +64,8 @@ public class CharacterMovement : MonoBehaviour
         float x2 = rightstick.Horizontal();
         float y2 = rightstick.Vertical();
 
+        bool PlayerCanMove = cdc.character.CanMove;
+
         float distance = Mathf.Sqrt(Mathf.Pow(x1, 2) + Mathf.Pow(y1, 2));
         movement = new Vector3(x1, 0, y1);
 
@@ -74,7 +75,7 @@ public class CharacterMovement : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(newvec), interpspeed);
         }
 
-        if (distance != 0f)
+        if (distance != 0f && PlayerCanMove)
         {
             float y_component_radians = gameObject.transform.rotation.eulerAngles.y * Mathf.Deg2Rad;
             float cos = Mathf.Cos(y_component_radians);
@@ -113,8 +114,8 @@ public class CharacterMovement : MonoBehaviour
                 anim.speed = distance * 2f;
                 anim.SetFloat("AnimMultiplier", 1f / anim.speed);
                 movement *= distance * 2f;
+                //anim.transform.rotation = Quaternion.LookRotation(movement); //this could work for rotating slightly
             }
-
 
             pc.SimpleMove(movement);
         }

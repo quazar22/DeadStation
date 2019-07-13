@@ -21,11 +21,17 @@ public class ZombieAnimationManager : MonoBehaviour
     int m_move_state;
     float m_lower_anim_speed;
 
+    //both
+    int idle_anim;
+    float idle_speed;
+
     private void Awake()
     {
         m_anim = GetComponent<Animator>();
         m_WeightScalar = 0f;
         m_cdc = GetComponentInParent<CharacterDataController>();
+        idle_anim = Random.Range(0, 2);
+        idle_speed = Random.Range(0.75f, 1.5f);
     }
 
     public void SetPlayerTarget(GameObject player)
@@ -35,7 +41,7 @@ public class ZombieAnimationManager : MonoBehaviour
 
     public void AttackLanded()
     {
-        if(m_player_target == null) { return; }
+        if (m_player_target == null) { return; }
 
         float distance = Vector3.Distance(gameObject.transform.position, m_player_target.transform.position);
 
@@ -56,14 +62,15 @@ public class ZombieAnimationManager : MonoBehaviour
     //assigns random idle animation and begins animation
     public void BeginIdleAnimation()
     {
-        m_move_state = Random.Range(0, 2);
+        m_move_state = idle_anim;
         m_anim.SetInteger("AnimState", m_move_state);
-        m_anim.speed = Random.Range(0.75f, 1.5f);
+        m_anim.speed = idle_speed;
+        m_anim.SetLayerWeight(1, 0f);
     }
 
     public void StandStill()
     {
-        m_anim.SetInteger("AnimState", Random.Range(0, 2));
+        m_anim.SetInteger("AnimState", idle_anim);
         m_anim.speed = 1f;
         m_anim.SetFloat("AttackSpeed", 2f);
     }

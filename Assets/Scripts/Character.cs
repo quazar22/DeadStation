@@ -21,6 +21,8 @@ abstract public class Character
     public NavMeshAgent nma;
     public CharacterController cc;
     public Stopwatch AnimPlayTime;
+    public bool CanMove;
+    public bool isAlive;
 
     //public CharacterAnimationManager cam = null;
     //public ZombieAnimationManager zam = null;
@@ -49,6 +51,8 @@ abstract public class Character
         return_character.nma = go.GetComponent<NavMeshAgent>();
         return_character.cc = go.GetComponent<CharacterController>();
         return_character.AnimPlayTime = new Stopwatch();
+        return_character.CanMove = true;
+        return_character.isAlive = true;
 
         return return_character;
     }
@@ -92,6 +96,8 @@ public class Zombie : Character
         nma.speed = 0;
         nma.enabled = false;
         cc.enabled = false;
+        CanMove = false;
+        isAlive = false;
     }
 
     public int GetDamage()
@@ -105,11 +111,13 @@ public class Player : Character
 {
 
     private CharacterAnimationManager cam;
+    private WeaponManager wm;
 
     public Player(GameObject character_object)
     {
         playerobject = character_object;
         cam = playerobject.GetComponentInChildren<CharacterAnimationManager>();
+        wm = playerobject.GetComponent<WeaponManager>();
         char_name = "player";
         health = 100;
         interpspeed = 0.02f;
@@ -119,7 +127,7 @@ public class Player : Character
 
     public override void DamageCharacter(int damage)
     {
-        health -= 0;
+        health -= damage;
         cam.TakeDamage();
         AnimPlayTime.Start();
     }
@@ -127,6 +135,9 @@ public class Player : Character
     public override void Die()
     {
         cam.BeginDeathAnimation();
+        wm.CanFire = false;
+        CanMove = false;
+        isAlive = false;
     }
 }
 
@@ -149,6 +160,8 @@ public class Boss : Character
 
     public override void Die()
     {
+        CanMove = false;
+        isAlive = false;
         throw new System.NotImplementedException();
     }
 }

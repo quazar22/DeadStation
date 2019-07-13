@@ -34,13 +34,14 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-        if(shouldAttack)
+        bool PlayerCanMove = cdc.character.CanMove;
+        if(shouldAttack && PlayerCanMove)
             FollowPlayerAndAttack();
     }
 
     public void FollowPlayerAndAttack()
     {
-        if (agent.enabled)
+        if (agent.enabled && player_char.isAlive)
         {
             agent.destination = player.transform.position;
             float distance = Vector3.Distance(agent.transform.position, player.transform.position);
@@ -53,6 +54,10 @@ public class EnemyMovement : MonoBehaviour
             {
                 ContinueMoving();
             }
+        } else if (!player_char.isAlive)
+        {
+            zam.BeginIdleAnimation();
+            agent.enabled = false;
         }
     }
 
