@@ -27,7 +27,7 @@ where does the difficulty with this game lie?
 	6) Could pick up different abilities, like a skill tree? Could be unlocked with findable items, or by leveling up?
 	7) Combination of item abilities, natural player abilities, and unlocked abilities
 	8) Build trees?
-	9) health management?
+	9) health management? (finding health replenishment items, etc)
 	10) Inventory management? (no ammo)
 	11) Temporary powerups, like old school arcade shooters?
 	
@@ -48,6 +48,7 @@ List of Rooms:
 			ii) lab
 		c) Planetary Resources
 			i) Planet scanning interfaces
+			ii)
 		d) Xenobiology
 			i) Clean room
 			ii) lab
@@ -74,15 +75,16 @@ List of Rooms:
 	18) Observation Deck
 	19) Cockpit
 	20) Mechanic Workshop
+	21) Fire Control
 	
 Floors - 6 total?
 
 Top	1) Communications, Observation Deck, Bridge, Cockpit
 	2) Lounge, Movie Theater, Crew Quarters, Cafeteria, Gym
-	3) Offices, Research, Hospital
-	4) Engines, Engineering/Power Generation, Security, 
+	3) Offices, Research, Engineering/Power Generation
+	4) Hospital, Security, Fire Control
 	5) Life Support, Food Generation
-	6) Evacuation Pod Room, Hangar, Mechanic Workshop
+	6) Engines, Evacuation Pod Room, Hangar, Mechanic Workshop
 	
 The Story of Holden Maxwell
 
@@ -91,7 +93,7 @@ Story - Let's follow the Hero's Journey
 ==== ORDINARY WORLD ====
 You are apart of the security personnel for a space station, stationed above a planet for the purposes of studying the planet and assessing potential resources that can be
 harvested from it before resource excavation ships come in and harvest the resources. Since most of the inhabitants of the station are academics, the job is fairly boring, 
-bordering on a useless position. There are 10 of you on the entire ship, including the captain.
+bordering on a useless position. There are 10 security personnel on the entire ship, including the captain.
 
 After some of the scientists return from the planet after a routine survey (ship instruments can't pick up everything), one of the scientists becomes ill. He is sent to the infirmary where he is deemed fine
 and he is sent on his way. Later in the cafeteria, the scientist becomes violently ill, vomits blood, then dies on the spot. After trying to revive him without success, it seems that he is dead. The coworkers are
@@ -130,6 +132,7 @@ I am located in our secure clean room in research lab 12 - You'll need to take t
 ==== CROSSING THE THRESHOLD ====
 Your journey now begins. The first subtask of finding Dr. Wilkes is to get to the elevator from where you are now, which is close to the gym and the evacuation pods.
 Of course, however, there are plenty of zombies in your way. There are rooms to explore, items to pick up that enhance abilities, items to pick up that you can read (lore).
+Barriers blocking the easiest paths, barriers that have to be removed or circumvented, people to help in exchange for items, boss fights, etc.
 Introduce grenades?
 
 ==== TESTS, ALLIES, ENEMIES ====

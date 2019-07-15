@@ -13,7 +13,7 @@ public class CharacterMovement : MonoBehaviour
     private CharacterDataController cdc;
     private float speed = 2.0f;
     
-    private float interpspeed = 0.15f;
+    private float interpspeed = 1f;
     private Animator anim; //potentially replace with a new class called AnimationController
     private Transform fire_position;
     private bool shouldWalk;
@@ -72,7 +72,8 @@ public class CharacterMovement : MonoBehaviour
         if (x2 != 0f && y2 != 0f)
         {
             Vector3 newvec = new Vector3(transform.eulerAngles.x, Mathf.Atan2(x2, y2) * Mathf.Rad2Deg, transform.eulerAngles.z);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(newvec), interpspeed);
+            //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(newvec), interpspeed);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(newvec), 5f);
         }
 
         if (distance != 0f && PlayerCanMove)
