@@ -150,6 +150,11 @@ ModelImporter:
     2100004: high-poly.012
     2100006: ponytail01.003
     2100008: black_human_female_long_shirt_skirt.001
+    2100010: shoes01
+    2100012: female_elegantsuit01
+    2100014: high-poly
+    2100016: ponytail01
+    2100018: black_human_female_long_shirt_skirt
     4300000: shoes01Mesh
     4300002: female_elegantsuit01Mesh
     4300004: high-polyMesh
@@ -162,6 +167,7 @@ ModelImporter:
     13700004: high-polyMesh
     13700006: ponytail01Mesh
     13700008: shoes01Mesh
+    2186277476908879412: ImportLogs
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -200,7 +206,13 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: 
+    rigImportWarnings: "Avatar Rig Configuration mis-match. Bone length in configuration
+      does not match position in animation file:\n\t'mixamorig:LeftUpLeg' : position
+      error = 26.774958 mm\n\t'mixamorig:LeftLeg' : position error = 2.946110 mm\n\t'mixamorig:LeftFoot'
+      : position error = 40.128498 mm\n\t'mixamorig:RightUpLeg' : position error =
+      26.938299 mm\n\t'mixamorig:RightLeg' : position error = 2.986138 mm\n\t'mixamorig:RightFoot'
+      : position error = 40.093426 mm\n\t'mixamorig:RightToeBase' : position error
+      = 2.431706 mm\n"
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 

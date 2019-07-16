@@ -74,6 +74,8 @@ ModelImporter:
     100136: shoes06Mesh.001
     100138: //RootNode
     100140: white_human_female_short_shirt_shortsMesh
+    100142: high-polyMesh.004
+    100144: ponytail01Mesh.001
     400000: female_casualsuit02Mesh
     400002: high-polyMesh.005
     400004: mixamorig:Head
@@ -145,16 +147,25 @@ ModelImporter:
     400136: shoes06Mesh.001
     400138: //RootNode
     400140: white_human_female_short_shirt_shortsMesh
+    400142: high-polyMesh.004
+    400144: ponytail01Mesh.001
     2100000: shoes06.003
     2100002: female_casualsuit02.001
     2100004: high-poly.017
     2100006: ponytail01.005
     2100008: white_human_female_short_shirt_shorts.001
+    2100010: shoes06.001
+    2100012: female_casualsuit02
+    2100014: high-poly.007
+    2100016: ponytail01.004
+    2100018: white_human_female_short_shirt_shorts
     4300000: shoes06Mesh.001
     4300002: female_casualsuit02Mesh
     4300004: high-polyMesh.005
     4300006: ponytail01Mesh.002
     4300008: white_human_female_short_shirt_shortsMesh
+    4300010: high-polyMesh.004
+    4300012: ponytail01Mesh.001
     7400000: mixamo.com
     9500000: //RootNode
     13700000: female_casualsuit02Mesh
@@ -162,6 +173,9 @@ ModelImporter:
     13700004: ponytail01Mesh.002
     13700006: shoes06Mesh.001
     13700008: white_human_female_short_shirt_shortsMesh
+    13700010: high-polyMesh.004
+    13700012: ponytail01Mesh.001
+    2186277476908879412: ImportLogs
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -200,7 +214,13 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: 
+    rigImportWarnings: "Avatar Rig Configuration mis-match. Bone length in configuration
+      does not match position in animation file:\n\t'mixamorig:LeftUpLeg' : position
+      error = 5.855018 mm\n\t'mixamorig:LeftLeg' : position error = 6.708617 mm\n\t'mixamorig:LeftFoot'
+      : position error = 53.021198 mm\n\t'mixamorig:LeftToeBase' : position error
+      = 5.598710 mm\n\t'mixamorig:RightUpLeg' : position error = 5.839936 mm\n\t'mixamorig:RightLeg'
+      : position error = 6.697783 mm\n\t'mixamorig:RightFoot' : position error = 53.176491
+      mm\n\t'mixamorig:RightToeBase' : position error = 4.649578 mm\n"
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 

@@ -74,6 +74,7 @@ ModelImporter:
     100136: mixamorig:Spine2
     100138: shoes05Mesh.001
     100140: short01Mesh.001
+    100142: high-polyMesh.002
     400000: black_human_male_short_shirtMesh
     400002: //RootNode
     400004: high-polyMesh.003
@@ -145,16 +146,23 @@ ModelImporter:
     400136: mixamorig:Spine2
     400138: shoes05Mesh.001
     400140: short01Mesh.001
+    400142: high-polyMesh.002
     2100000: male_casualsuit04.003
     2100002: shoes05.004
     2100004: high-poly.015
     2100006: short01.003
     2100008: black_human_male_short_shirt.001
+    2100010: male_casualsuit04.001
+    2100012: shoes05.001
+    2100014: high-poly.005
+    2100016: short01.001
+    2100018: black_human_male_short_shirt
     4300000: male_casualsuit04Mesh.001
     4300002: shoes05Mesh.001
     4300004: high-polyMesh.003
     4300006: short01Mesh.001
     4300008: black_human_male_short_shirtMesh
+    4300010: high-polyMesh.002
     7400000: mixamo.com
     9500000: //RootNode
     13700000: black_human_male_short_shirtMesh
@@ -162,6 +170,8 @@ ModelImporter:
     13700004: male_casualsuit04Mesh.001
     13700006: shoes05Mesh.001
     13700008: short01Mesh.001
+    13700010: high-polyMesh.002
+    2186277476908879412: ImportLogs
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -200,7 +210,13 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: 
+    rigImportWarnings: "Avatar Rig Configuration mis-match. Bone length in configuration
+      does not match position in animation file:\n\t'mixamorig:LeftUpLeg' : position
+      error = 4.974634 mm\n\t'mixamorig:LeftLeg' : position error = 3.413546 mm\n\t'mixamorig:LeftFoot'
+      : position error = 25.316120 mm\n\t'mixamorig:LeftToeBase' : position error
+      = 3.553757 mm\n\t'mixamorig:RightUpLeg' : position error = 4.562582 mm\n\t'mixamorig:RightLeg'
+      : position error = 3.367848 mm\n\t'mixamorig:RightFoot' : position error = 25.303789
+      mm\n\t'mixamorig:RightToeBase' : position error = 1.242773 mm\n"
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 

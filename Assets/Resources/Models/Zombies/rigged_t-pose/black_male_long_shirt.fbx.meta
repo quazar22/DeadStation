@@ -74,6 +74,7 @@ ModelImporter:
     100136: mixamorig:Spine2
     100138: shoes05Mesh
     100140: short01Mesh
+    100142: high-polyMesh.001
     400000: black_human_male_long_shirtMesh
     400002: //RootNode
     400004: high-polyMesh.002
@@ -145,16 +146,23 @@ ModelImporter:
     400136: mixamorig:Spine2
     400138: shoes05Mesh
     400140: short01Mesh
+    400142: high-polyMesh.001
     2100000: male_casualsuit03.001
     2100002: shoes05.003
     2100004: high-poly.014
     2100006: short01.002
     2100008: black_human_male_long_shirt.001
+    2100010: male_casualsuit03
+    2100012: shoes05
+    2100014: high-poly.004
+    2100016: short01
+    2100018: black_human_male_long_shirt
     4300000: male_casualsuit03Mesh
     4300002: shoes05Mesh
     4300004: high-polyMesh.002
     4300006: short01Mesh
     4300008: black_human_male_long_shirtMesh
+    4300010: high-polyMesh.001
     7400000: mixamo.com
     9500000: //RootNode
     13700000: black_human_male_long_shirtMesh
@@ -162,6 +170,8 @@ ModelImporter:
     13700004: male_casualsuit03Mesh
     13700006: shoes05Mesh
     13700008: short01Mesh
+    13700010: high-polyMesh.001
+    2186277476908879412: ImportLogs
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -200,7 +210,12 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: 
+    rigImportWarnings: "Avatar Rig Configuration mis-match. Bone length in configuration
+      does not match position in animation file:\n\t'mixamorig:LeftUpLeg' : position
+      error = 3.823898 mm\n\t'mixamorig:LeftLeg' : position error = 2.487456 mm\n\t'mixamorig:LeftFoot'
+      : position error = 36.302605 mm\n\t'mixamorig:RightUpLeg' : position error =
+      5.046352 mm\n\t'mixamorig:RightLeg' : position error = 2.188260 mm\n\t'mixamorig:RightFoot'
+      : position error = 36.410782 mm\n"
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
