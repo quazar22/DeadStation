@@ -5110,7 +5110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8b48933a6a2104ba354a7bbbe570aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shouldSpawn: 0
+  shouldSpawn: 1
 --- !u!4 &975677856
 Transform:
   m_ObjectHideFlags: 0
@@ -7439,7 +7439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8b48933a6a2104ba354a7bbbe570aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shouldSpawn: 0
+  shouldSpawn: 1
 --- !u!4 &1302512474
 Transform:
   m_ObjectHideFlags: 0
@@ -7611,7 +7611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8b48933a6a2104ba354a7bbbe570aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shouldSpawn: 0
+  shouldSpawn: 1
 --- !u!4 &1321938530
 Transform:
   m_ObjectHideFlags: 0
@@ -7736,7 +7736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8b48933a6a2104ba354a7bbbe570aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shouldSpawn: 0
+  shouldSpawn: 1
 --- !u!4 &1378958149
 Transform:
   m_ObjectHideFlags: 0
@@ -7780,7 +7780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8b48933a6a2104ba354a7bbbe570aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shouldSpawn: 0
+  shouldSpawn: 1
 --- !u!4 &1381642080
 Transform:
   m_ObjectHideFlags: 0
@@ -9046,7 +9046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8b48933a6a2104ba354a7bbbe570aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shouldSpawn: 0
+  shouldSpawn: 1
 --- !u!4 &1655597478
 Transform:
   m_ObjectHideFlags: 0
@@ -11716,6 +11716,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633367265452398003, guid: 893d28458e7e5ef488389a0070a454f7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.28
       objectReference: {fileID: 0}
     - target: {fileID: 7633367266428450068, guid: 893d28458e7e5ef488389a0070a454f7,
         type: 3}

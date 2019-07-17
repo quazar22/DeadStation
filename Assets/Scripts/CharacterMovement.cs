@@ -69,7 +69,7 @@ public class CharacterMovement : MonoBehaviour
         float distance = Mathf.Sqrt(Mathf.Pow(x1, 2) + Mathf.Pow(y1, 2));
         movement = new Vector3(x1, 0, y1);
 
-        if (x2 != 0f && y2 != 0f)
+        if (x2 != 0f && y2 != 0f && PlayerCanMove)
         {
             Vector3 newvec = new Vector3(transform.eulerAngles.x, Mathf.Atan2(x2, y2) * Mathf.Rad2Deg, transform.eulerAngles.z);
             //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(newvec), interpspeed);

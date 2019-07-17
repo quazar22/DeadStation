@@ -8,6 +8,7 @@ public class ZombieSpawn : MonoBehaviour
     //static GameObject[] zombie_prefab_list = null;
     internal static List<ZombieTextureData> zombie_texture_data = null;
     float SpawnSpeed = 5f;
+    static int zombieCount = 0;
 
     public bool shouldSpawn;
     
@@ -56,16 +57,18 @@ public class ZombieSpawn : MonoBehaviour
 
     IEnumerator BeginSpawnZombie()
     {
-        while(shouldSpawn && !(Time.fixedTime > 15f))
+        while(shouldSpawn && !(Time.fixedTime > 10f))
         {
             SpawnZombie();
-            yield return new WaitForSeconds(1f);
+            zombieCount++;
+            yield return new WaitForSeconds(.25f);
         }
     }
 
     private void Update()
     {
-        
+        if (Time.time > 10f && Time.time < 11f)
+            UnityEngine.Debug.Log(zombieCount);
     }
 
     void SpawnZombie()

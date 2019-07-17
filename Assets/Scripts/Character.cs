@@ -127,7 +127,7 @@ public class Player : Character
 
     public override void DamageCharacter(int damage)
     {
-        health -= damage;
+        health -= 0;
         cam.TakeDamage();
         AnimPlayTime.Start();
     }
