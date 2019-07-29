@@ -26,7 +26,8 @@ public class ProjectileScript : MonoBehaviour
         closestCollider = player.GetComponentInChildren<AimTrigger>().GetClosestCollider();
         if (closestCollider == null)
         {
-            colliderPos = player.transform.GetChild(0).position + player.transform.GetChild(0).forward * 10f + new Vector3(0f, 3.2f, 0f);
+            Transform player_object_transform = player.transform.GetChild(0);
+            colliderPos = player_object_transform.position + player_object_transform.forward * 10f + new Vector3(0f, 3.2f, 0f);
         } else
         {
             colliderPos = closestCollider.transform.position;
@@ -97,10 +98,10 @@ public class ProjectileScript : MonoBehaviour
                     {
                         return;
                     }
-                    if(!(weapon is LaserCannon))
-                    {
-                        Destroy(gameObject);
-                    }
+                    //if(!(weapon is LaserCannon))
+                    //{
+                    //    Destroy(gameObject);
+                    //}
                     //Destroy(gameObject);
                 } else if (hit.collider.tag.StartsWith("wall"))
                 {

@@ -61,14 +61,14 @@ public class ZombieSpawn : MonoBehaviour
         {
             SpawnZombie();
             zombieCount++;
-            yield return new WaitForSeconds(.25f);
+            yield return new WaitForSeconds(1f);
         }
     }
 
     private void Update()
     {
-        if (Time.time > 10f && Time.time < 11f)
-            UnityEngine.Debug.Log(zombieCount);
+        //if (Time.time > 10f && Time.time < 11f)
+        //    UnityEngine.Debug.Log(zombieCount);
     }
 
     void SpawnZombie()

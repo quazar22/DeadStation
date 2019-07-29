@@ -12,11 +12,11 @@ public class CharacterMovement : MonoBehaviour
     private CharacterController pc;
     private CharacterDataController cdc;
     private float speed = 2.0f;
-    
+
     private float interpspeed = 1f;
     private Animator anim; //potentially replace with a new class called AnimationController
-    private Transform fire_position;
     private bool shouldWalk;
+    private Transform aim_angle;
     Vector3 movement;
 
     //each animation runs at 30fps
@@ -49,7 +49,7 @@ public class CharacterMovement : MonoBehaviour
         interpspeed = cdc.character.GetInterpSpeed();
         speed = cdc.character.GetMoveSpeed();
         anim = GetComponentInChildren<Animator>();
-        fire_position = gameObject.transform.Find("player/fire_position");
+        aim_angle = GameObject.Find("player/aim_cone_blue").GetComponent<Transform>();
     }
 
     void Update()
@@ -85,7 +85,7 @@ public class CharacterMovement : MonoBehaviour
             float direction_x = x1 * cos - y1 * sin; //negative means strafe left, positive means strafe right
 
             float angle = Mathf.Atan2(direction_y, direction_x) * Mathf.Rad2Deg;
-            
+
             if (shouldWalk)
             {
                 distance = 0.5f;
@@ -96,7 +96,7 @@ public class CharacterMovement : MonoBehaviour
             anim.SetFloat("angle", angle);
             anim.SetFloat("distance", distance);
 
-            float walking_magnitude = GetWalkingMagnitude(angle, distance);
+            float walking_magnitude = GetWalkingMagnitude2(angle, distance);
 
             movement = ClampMagnitude(movement.normalized * walking_magnitude, 9f, 3f);
 
@@ -110,13 +110,14 @@ public class CharacterMovement : MonoBehaviour
                 anim.speed = 1f;
             }
 
-            if(distance <= 0.5f)
+            if (distance <= 0.5f)
             {
                 anim.speed = distance * 2f;
                 anim.SetFloat("AnimMultiplier", 1f / anim.speed);
                 movement *= distance * 2f;
-                //anim.transform.rotation = Quaternion.LookRotation(movement); //this could work for rotating slightly
             }
+
+            RotateLowerBody(angle);
 
             pc.SimpleMove(movement);
         }
@@ -134,6 +135,41 @@ public class CharacterMovement : MonoBehaviour
     public float GetMovementMagnitude()
     {
         return movement.magnitude;
+    }
+
+    public void RotateUpperBody()
+    {
+        anim.SetLookAtWeight(1f, 1f, 1f, 1f, .5f);
+        anim.SetLookAtPosition(aim_angle.position);
+    }
+
+    public void RotateLowerBody(float angle)
+    {
+        if(angle < 180 && angle > 0f)
+        {
+            //anim.transform.rotation = Quaternion.LookRotation(movement);
+            anim.transform.rotation = Quaternion.RotateTowards(anim.transform.rotation, Quaternion.LookRotation(movement), 5f);
+        } else if(angle > -180f && angle < 0f)
+        {
+            //anim.transform.rotation = Quaternion.LookRotation(-movement);
+            anim.transform.rotation = Quaternion.RotateTowards(anim.transform.rotation, Quaternion.LookRotation(-movement), 5f);
+        }
+    }
+
+    //simplified, but prettier version
+    float GetWalkingMagnitude2(float angle, float distance)
+    {
+        float outFloat = 0f;
+
+        if(angle <= 181f && angle >= 0f)
+        {
+            outFloat = distance > 0.5f ? RunForward : WalkForward;
+        } else
+        {
+            outFloat = distance > 0.5f ? RunBackward : WalkBackward;
+        }
+
+        return outFloat;
     }
 
     //returns movement in units/second

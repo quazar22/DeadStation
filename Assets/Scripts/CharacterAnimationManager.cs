@@ -8,18 +8,27 @@ public class CharacterAnimationManager : MonoBehaviour
     private Animator m_anim;
     private CharacterDataController m_cdc;
     private WeaponManager m_wm;
-    
+    private Transform aim_angle;
+    private CharacterMovement m_cm;
+
     void Start()
     {
         m_anim = GetComponent<Animator>();
         m_cdc = transform.parent.GetComponent<CharacterDataController>();
         m_wm = transform.parent.GetComponent<WeaponManager>();
+        m_cm = transform.parent.GetComponent<CharacterMovement>();
+        aim_angle = GameObject.Find("player/aim_angle").GetComponent<Transform>();
     }
 
     
     void Update()
     {
         
+    }
+
+    private void OnAnimatorIK(int layerIndex)
+    {
+        m_cm.RotateUpperBody();
     }
 
     private void FixedUpdate()
