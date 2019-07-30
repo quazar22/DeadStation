@@ -29,7 +29,8 @@ public class WeaponManager : MonoBehaviour
             aim_cone = GameObject.Find("player/aim_cone_blue_dotted");
         }
         player = GameObject.Find(Character.PLAYER);
-        fireposition = GameObject.Find("player/fire_position").transform;
+        //fireposition = GameObject.Find("player/gun/Bone001/m4a1_upper receiver/fire_position").transform;
+        fireposition = GameObject.Find("player/SpaceMan@Idle/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand/gun/Bone001/m4a1_upper receiver/fire_position").transform;
         laser_flash = fireposition.GetComponent<Light>();
         laser_flash.intensity = 0f;
 
