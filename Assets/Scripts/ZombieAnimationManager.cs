@@ -121,7 +121,7 @@ public class ZombieAnimationManager : MonoBehaviour
     {
         float agent_speed = 1f;
 
-        m_move_state = Random.Range(2, 6);
+        m_move_state = Random.Range(2, 8);
         //m_anim.SetInteger("AnimState", m_attack_state);
 
         if (m_move_state == 2)
@@ -130,17 +130,35 @@ public class ZombieAnimationManager : MonoBehaviour
             m_lower_anim_speed = 2f * multiplier;
             agent_speed = 1.6f * multiplier;
         }
-        else if (m_move_state == 5)
+        else if(m_move_state == 3)
         {
-            float multiplier = Random.Range(.75f, 1f);
-            m_lower_anim_speed = 1f * multiplier;
-            agent_speed = 4.5f * multiplier;
+            float multiplier = Random.Range(1f, 1.5f);
+            m_lower_anim_speed = .5f * multiplier;
+            agent_speed = 3f * multiplier;
         }
         else if (m_move_state == 4)
         {
             float multiplier = Random.Range(.75f, 1.5f);
             m_lower_anim_speed = 1f * multiplier;
             agent_speed = 1.5f * multiplier;
+        }
+        else if (m_move_state == 5)
+        {
+            float multiplier = Random.Range(.75f, 1f);
+            m_lower_anim_speed = 1f * multiplier;
+            agent_speed = 4.5f * multiplier;
+        }
+        else if (m_move_state == 6)
+        {
+            float multiplier = Random.Range(1f, 1.5f);
+            m_lower_anim_speed = 1f * multiplier;
+            agent_speed = 1.25f * multiplier;
+        }
+        else if (m_move_state == 7)
+        {
+            float multiplier = Random.Range(2f, 2.5f);
+            m_lower_anim_speed = 1f * multiplier;
+            agent_speed = .9f * multiplier;
         }
         else
         {
