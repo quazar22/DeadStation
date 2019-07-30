@@ -168,7 +168,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Zombie Reaction Hit
       takeName: mixamo.com
-      firstFrame: 0
+      firstFrame: 6
       lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0

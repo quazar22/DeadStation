@@ -78,12 +78,15 @@ public class ZombieSpawn : MonoBehaviour
 
         Renderer[] r = zombie_obj.GetComponentsInChildren<Renderer>();
 
-        Material m = new Material(r[1].sharedMaterial)
-        {
-            color = new Color() { r = Random.Range(0f, 0.5f), a = Random.Range(0.5f, 1f), b = Random.Range(0f, 0.5f), g = Random.Range(0f, 0.5f) }
-        };
 
         r[0].sharedMaterial = ZombieTextureData.skins[Random.Range(0, ZombieTextureData.skins.Count)];
+
+
+        //Material m = new Material(zombie.clothes[Random.Range(0, zombie.clothes.Count)])
+        //{
+        //    color = new Color() { r = Random.Range(0.5f, 1f), a = Random.Range(0.5f, 1f), b = Random.Range(0.5f, 1f), g = Random.Range(0.5f, 1f) }
+        //};
+
         r[1].sharedMaterial = zombie.clothes[Random.Range(0, zombie.clothes.Count)];
 
     }

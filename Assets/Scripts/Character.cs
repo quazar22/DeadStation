@@ -72,6 +72,7 @@ public class Zombie : Character
 {
     private int damage;
     private ZombieAnimationManager zam;
+    private float stumbleChance = 0.1f;
 
     public Zombie(GameObject character_object)
     {
@@ -88,6 +89,7 @@ public class Zombie : Character
     public override void DamageCharacter(int damage)
     {
         health -= damage;
+        zam.TakeHitFromBullet();
     }
     
     public override void Die()

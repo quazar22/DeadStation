@@ -37,6 +37,21 @@ public class EnemyMovement : MonoBehaviour
         bool PlayerCanMove = cdc.character.CanMove;
         if(shouldAttack && PlayerCanMove)
             FollowPlayerAndAttack();
+        else if(Vector3.Distance(gameObject.transform.position, player.transform.position) < 20f && cm.GetMovementMagnitude() > 6.75f/2f)
+        {
+            AlertZombie();
+        }
+    }
+
+    void AlertZombie()
+    {
+        shouldAttack = true;
+    }
+
+    void SleepZombie()
+    {
+        shouldAttack = false;
+        StandStill();
     }
 
     public void FollowPlayerAndAttack()

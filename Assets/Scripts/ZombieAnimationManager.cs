@@ -87,6 +87,13 @@ public class ZombieAnimationManager : MonoBehaviour
         m_anim.speed = m_lower_anim_speed;
     }
 
+    public void TakeHitFromBullet()
+    {
+        m_WeightScalar = 1f;
+        m_anim.SetLayerWeight(1, m_WeightScalar);
+        m_anim.SetInteger("AttackState", -1);
+    }
+
     //player is the mesh object of the player GameObject, so related scripts are in the parent
     public void Attack(GameObject player)
     {
@@ -126,27 +133,27 @@ public class ZombieAnimationManager : MonoBehaviour
 
         if (m_move_state == 2)
         {
-            float multiplier = Random.Range(0.75f, 1.25f);
+            float multiplier = Random.Range(1f, 1.5f);
             m_lower_anim_speed = 2f * multiplier;
             agent_speed = 1.6f * multiplier;
         }
         else if(m_move_state == 3)
         {
-            float multiplier = Random.Range(1f, 1.5f);
+            float multiplier = Random.Range(1.5f, 2f);
             m_lower_anim_speed = .5f * multiplier;
             agent_speed = 3f * multiplier;
         }
         else if (m_move_state == 4)
         {
-            float multiplier = Random.Range(.75f, 1.5f);
-            m_lower_anim_speed = 1f * multiplier;
-            agent_speed = 1.5f * multiplier;
+            float multiplier = Random.Range(1.25f, 2f);
+            m_lower_anim_speed = .5f * multiplier;
+            agent_speed = 2.75f * multiplier;
         }
         else if (m_move_state == 5)
         {
-            float multiplier = Random.Range(.75f, 1f);
+            float multiplier = Random.Range(1f, 1.25f);
             m_lower_anim_speed = 1f * multiplier;
-            agent_speed = 4.5f * multiplier;
+            agent_speed = 3f * multiplier;
         }
         else if (m_move_state == 6)
         {
