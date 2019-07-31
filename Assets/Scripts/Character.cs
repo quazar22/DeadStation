@@ -72,7 +72,6 @@ public class Zombie : Character
 {
     private int damage;
     private ZombieAnimationManager zam;
-    private float stumbleChance = 0.1f;
 
     public Zombie(GameObject character_object)
     {
