@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class CharacterAnimationManager : MonoBehaviour
@@ -34,6 +35,16 @@ public class CharacterAnimationManager : MonoBehaviour
     private void FixedUpdate()
     {
         //HandleUpperBodyAnimations();
+    }
+
+    public void ThrowGrenade()
+    {
+        m_anim.SetInteger("UpperBodyAnimState", 4);
+    }
+
+    public void ReleaseGrenade()
+    {
+        m_anim.SetInteger("UpperBodyAnimState", 0);
     }
 
     public void BeginDeathAnimation()

@@ -29,8 +29,11 @@ public class WeaponButtonSwitcher : MonoBehaviour
             case "LaserCannon":
                 button.onClick.AddListener(() => wm.SwitchWeapon(wm.weapon_list[Weapon.LASERCANNON]));
                 break;
+            //case "GrenadeLauncher":
+            //    button.onClick.AddListener(() => wm.SwitchWeapon(wm.weapon_list[Weapon.GRENADELAUNCHER]));
+            //    break;
             case "GrenadeLauncher":
-                button.onClick.AddListener(() => wm.SwitchWeapon(wm.weapon_list[Weapon.GRENADELAUNCHER]));
+                button.onClick.AddListener(() => wm.ThrowGrenade());
                 break;
         }
     }

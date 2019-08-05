@@ -11,9 +11,11 @@ public class WeaponManager : MonoBehaviour
     GameObject aim_cone;
     GameObject player;
     public List<Weapon> weapon_list;
+    public GameObject grenade;
     Transform fireposition;
     public bool CanFire;
     Animator anim;
+    CharacterAnimationManager cam;
     private Light laser_flash;
     private Stopwatch flash_timer;
 
@@ -38,9 +40,11 @@ public class WeaponManager : MonoBehaviour
         laser_flash = fireposition.GetComponent<Light>();
         laser_flash.intensity = 0f;
 
-        weapon_list = new List<Weapon>(new Weapon[] { new AutoRifle(), new Shotgun(), new LaserCannon(), new GrenadeLauncher() });
+        weapon_list = new List<Weapon>(new Weapon[] { new AutoRifle(), new Shotgun(), new LaserCannon()});
+        grenade = Resources.Load<GameObject>("Prefabs/Weapons/grenade");
 
         anim = GameObject.Find(Character.PLAYER).GetComponentInChildren<Animator>();
+        cam = GameObject.Find(Character.PLAYER).GetComponentInChildren<CharacterAnimationManager>();
 
         SwitchWeapon(weapon_list[Weapon.AUTORIFLE]);
     }
@@ -65,6 +69,12 @@ public class WeaponManager : MonoBehaviour
                 currentWeapon.timer.Restart();
             }
         }
+    }
+
+    public void ThrowGrenade()
+    {
+        cam.ThrowGrenade();
+        //GameObject go = Instantiate(grenade, player.transform.position + new Vector3(0f, 3.2f), Quaternion.identity);
     }
 
     public Weapon GetWeapon(string weapon)

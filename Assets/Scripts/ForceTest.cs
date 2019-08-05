@@ -6,24 +6,25 @@ using UnityEngine.AI;
 public class ForceTest : MonoBehaviour
 {
     private GameObject character;
-    private GameObject zombie;
-    private CharacterController cc;
-    private NavMeshAgent nma;
-    private Animator anim;
-    private Rigidbody[] rb;
     Vector3 center = Vector3.zero;
+
+    private GameObject[] zombies;
     // Start is called before the first frame update
     void Start()
     {
         character = GameObject.Find("player/SpaceMan@Idle");
-        zombie = GameObject.Find("zombie0");
-        nma = zombie.GetComponent<NavMeshAgent>();
-        cc = zombie.GetComponent<CharacterController>();
-        anim = zombie.GetComponentInChildren<Animator>();
-        rb = zombie.GetComponentsInChildren<Rigidbody>();
-        foreach(Rigidbody r in rb)
+        //zombie = GameObject.Find("zombie0");
+        zombies = GameObject.FindGameObjectsWithTag("zombie");
+        foreach(GameObject z in zombies)
         {
-            r.detectCollisions = false;
+            //foreach(Rigidbody rbb in z.GetComponentsInChildren<Rigidbody>())
+            //{
+            //    rbb.detectCollisions = false;
+            //}
+            foreach(Collider c in z.GetComponentsInChildren<Collider>())
+            {
+                c.enabled = false;
+            }
         }
     }
 
@@ -32,14 +33,22 @@ public class ForceTest : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            cc.enabled = false;
-            foreach (Rigidbody rbb in rb)
+            foreach(GameObject z in zombies)
             {
-                rbb.detectCollisions = true;
+                z.GetComponent<CharacterDataController>().character.cc.enabled = false;
+                Rigidbody[] rbb = z.GetComponentsInChildren<Rigidbody>();
+                //foreach (Rigidbody rb in rbb)
+                //{
+                //    rb.detectCollisions = true;
+                //}
+                foreach (Collider c in z.GetComponentsInChildren<Collider>())
+                {
+                    c.enabled = true;
+                }
+                z.GetComponent<CharacterDataController>().character.nma.enabled = false;
+                z.GetComponent<CharacterDataController>().character.anim.enabled = false;
+                //rbb[0].AddExplosionForce(300f, zombies[6].transform.position, 100f, 1f, ForceMode.Impulse);
             }
-            nma.enabled = false;
-            anim.enabled = false;
-            rb[0].AddExplosionForce(300f, zombie.transform.position, 100f, 10f, ForceMode.Impulse);
         }
     }
 }

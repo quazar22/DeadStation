@@ -673,33 +673,33 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: SpaceMan@Rifle Aiming Idle@T-Pose(Clone)
+    - name: SpaceMan@T-Pose(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Cube.001
-      parentName: SpaceMan@Rifle Aiming Idle@T-Pose(Clone)
+      parentName: SpaceMan@T-Pose(Clone)
       position: {x: -8.432597e-25, y: 5.8796635, z: -1.1577761}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
       scale: {x: 66.23662, y: 100, z: 100}
     - name: Cube
-      parentName: SpaceMan@Rifle Aiming Idle@T-Pose(Clone)
+      parentName: SpaceMan@T-Pose(Clone)
       position: {x: -8.432597e-25, y: 5.8796635, z: -1.1577761}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
       scale: {x: 66.23662, y: 100, z: 100}
     - name: Icosphere
-      parentName: SpaceMan@Rifle Aiming Idle@T-Pose(Clone)
+      parentName: SpaceMan@T-Pose(Clone)
       position: {x: 0.015322368, y: 7.4078937, z: 0.38883758}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
       scale: {x: 48, y: 48, z: 62.4}
     - name: Cylinder
-      parentName: SpaceMan@Rifle Aiming Idle@T-Pose(Clone)
+      parentName: SpaceMan@T-Pose(Clone)
       position: {x: -0, y: 6.5, z: 0.099999994}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
       scale: {x: 50, y: 50, z: 50}
     - name: mixamorig:Hips
-      parentName: SpaceMan@Rifle Aiming Idle@T-Pose(Clone)
+      parentName: SpaceMan@T-Pose(Clone)
       position: {x: 0.00000239708, y: 4.6072865, z: 0.021284644}
       rotation: {x: -0.000000025490337, y: 0.00000016379299, z: -0.0000051981547,
         w: 1}

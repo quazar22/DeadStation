@@ -61,7 +61,7 @@ public class AimTrigger : MonoBehaviour
 
         foreach (Collider c in ColliderList) //find closest collider
         {
-            if (c == null || c.gameObject.GetComponent<CharacterDataController>().character.health <= 0 && ColliderList.Contains(c))
+            if (c == null || c.gameObject.GetComponent<CharacterDataController>().character.GetHealth() <= 0 && ColliderList.Contains(c))
             {
                 tmpCollider = c;
                 broken = true;
