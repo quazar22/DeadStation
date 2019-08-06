@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class CharacterAnimationManager : MonoBehaviour
@@ -13,7 +14,11 @@ public class CharacterAnimationManager : MonoBehaviour
 
     private GameObject grenade;
     private GameObject grenade_in_hand;
+    private AimTrigger m_at;
+    private Stopwatch m_st;
+
     private bool isThrowing;
+    private bool shouldTakeDamage;
 
     void Start()
     {
@@ -22,9 +27,12 @@ public class CharacterAnimationManager : MonoBehaviour
         m_wm = transform.parent.GetComponent<WeaponManager>();
         m_cm = transform.parent.GetComponent<CharacterMovement>();
         aim_angle = GameObject.Find("player/aim_angle").GetComponent<Transform>();
+        m_at = GameObject.Find("player/aim_angle").GetComponent<AimTrigger>();
+        m_st = new Stopwatch();
 
         grenade = Resources.Load<GameObject>("Prefabs/Weapons/grenade");
         isThrowing = false;
+        shouldTakeDamage = false;
     }
 
     
@@ -33,18 +41,44 @@ public class CharacterAnimationManager : MonoBehaviour
         
     }
 
+    private void FixedUpdate()
+    {
+        if(m_at.isShooting && !isThrowing && !shouldTakeDamage)
+        {
+            BeginShooting();
+        } else if(shouldTakeDamage && !isThrowing)
+        {
+            BeginDamageAnimation();
+        } else if (isThrowing)
+        {
+            BeginThrowingAnimation();
+        } else if(!m_at.isShooting && !isThrowing && !shouldTakeDamage)
+        {
+            ResetToIdle();
+        }
+    }
+
     private void OnAnimatorIK(int layerIndex)
     {
         m_cm.RotateUpperBody();
     }
 
-    private void FixedUpdate()
+    IEnumerator FadeLayer(int layer)
     {
-        //HandleUpperBodyAnimations();
+        while(m_anim.GetLayerWeight(layer) > 0f)
+        {
+            float lw = m_anim.GetLayerWeight(layer);
+            m_anim.SetLayerWeight(layer, lw -= 4 * Time.deltaTime);
+            yield return new WaitForSeconds(0.016f);
+        }
     }
 
     public void ToggleThrow()
     {
+        if (isThrowing)
+        {
+            StartCoroutine("FadeLayer", 2);
+        }
         isThrowing = !isThrowing;
     }
 
@@ -53,8 +87,6 @@ public class CharacterAnimationManager : MonoBehaviour
         if (!isThrowing)
         {
             isThrowing = true;
-            m_anim.SetLayerWeight(2, 1f);
-            m_anim.SetInteger("UpperBodyAnimState", 4);
             Transform pos = gameObject.transform.Find("mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand/mixamorig:RightHandMiddle1");
             grenade_in_hand = Instantiate(grenade, pos.transform.position, Quaternion.identity, pos.transform);
             grenade_in_hand.transform.localPosition += new Vector3(0.04f, 0f);
@@ -69,36 +101,37 @@ public class CharacterAnimationManager : MonoBehaviour
         grenade_in_hand = null;
     }
 
+    public void BeginThrowingAnimation()
+    {
+        m_anim.SetLayerWeight(2, 1f);
+        m_anim.SetInteger("UpperBodyAnimState", 4);
+    }
+
     public void BeginDeathAnimation()
     {
         m_anim.speed = 1f;
         m_anim.SetLayerWeight(1, 0f);
+        m_anim.SetLayerWeight(2, 0f);
         m_anim.SetBool("Alive", false);
     }
 
     public void ResetToIdle()
     {
-        int anim_state = m_anim.GetInteger("UpperBodyAnimState");
-        if (anim_state == 3 && m_cdc.character.AnimPlayTime.ElapsedMilliseconds > 0.55f * 1000f)
-        {
-            m_anim.SetInteger("UpperBodyAnimState", 0);
-            m_cdc.character.AnimPlayTime.Reset();
-        } else if(anim_state == 1 || anim_state == 2)
-        {
-            m_anim.SetInteger("UpperBodyAnimState", 0);
-        }
+        m_anim.SetInteger("UpperBodyAnimState", 0);
+        shouldTakeDamage = false;
     }
 
     public void BeginShooting()
     {
-        if (m_anim.GetInteger("UpperBodyAnimState") == 0 && m_wm.GetCurrentWeapon().timer.ElapsedMilliseconds >= m_wm.GetCurrentWeapon().rate_of_fire * 1000f)
-        {
-            m_anim.SetInteger("UpperBodyAnimState", m_wm.GetCurrentWeapon().recoilCount);
-        }
-        else if (m_anim.GetInteger("UpperBodyAnimState") == 0)
-        {
-            m_anim.SetInteger("UpperBodyAnimState", 0);
-        }
+        //if (m_anim.GetInteger("UpperBodyAnimState") == 0 && m_wm.GetCurrentWeapon().timer.ElapsedMilliseconds >= m_wm.GetCurrentWeapon().rate_of_fire * 1000f)
+        //{
+        //    m_anim.SetInteger("UpperBodyAnimState", m_wm.GetCurrentWeapon().recoilCount);
+        //}
+        //else if (m_anim.GetInteger("UpperBodyAnimState") == 0)
+        //{
+        //    m_anim.SetInteger("UpperBodyAnimState", 0);
+        //}
+        m_anim.SetInteger("UpperBodyAnimState", m_wm.GetCurrentWeapon().recoilCount);
     }
 
     public void StopSingleShot()
@@ -106,18 +139,24 @@ public class CharacterAnimationManager : MonoBehaviour
         m_anim.SetInteger("UpperBodyAnimState", 0);
     }
 
-    public void HandleUpperBodyAnimations()
+    public void BeginDamageAnimation()
     {
-        if (m_anim.GetInteger("UpperBodyAnimState") == 3 && m_cdc.character.AnimPlayTime.ElapsedMilliseconds > 0.55f * 1000f)
+        if(m_st.ElapsedMilliseconds >= 590f)
         {
             m_anim.SetInteger("UpperBodyAnimState", 0);
-            m_cdc.character.AnimPlayTime.Reset();
+            shouldTakeDamage = false;
+            m_st.Stop();
+            m_st.Reset();
+        } else {
+            m_anim.SetInteger("UpperBodyAnimState", 3);
         }
     }
 
     public void TakeDamage()
     {
-        m_anim.SetInteger("UpperBodyAnimState", 3);
+        if (!m_st.IsRunning)
+            m_st.Start();
+        shouldTakeDamage = true;
     }
 
 }

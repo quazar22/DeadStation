@@ -196,7 +196,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 1
+      - time: 0.82765955
         functionName: ToggleThrow
         data: 
         objectReferenceParameter: {instanceID: 0}

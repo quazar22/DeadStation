@@ -20,8 +20,6 @@ abstract public class Character
     public Animator anim;
     public NavMeshAgent nma;
     public CharacterController cc;
-    public Stopwatch AnimPlayTime;
-    public bool CanMove;
     public bool isAlive;
 
     //public CharacterAnimationManager cam = null;
@@ -50,17 +48,9 @@ abstract public class Character
         return_character.anim = go.GetComponentInChildren<Animator>();
         return_character.nma = go.GetComponent<NavMeshAgent>();
         return_character.cc = go.GetComponent<CharacterController>();
-        return_character.AnimPlayTime = new Stopwatch();
-        return_character.CanMove = true;
         return_character.isAlive = true;
 
         return return_character;
-    }
-
-    //if a character falls down
-    public void CycleFall()
-    {
-
     }
 
     abstract public void Die();
@@ -72,11 +62,13 @@ public class Zombie : Character
 {
     private int damage;
     private ZombieAnimationManager zam;
+    private EnemyMovement em;
 
     public Zombie(GameObject character_object)
     {
         playerobject = character_object;
         zam = playerobject.GetComponentInChildren<ZombieAnimationManager>();
+        em = playerobject.GetComponent<EnemyMovement>();
         damage = Random.Range(8, 14);
         char_name = "zombie";
         health = 100;
@@ -87,17 +79,18 @@ public class Zombie : Character
 
     public override void DamageCharacter(int damage)
     {
-        health -= damage;
+        health -= Mathf.Abs(damage);
         zam.TakeHitFromBullet();
     }
     
     public override void Die()
     {
         zam.BeginDeathAnimation();
+        em.shouldMove = false;
+        em.shouldAttack = false;
         nma.speed = 0;
         nma.enabled = false;
         cc.enabled = false;
-        CanMove = false;
         isAlive = false;
     }
 
@@ -113,12 +106,14 @@ public class Player : Character
 
     private CharacterAnimationManager cam;
     private WeaponManager wm;
+    private CharacterMovement cm;
 
     public Player(GameObject character_object)
     {
         playerobject = character_object;
         cam = playerobject.GetComponentInChildren<CharacterAnimationManager>();
         wm = playerobject.GetComponent<WeaponManager>();
+        cm = playerobject.GetComponent<CharacterMovement>();
         char_name = "player";
         health = 100;
         interpspeed = 0.02f;
@@ -130,20 +125,20 @@ public class Player : Character
     {
         health -= 0;
         cam.TakeDamage();
-        AnimPlayTime.Start();
     }
 
     public override void Die()
     {
+        cm.canMove = false;
         cam.BeginDeathAnimation();
         wm.CanFire = false;
-        CanMove = false;
         isAlive = false;
     }
 }
 
 public class Boss : Character
 {
+
     public Boss(GameObject character_object)
     {
         playerobject = character_object;
@@ -161,7 +156,6 @@ public class Boss : Character
 
     public override void Die()
     {
-        CanMove = false;
         isAlive = false;
         throw new System.NotImplementedException();
     }

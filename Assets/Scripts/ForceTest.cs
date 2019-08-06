@@ -17,11 +17,12 @@ public class ForceTest : MonoBehaviour
         zombies = GameObject.FindGameObjectsWithTag("zombie");
         foreach(GameObject z in zombies)
         {
-            //foreach(Rigidbody rbb in z.GetComponentsInChildren<Rigidbody>())
-            //{
-            //    rbb.detectCollisions = false;
-            //}
-            foreach(Collider c in z.GetComponentsInChildren<Collider>())
+            foreach (Rigidbody rbb in z.GetComponentsInChildren<Rigidbody>())
+            {
+                rbb.isKinematic = true;
+                rbb.detectCollisions = false;
+            }
+            foreach (Collider c in z.GetComponentsInChildren<Collider>())
             {
                 c.enabled = false;
             }
@@ -35,19 +36,22 @@ public class ForceTest : MonoBehaviour
         {
             foreach(GameObject z in zombies)
             {
-                z.GetComponent<CharacterDataController>().character.cc.enabled = false;
+                z.GetComponent<CharacterDataController>().character.cc.enabled = true;
+                z.GetComponent<CharacterDataController>().character.cc.detectCollisions = false;
                 Rigidbody[] rbb = z.GetComponentsInChildren<Rigidbody>();
-                //foreach (Rigidbody rb in rbb)
-                //{
-                //    rb.detectCollisions = true;
-                //}
+                z.GetComponent<CharacterDataController>().character.nma.enabled = false;
+                z.GetComponent<CharacterDataController>().character.anim.enabled = false;
+                foreach (Rigidbody rb in rbb)
+                {
+                    rb.detectCollisions = true;
+                    //rb.velocity = Vector3.zero;
+                    rb.isKinematic = false;
+                }
                 foreach (Collider c in z.GetComponentsInChildren<Collider>())
                 {
                     c.enabled = true;
                 }
-                z.GetComponent<CharacterDataController>().character.nma.enabled = false;
-                z.GetComponent<CharacterDataController>().character.anim.enabled = false;
-                //rbb[0].AddExplosionForce(300f, zombies[6].transform.position, 100f, 1f, ForceMode.Impulse);
+                rbb[0].AddExplosionForce(300f, character.transform.position, 100f, 1f, ForceMode.Impulse);
             }
         }
     }

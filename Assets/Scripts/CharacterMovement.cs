@@ -16,6 +16,7 @@ public class CharacterMovement : MonoBehaviour
     private float interpspeed = 1f;
     private Animator anim; //potentially replace with a new class called AnimationController
     private bool shouldWalk;
+    public bool canMove;
     private Transform aim_angle;
     Vector3 movement;
 
@@ -44,6 +45,7 @@ public class CharacterMovement : MonoBehaviour
     {
         Application.targetFrameRate = 30;
         shouldWalk = false;
+        canMove = true;
         pc = GetComponent<CharacterController>();
         cdc = GetComponent<CharacterDataController>();
         interpspeed = cdc.character.GetInterpSpeed();
@@ -64,19 +66,17 @@ public class CharacterMovement : MonoBehaviour
         float x2 = rightstick.Horizontal();
         float y2 = rightstick.Vertical();
 
-        bool PlayerCanMove = cdc.character.CanMove;
-
         float distance = Mathf.Sqrt(Mathf.Pow(x1, 2) + Mathf.Pow(y1, 2));
         movement = new Vector3(x1, 0, y1);
 
-        if (x2 != 0f && y2 != 0f && PlayerCanMove)
+        if (x2 != 0f && y2 != 0f && canMove)
         {
             Vector3 newvec = new Vector3(transform.eulerAngles.x, Mathf.Atan2(x2, y2) * Mathf.Rad2Deg, transform.eulerAngles.z);
             //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(newvec), interpspeed);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(newvec), 5f);
         }
 
-        if (distance != 0f && PlayerCanMove)
+        if (distance != 0f && canMove)
         {
             float y_component_radians = gameObject.transform.rotation.eulerAngles.y * Mathf.Deg2Rad;
             float cos = Mathf.Cos(y_component_radians);

@@ -7,7 +7,7 @@ public class GrenadeScript : MonoBehaviour
 {
     Rigidbody rb;
     GameObject player;
-    float explosion_radius = 10f;
+    float explosion_radius = 5f;
 
     private Light grenade_light;
     bool exploded;
@@ -21,7 +21,7 @@ public class GrenadeScript : MonoBehaviour
         player = GameObject.Find(Character.PLAYER);
         rb = GetComponent<Rigidbody>();
         rb.useGravity = true;
-        rb.AddForce(rb.velocity + player.transform.position + player.transform.forward * 2500f);
+        rb.AddForce(rb.velocity + player.transform.position + player.transform.forward * 2000f);
 
         exploded = false;
         st.Start();
@@ -42,8 +42,7 @@ public class GrenadeScript : MonoBehaviour
         while(!exploded)
         {
             grenade_light.intensity = 10f * Mathf.Sin((2 * Mathf.PI) * ((st.ElapsedMilliseconds / 1000f) + 0.25f)) + 10f;
-            UnityEngine.Debug.Log(grenade_light.intensity);
-            if(st.ElapsedMilliseconds > 4000f)
+            if(st.ElapsedMilliseconds >= 3000f)
             {
                 Explode();
             }
@@ -65,6 +64,6 @@ public class GrenadeScript : MonoBehaviour
             colliders[i].GetComponent<CharacterDataController>().character.DamageCharacter((int)damage);
         }
 
-        Destroy(gameObject, 2f);
+        Destroy(gameObject);
     }
 }

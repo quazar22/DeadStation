@@ -5,11 +5,12 @@ using UnityEngine;
 public class ZombieAnimationManager : MonoBehaviour
 {
     private Animator m_anim;
-    private GameObject m_player_target = null;
     private CharacterDataController m_cdc;
 
     private CharacterMovement CharacterMovement = null;
-    private Character target_character = null;
+    private EnemyMovement m_em;
+
+    private GameObject m_player_target = null;
 
     float m_WeightScalar;
 
@@ -25,13 +26,54 @@ public class ZombieAnimationManager : MonoBehaviour
     int idle_anim;
     float idle_speed;
 
+    bool shouldTakeDamage;
+
     private void Awake()
     {
         m_anim = GetComponent<Animator>();
         m_WeightScalar = 0f;
         m_cdc = GetComponentInParent<CharacterDataController>();
+        m_em = GetComponentInParent<EnemyMovement>();
         idle_anim = Random.Range(0, 2);
         idle_speed = Random.Range(0.75f, 1.5f);
+
+        shouldTakeDamage = false;
+
+        m_attack_state = Random.Range(0, 3);
+    }
+
+    private void FixedUpdate()
+    {
+        if (m_cdc.character.isAlive)
+        {
+            if(shouldTakeDamage)
+            {
+                ProcessReactionHit();
+            } else if(m_em.shouldAttack && m_em.shouldMove) //move into attack position
+            {
+                m_player_target = m_em.GetZombieTarget();
+                MoveAndAttack();
+            } else if(m_em.shouldAttack && !m_em.shouldMove) //stand still and attack
+            {
+                m_player_target = m_em.GetZombieTarget();
+                Attack(m_player_target);
+                StandStill();
+            } else if(!m_em.shouldAttack && !m_em.shouldMove) //stand still and don't attack
+            {
+                BeginIdleAnimation();
+            } else if(!m_em.shouldAttack && m_em.shouldMove)
+            {
+                ContinueMoving();
+            }
+        }
+    }
+
+    public void MoveAndAttack()
+    {
+        m_anim.SetInteger("AnimState", m_move_state);
+        m_anim.SetFloat("AttackSpeed", 2f / m_lower_anim_speed);
+        m_anim.speed = m_lower_anim_speed;
+        Attack(m_player_target);
     }
 
     public void SetPlayerTarget(GameObject player)
@@ -48,18 +90,20 @@ public class ZombieAnimationManager : MonoBehaviour
         if (distance < 3f)
         {
             Zombie z = (Zombie)m_cdc.character;
-            target_character.DamageCharacter(z.GetDamage());
+            m_player_target.GetComponentInParent<CharacterDataController>().character.DamageCharacter(z.GetDamage());
         }
     }
 
     //random death animation
     public void BeginDeathAnimation()
     {
+        m_anim.SetLayerWeight(1, 0f);
         m_anim.SetBool("Alive", false);
         m_anim.SetInteger("AnimState", Random.Range(0, 2) * -1);
     }
 
-    //assigns random idle animation and begins animation
+    //begins playing idle animation at predefined settings in Awake()
+    //no attack animation can be played after calling this function
     public void BeginIdleAnimation()
     {
         m_move_state = idle_anim;
@@ -68,6 +112,7 @@ public class ZombieAnimationManager : MonoBehaviour
         m_anim.SetLayerWeight(1, 0f);
     }
 
+    //stops the movement animation, attack animation can happen after this call
     public void StandStill()
     {
         m_anim.SetInteger("AnimState", idle_anim);
@@ -87,21 +132,26 @@ public class ZombieAnimationManager : MonoBehaviour
         m_anim.speed = m_lower_anim_speed;
     }
 
-    public void TakeHitFromBullet()
+    public void ProcessReactionHit()
     {
         m_WeightScalar = 1f;
         m_anim.SetLayerWeight(1, m_WeightScalar);
         m_anim.SetInteger("AttackState", -1);
+        shouldTakeDamage = false;
+    }
+
+    public void TakeHitFromBullet()
+    {
+        shouldTakeDamage = true;
     }
 
     //player is the mesh object of the player GameObject, so related scripts are in the parent
     public void Attack(GameObject player)
     {
-        if (m_player_target != player || CharacterMovement == null || target_character == null)
+        if (m_player_target != player || CharacterMovement == null)
         {
             m_player_target = player;
             CharacterMovement = player.GetComponentInParent<CharacterMovement>();
-            target_character = player.GetComponentInParent<CharacterDataController>().character;
         }
 
         float distance = Vector3.Distance(gameObject.transform.position, m_player_target.transform.position);
@@ -115,13 +165,16 @@ public class ZombieAnimationManager : MonoBehaviour
             }
             m_WeightScalar += Time.deltaTime * 2f;
             m_anim.SetLayerWeight(1, m_WeightScalar);
+        } else
+        {
+            m_anim.SetInteger("AttackState", m_attack_state);
         }
 
-        if (distance < 3f)
-        {
-            if (!(CharacterMovement.GetMovementMagnitude() > 0f))
-                StandStill();
-        }
+        //if (distance < 3f)
+        //{
+        //    if (!(CharacterMovement.GetMovementMagnitude() > 0f))
+        //        StandStill();
+        //}
     }
 
     public float SetRandomMovementAnim()

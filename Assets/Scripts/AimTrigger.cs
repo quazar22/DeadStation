@@ -17,6 +17,8 @@ public class AimTrigger : MonoBehaviour
     Color blue;
     Color red;
 
+    public bool isShooting;
+
     void Start()
     {
         ColliderList = new List<Collider>();
@@ -47,6 +49,8 @@ public class AimTrigger : MonoBehaviour
             b = 0f,
             a = 0.4705f
         };
+
+        isShooting = false;
     }
 
     void Update()
@@ -118,18 +122,21 @@ public class AimTrigger : MonoBehaviour
                 if(!hit.collider.tag.StartsWith("wall") && wm.CanFire)
                 {
                     SetAimConeToRed();
-                    cam.BeginShooting();
+                    //cam.BeginShooting();
+                    isShooting = true;
                 } else
                 {
                     SetAimConeToBlue();
-                    cam.ResetToIdle();
+                    //cam.ResetToIdle();
+                    isShooting = false;
                 }
             }
         }
         else
         {
             SetAimConeToBlue();
-            cam.ResetToIdle();
+            //cam.ResetToIdle();
+            isShooting = false;
         }
     }
 

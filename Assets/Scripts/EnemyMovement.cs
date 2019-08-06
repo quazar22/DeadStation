@@ -13,7 +13,9 @@ public class EnemyMovement : MonoBehaviour
 
     private float agent_speed = 1f;
 
-    private bool shouldAttack;
+    public bool shouldAttack;
+    public bool shouldMove;
+    private bool shouldFollow;
 
     void Start()
     {
@@ -27,6 +29,8 @@ public class EnemyMovement : MonoBehaviour
         player_char = GameObject.Find(Character.PLAYER).GetComponent<CharacterDataController>().character;
 
         shouldAttack = true;
+        shouldMove = true;
+        shouldFollow = true;
 
         zam.BeginIdleAnimation();
         agent_speed = zam.SetRandomMovementAnim();
@@ -34,18 +38,18 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-        bool PlayerCanMove = cdc.character.CanMove;
-        if(shouldAttack && PlayerCanMove)
-            FollowPlayerAndAttack();
-        else if(Vector3.Distance(gameObject.transform.position, player.transform.position) < 20f && cm.GetMovementMagnitude() > 6.75f/2f)
-        {
-            AlertZombie();
-        }
+        if(shouldFollow)
+            FollowPlayer();
+        //else if(Vector3.Distance(gameObject.transform.position, player.transform.position) < 20f && cm.GetMovementMagnitude() > 6.75f/2f)
+        //{
+        //    AlertZombie();
+        //}
     }
 
     void AlertZombie()
     {
         shouldAttack = true;
+        ContinueMoving();
     }
 
     void SleepZombie()
@@ -54,7 +58,7 @@ public class EnemyMovement : MonoBehaviour
         StandStill();
     }
 
-    public void FollowPlayerAndAttack()
+    public void FollowPlayer()
     {
         if (agent.enabled && player_char.isAlive)
         {
@@ -63,7 +67,12 @@ public class EnemyMovement : MonoBehaviour
 
             if (distance < 4f)
             {
-                zam.Attack(player);
+                shouldAttack = true;
+                if(distance < 3f)
+                {
+                    shouldMove = false;
+                    StandStill();
+                }
             }
             else
             {
@@ -71,23 +80,30 @@ public class EnemyMovement : MonoBehaviour
             }
         } else if (!player_char.isAlive)
         {
-            zam.BeginIdleAnimation();
+            shouldAttack = false;
+            shouldMove = false;
             agent.enabled = false;
         }
     }
 
     public void StandStill()
     {
+        shouldMove = false;
         agent.speed = 0f;
         agent.acceleration = 60f;
-        zam.StandStill();
     }
 
     public void ContinueMoving()
     {
         agent.acceleration = 8f;
         agent.speed = agent_speed;
-        zam.ContinueMoving();
+        shouldAttack = false;
+        shouldMove = true;
+    }
+
+    public GameObject GetZombieTarget()
+    {
+        return player;
     }
 
 }
