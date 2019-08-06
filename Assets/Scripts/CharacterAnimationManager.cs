@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class CharacterAnimationManager : MonoBehaviour
@@ -12,6 +11,10 @@ public class CharacterAnimationManager : MonoBehaviour
     private Transform aim_angle;
     private CharacterMovement m_cm;
 
+    private GameObject grenade;
+    private GameObject grenade_in_hand;
+    private bool isThrowing;
+
     void Start()
     {
         m_anim = GetComponent<Animator>();
@@ -19,6 +22,9 @@ public class CharacterAnimationManager : MonoBehaviour
         m_wm = transform.parent.GetComponent<WeaponManager>();
         m_cm = transform.parent.GetComponent<CharacterMovement>();
         aim_angle = GameObject.Find("player/aim_angle").GetComponent<Transform>();
+
+        grenade = Resources.Load<GameObject>("Prefabs/Weapons/grenade");
+        isThrowing = false;
     }
 
     
@@ -37,14 +43,30 @@ public class CharacterAnimationManager : MonoBehaviour
         //HandleUpperBodyAnimations();
     }
 
+    public void ToggleThrow()
+    {
+        isThrowing = !isThrowing;
+    }
+
     public void ThrowGrenade()
     {
-        m_anim.SetInteger("UpperBodyAnimState", 4);
+        if (!isThrowing)
+        {
+            isThrowing = true;
+            m_anim.SetLayerWeight(2, 1f);
+            m_anim.SetInteger("UpperBodyAnimState", 4);
+            Transform pos = gameObject.transform.Find("mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand/mixamorig:RightHandMiddle1");
+            grenade_in_hand = Instantiate(grenade, pos.transform.position, Quaternion.identity, pos.transform);
+            grenade_in_hand.transform.localPosition += new Vector3(0.04f, 0f);
+        }
     }
 
     public void ReleaseGrenade()
     {
         m_anim.SetInteger("UpperBodyAnimState", 0);
+        grenade_in_hand.transform.parent = null;
+        grenade_in_hand.AddComponent<GrenadeScript>();
+        grenade_in_hand = null;
     }
 
     public void BeginDeathAnimation()
