@@ -64,6 +64,9 @@ public class Zombie : Character
     private ZombieAnimationManager zam;
     private EnemyMovement em;
 
+    public Collider[] colliders;
+    public Rigidbody[] rigidbodies;
+
     public Zombie(GameObject character_object)
     {
         playerobject = character_object;

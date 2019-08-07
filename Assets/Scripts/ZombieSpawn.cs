@@ -77,17 +77,30 @@ public class ZombieSpawn : MonoBehaviour
         GameObject zombie_obj = Instantiate(zombie.GetZombieObject(), gameObject.transform.position, Quaternion.identity);
 
         Renderer[] r = zombie_obj.GetComponentsInChildren<Renderer>();
-
-
         r[0].sharedMaterial = ZombieTextureData.skins[Random.Range(0, ZombieTextureData.skins.Count)];
+        r[1].sharedMaterial = zombie.clothes[Random.Range(0, zombie.clothes.Count)];
 
+        Zombie z = (Zombie)zombie_obj.GetComponent<CharacterDataController>().character;
 
         //Material m = new Material(zombie.clothes[Random.Range(0, zombie.clothes.Count)])
         //{
         //    color = new Color() { r = Random.Range(0.5f, 1f), a = Random.Range(0.5f, 1f), b = Random.Range(0.5f, 1f), g = Random.Range(0.5f, 1f) }
         //};
 
-        r[1].sharedMaterial = zombie.clothes[Random.Range(0, zombie.clothes.Count)];
+        z.rigidbodies = zombie_obj.GetComponentsInChildren<Rigidbody>();
+        z.colliders = zombie_obj.GetComponentsInChildren<Collider>();
+
+        foreach (Rigidbody rb in z.rigidbodies)
+        {
+            rb.isKinematic = true;
+            rb.detectCollisions = false;
+        }
+
+        foreach (Collider c in z.colliders)
+        {
+            if(!(c is CharacterController))
+            c.enabled = false;
+        }
 
     }
 

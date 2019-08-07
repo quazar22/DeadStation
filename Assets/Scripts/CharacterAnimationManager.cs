@@ -68,7 +68,7 @@ public class CharacterAnimationManager : MonoBehaviour
         while(m_anim.GetLayerWeight(layer) > 0f)
         {
             float lw = m_anim.GetLayerWeight(layer);
-            m_anim.SetLayerWeight(layer, lw -= 4 * Time.deltaTime);
+            m_anim.SetLayerWeight(layer, lw -= 4 * m_anim.GetFloat("AnimMultiplier") * Time.deltaTime);
             yield return new WaitForSeconds(0.016f);
         }
     }
@@ -87,6 +87,7 @@ public class CharacterAnimationManager : MonoBehaviour
         if (!isThrowing)
         {
             isThrowing = true;
+            m_anim.SetFloat("AnimMultiplier", 1f / m_anim.speed);
             Transform pos = gameObject.transform.Find("mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand/mixamorig:RightHandMiddle1");
             grenade_in_hand = Instantiate(grenade, pos.transform.position, Quaternion.identity, pos.transform);
             grenade_in_hand.transform.localPosition += new Vector3(0.04f, 0f);

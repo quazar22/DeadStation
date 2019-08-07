@@ -113,8 +113,10 @@ public class CharacterMovement : MonoBehaviour
             if (distance <= 0.5f)
             {
                 anim.speed = distance * 2f;
+                anim.speed = Mathf.Clamp(anim.speed, 0.5f, 1f);
                 anim.SetFloat("AnimMultiplier", 1f / anim.speed);
-                movement *= distance * 2f;
+                //movement *= distance * 2f;
+                movement *= anim.speed;
             }
 
             RotateLowerBody(angle);
