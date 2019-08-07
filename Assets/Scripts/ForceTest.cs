@@ -9,10 +9,12 @@ public class ForceTest : MonoBehaviour
     Vector3 center = Vector3.zero;
 
     private GameObject[] zombies;
+    private WeaponManager wm;
     // Start is called before the first frame update
     void Start()
     {
         character = GameObject.Find("player/SpaceMan@Idle");
+        wm = GameObject.Find("player").GetComponent<WeaponManager>();
         //zombie = GameObject.Find("zombie0");
         zombies = GameObject.FindGameObjectsWithTag("zombie");
         foreach(GameObject z in zombies)
@@ -34,25 +36,7 @@ public class ForceTest : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            foreach(GameObject z in zombies)
-            {
-                z.GetComponent<CharacterDataController>().character.cc.enabled = true;
-                z.GetComponent<CharacterDataController>().character.cc.detectCollisions = false;
-                Rigidbody[] rbb = z.GetComponentsInChildren<Rigidbody>();
-                z.GetComponent<CharacterDataController>().character.nma.enabled = false;
-                z.GetComponent<CharacterDataController>().character.anim.enabled = false;
-                foreach (Rigidbody rb in rbb)
-                {
-                    rb.detectCollisions = true;
-                    //rb.velocity = Vector3.zero;
-                    rb.isKinematic = false;
-                }
-                foreach (Collider c in z.GetComponentsInChildren<Collider>())
-                {
-                    c.enabled = true;
-                }
-                rbb[0].AddExplosionForce(300f, character.transform.position, 100f, 1f, ForceMode.Impulse);
-            }
+            wm.ThrowGrenade();
         }
     }
 }

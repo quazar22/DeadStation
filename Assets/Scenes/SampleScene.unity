@@ -3758,13 +3758,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.42893514, y: 0, z: 0, w: 0.9033353}
-  m_LocalPosition: {x: 0.5, y: 13.59, z: 58.69}
+  m_LocalRotation: {x: 0.43287244, y: 0, z: 0, w: 0.90145516}
+  m_LocalPosition: {x: 0.5, y: 16.39, z: 59.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50.8, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 51.3, y: 0, z: 0}
 --- !u!114 &534669906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7999,12 +7999,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
---- !u!4 &1139551489 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7633367265084998496, guid: 893d28458e7e5ef488389a0070a454f7,
-    type: 3}
-  m_PrefabInstance: {fileID: 7633367264760035369}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1143989096 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6cb11e8e50d455049a729dd98bba8cda,
@@ -11704,36 +11698,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d500b6ef30a9c4ea73fe341da73531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1814052876
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1814052877}
-  m_Layer: 0
-  m_Name: GrenadeSpawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1814052877
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814052876}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1139551489}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1845830750
 PrefabInstance:
   m_ObjectHideFlags: 0

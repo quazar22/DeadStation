@@ -11,7 +11,7 @@ public class WeaponManager : MonoBehaviour
     GameObject aim_cone;
     GameObject player;
     public List<Weapon> weapon_list;
-    public GameObject grenade;
+    private GameObject grenade;
     Transform fireposition;
     public bool CanFire;
     Animator anim;
