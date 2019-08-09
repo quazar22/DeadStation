@@ -29,7 +29,6 @@ public class GrenadeScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.useGravity = true;
         rb.AddForce((player.transform.position + player.transform.forward * 2000f) + (cc.velocity * 200));
-        UnityEngine.Debug.Log(cc.velocity * 100);
 
         exploded = false;
         st.Start();
@@ -54,7 +53,6 @@ public class GrenadeScript : MonoBehaviour
     {
         while(!exploded)
         {
-            //grenade_light.intensity = 10f * Mathf.Sin((2 * Mathf.PI) * ((st.ElapsedMilliseconds / 1000f) + 0.25f)) + 10f; //old
             if (st.ElapsedMilliseconds >= 2500)
             {
                 grenade_light.intensity = 40f;
@@ -89,10 +87,7 @@ public class GrenadeScript : MonoBehaviour
 
             if(z.GetHealth() <= 0)
             {
-                z.cc.enabled = true;
-                z.cc.detectCollisions = false;
-                z.nma.enabled = false;
-                z.anim.enabled = false;
+                z.m_anim.enabled = false;
 
                 foreach (Rigidbody rb in z.rigidbodies)
                 {

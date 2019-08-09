@@ -32,7 +32,7 @@ public class ZombieSpawn : MonoBehaviour
                 string s = mats[i].name;
                 if (s.StartsWith("skin"))
                 {
-                    ZombieTextureData.AddSkin(mats[i]);
+                    ZombieTextureData.AddSkin(mats[i]); //all skins work for every model, so just make a static variable for it
                 }
                 else if (s.StartsWith("clothing"))
                 {

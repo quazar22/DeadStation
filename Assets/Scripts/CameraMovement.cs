@@ -10,13 +10,13 @@ public class CameraMovement : MonoBehaviour {
     private readonly Vector3 default_offset2 = new Vector3(0.5f, 16.3f, -13f);
     private Transform pos;
 
-    private Transform refCam;
+    //private Transform refCam;
 
 	void Start ()
     {
         pos = GameObject.Find(Character.PLAYER).transform.GetChild(0).transform; //player object must be first in the hierarchy
         //pos = GameObject.Find(Character.PLAYER).transform;
-        refCam = GameObject.Find(Character.PLAYER).transform.Find("refCam");
+        //refCam = GameObject.Find(Character.PLAYER).transform.Find("refCam");
 	}
 	
 	void FixedUpdate () 

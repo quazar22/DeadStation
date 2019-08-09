@@ -11,24 +11,19 @@ abstract public class Character
     static public string PLAYER = "player";
     static public string BOSS = "boss";
 
-    public int health;
-    public float movespeed;
-    public float interpspeed;
-    public string char_name;
-    public bool isStanding;
-    public GameObject playerobject;
-    public Animator anim;
-    public NavMeshAgent nma;
-    public CharacterController cc;
-    public bool isAlive;
+    public int m_health;
+    public float m_interpspeed;
+    public string m_char_name;
+    public bool m_isStanding;
+    public GameObject m_playerobject;
+    public Animator m_anim;
+    public NavMeshAgent m_nma;
+    public CharacterController m_cc;
+    public bool m_isAlive;
 
-    //public CharacterAnimationManager cam = null;
-    //public ZombieAnimationManager zam = null;
-
-    public void HealCharacter(int heal)         { health += heal; }
-    public float GetInterpSpeed()               { return interpspeed; }
-    public float GetMoveSpeed()                 { return movespeed; }
-    public int GetHealth()                      { return health; }
+    public void HealCharacter(int heal)         { m_health += heal; }
+    public float GetInterpSpeed()               { return m_interpspeed; }
+    public int GetHealth()                      { return m_health; }
 
     public static Character CreateCharacter(string name, GameObject go)
     {
@@ -45,10 +40,10 @@ abstract public class Character
             return_character = new Boss(go);
         }
 
-        return_character.anim = go.GetComponentInChildren<Animator>();
-        return_character.nma = go.GetComponent<NavMeshAgent>();
-        return_character.cc = go.GetComponent<CharacterController>();
-        return_character.isAlive = true;
+        return_character.m_anim = go.GetComponentInChildren<Animator>();
+        return_character.m_nma = go.GetComponent<NavMeshAgent>();
+        return_character.m_cc = go.GetComponent<CharacterController>();
+        return_character.m_isAlive = true;
 
         return return_character;
     }
@@ -69,21 +64,24 @@ public class Zombie : Character
 
     public Zombie(GameObject character_object)
     {
-        playerobject = character_object;
-        zam = playerobject.GetComponentInChildren<ZombieAnimationManager>();
-        em = playerobject.GetComponent<EnemyMovement>();
+        m_playerobject = character_object;
+        zam = m_playerobject.GetComponentInChildren<ZombieAnimationManager>();
+        em = m_playerobject.GetComponent<EnemyMovement>();
         damage = Random.Range(8, 14);
-        char_name = "zombie";
-        health = 100;
-        interpspeed = 0.05f;
-        movespeed = 2.5f;
-        isStanding = true;
+        m_char_name = "zombie";
+        m_health = 100;
+        m_interpspeed = 0.05f;
+        m_isStanding = true;
     }
 
     public override void DamageCharacter(int damage)
     {
-        health -= Mathf.Abs(damage);
+        m_health -= Mathf.Abs(damage);
         zam.TakeHitFromBullet();
+        if(m_health <= 0)
+        {
+            Die();
+        }
     }
     
     public override void Die()
@@ -91,10 +89,12 @@ public class Zombie : Character
         zam.BeginDeathAnimation();
         em.shouldMove = false;
         em.shouldAttack = false;
-        nma.speed = 0;
-        nma.enabled = false;
-        cc.enabled = false;
-        isAlive = false;
+        m_nma.speed = 0;
+        m_nma.enabled = false;
+        m_cc.enabled = false;
+        m_cc.detectCollisions = false;
+        m_isAlive = false;
+        Object.Destroy(m_playerobject, 10f);
     }
 
     public int GetDamage()
@@ -113,21 +113,24 @@ public class Player : Character
 
     public Player(GameObject character_object)
     {
-        playerobject = character_object;
-        cam = playerobject.GetComponentInChildren<CharacterAnimationManager>();
-        wm = playerobject.GetComponent<WeaponManager>();
-        cm = playerobject.GetComponent<CharacterMovement>();
-        char_name = "player";
-        health = 100;
-        interpspeed = 0.02f;
-        movespeed = 6.0f;
-        isStanding = true;
+        m_playerobject = character_object;
+        cam = m_playerobject.GetComponentInChildren<CharacterAnimationManager>();
+        wm = m_playerobject.GetComponent<WeaponManager>();
+        cm = m_playerobject.GetComponent<CharacterMovement>();
+        m_char_name = "player";
+        m_health = 100;
+        m_interpspeed = 0.02f;
+        m_isStanding = true;
     }
 
     public override void DamageCharacter(int damage)
     {
-        health -= 0;
+        m_health -= 0;
         cam.TakeDamage();
+        if(m_health <= 0)
+        {
+            Die();
+        }
     }
 
     public override void Die()
@@ -135,7 +138,7 @@ public class Player : Character
         cm.canMove = false;
         cam.BeginDeathAnimation();
         wm.CanFire = false;
-        isAlive = false;
+        m_isAlive = false;
     }
 }
 
@@ -144,12 +147,11 @@ public class Boss : Character
 
     public Boss(GameObject character_object)
     {
-        playerobject = character_object;
-        char_name = "boss";
-        health = 5000;
-        interpspeed = 0.2f;
-        movespeed = 3.5f;
-        isStanding = true;
+        m_playerobject = character_object;
+        m_char_name = "boss";
+        m_health = 5000;
+        m_interpspeed = 0.2f;
+        m_isStanding = true;
     }
 
     public override void DamageCharacter(int damage)
@@ -159,7 +161,7 @@ public class Boss : Character
 
     public override void Die()
     {
-        isAlive = false;
+        m_isAlive = false;
         throw new System.NotImplementedException();
     }
 }

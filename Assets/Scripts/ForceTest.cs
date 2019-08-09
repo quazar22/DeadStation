@@ -15,7 +15,6 @@ public class ForceTest : MonoBehaviour
     {
         character = GameObject.Find("player/SpaceMan@Idle");
         wm = GameObject.Find("player").GetComponent<WeaponManager>();
-        //zombie = GameObject.Find("zombie0");
         zombies = GameObject.FindGameObjectsWithTag("zombie");
         foreach(GameObject z in zombies)
         {

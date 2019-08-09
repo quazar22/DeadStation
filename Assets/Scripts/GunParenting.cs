@@ -12,9 +12,4 @@ public class GunParenting : MonoBehaviour
         transform.SetParent(rightgrip);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

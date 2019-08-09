@@ -60,7 +60,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void FollowPlayer()
     {
-        if (agent.enabled && player_char.isAlive)
+        if (agent.enabled && player_char.m_isAlive)
         {
             agent.destination = player.transform.position;
             float distance = Vector3.Distance(agent.transform.position, player.transform.position);
@@ -78,7 +78,7 @@ public class EnemyMovement : MonoBehaviour
             {
                 ContinueMoving();
             }
-        } else if (!player_char.isAlive)
+        } else if (!player_char.m_isAlive)
         {
             shouldAttack = false;
             shouldMove = false;

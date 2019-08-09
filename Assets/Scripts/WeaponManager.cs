@@ -7,18 +7,20 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     Weapon currentWeapon;
-    GameObject aim_angle;
-    GameObject aim_cone;
-    GameObject player;
+    private GameObject player;
     public List<Weapon> weapon_list;
     private GameObject grenade;
     private GameObject explosion;
-    Transform fireposition;
-    public bool CanFire;
-    Animator anim;
-    CharacterAnimationManager cam;
+    private Transform fireposition;
+    private Animator anim;
+    private CharacterAnimationManager cam;
+    private CharacterMovement m_cm;
     private Light laser_flash;
     private Stopwatch flash_timer;
+
+    public bool CanFire;
+    public bool isShooting = false;
+
 
     private void Awake()
     {
@@ -28,14 +30,6 @@ public class WeaponManager : MonoBehaviour
     void Start()
     {
         CanFire = true;
-        aim_angle = GameObject.Find("player/aim_angle");
-        try
-        {
-            aim_cone = GameObject.Find("player/aim_cone_blue");
-        } catch(System.NullReferenceException)
-        {
-            aim_cone = GameObject.Find("player/aim_cone_blue_dotted");
-        }
         player = GameObject.Find(Character.PLAYER);
 
         laser_flash = fireposition.GetComponent<Light>();
@@ -47,6 +41,7 @@ public class WeaponManager : MonoBehaviour
 
         anim = GameObject.Find(Character.PLAYER).GetComponentInChildren<Animator>();
         cam = GameObject.Find(Character.PLAYER).GetComponentInChildren<CharacterAnimationManager>();
+        m_cm = GameObject.Find(Character.PLAYER).GetComponentInChildren<CharacterMovement>();
 
         SwitchWeapon(weapon_list[Weapon.AUTORIFLE]);
     }
@@ -70,6 +65,7 @@ public class WeaponManager : MonoBehaviour
         {
             if (CanFire)
             {
+                isShooting = true;
                 anim.SetInteger("UpperBodyAnimState", currentWeapon.recoilCount);
                 laser_flash.intensity = 1f;
                 currentWeapon.ShootWeapon(fireposition.position);
@@ -78,10 +74,14 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
+    public void StopShooting()
+    {
+        isShooting = false;
+    }
+
     public void ThrowGrenade()
     {
         cam.ThrowGrenade();
-        //GameObject go = Instantiate(grenade, player.transform.position + new Vector3(0f, 3.2f), Quaternion.identity);
     }
 
     public Weapon GetWeapon(string weapon)
@@ -101,10 +101,6 @@ public class WeaponManager : MonoBehaviour
     public void SwitchWeapon(Weapon weapon)
     {
         currentWeapon = weapon;
-        Transform aim = aim_angle.gameObject.transform;
-        Transform player_aim_cone = aim_cone.gameObject.transform;
-        aim.localScale = player_aim_cone.localScale = weapon.aim_angle_size;
-        aim.localPosition = player_aim_cone.localPosition = weapon.aim_angle_location;
         weapon.p.projectile_object.transform.localScale = weapon.p.projectile_scale;
 
     }
@@ -123,14 +119,11 @@ abstract public class Weapon
     static public Vector3 default_aim_angle_location = new Vector3(0, 0.28f, 7.93f);
     static public Vector3 default_fire_pos = new Vector3(0, 3.2f, -0.6f);
 
-    public Vector3 aim_angle_size;
-    public Vector3 aim_angle_location;
     public Projectile p = new Projectile();
     public Stopwatch timer;
 
     public int recoilCount;
     public float animPlayTime;
-
     public string weapon_name;
     public int damage_per_shot;
     public float rate_of_fire;
@@ -149,8 +142,6 @@ public class Shotgun : Weapon
 {
     public Shotgun()
     {
-        aim_angle_size = new Vector3(400f, 450f, default_aim_angle_size.z);
-        aim_angle_location = new Vector3(0, 0.28f, 3.43f);
         weapon_name = "shotgun";
         damage_per_shot = 25;
         rate_of_fire = 1f;
@@ -182,8 +173,6 @@ public class AutoRifle : Weapon
 {
     public AutoRifle()
     {
-        aim_angle_size = default_aim_angle_size;
-        aim_angle_location = default_aim_angle_location;
         weapon_name = "autorifle";
         damage_per_shot = 10;
         rate_of_fire = 0.2f;
@@ -207,8 +196,6 @@ public class LaserCannon : Weapon
 {
     public LaserCannon()
     {
-        aim_angle_size = new Vector3(250f, 900f, default_aim_angle_size.z);
-        aim_angle_location = default_aim_angle_location;
         weapon_name = "lasercannon";
         damage_per_shot = 100;
         rate_of_fire = 1.5f;
@@ -232,8 +219,6 @@ public class GrenadeLauncher : Weapon
 {
     public GrenadeLauncher()
     {
-        aim_angle_size = new Vector3(150f, 1500f, default_aim_angle_size.z);
-        aim_angle_location = new Vector3(0, default_aim_angle_location.y, 14.03f);
         weapon_name = "grenadelauncher";
         damage_per_shot = 2000;
         rate_of_fire = 4f;

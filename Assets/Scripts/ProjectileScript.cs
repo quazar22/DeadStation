@@ -23,15 +23,8 @@ public class ProjectileScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         player = GameObject.Find(Character.PLAYER);
 
-        closestCollider = player.GetComponentInChildren<AimTrigger>().GetClosestCollider();
-        if (closestCollider == null)
-        {
-            Transform player_object_transform = player.transform.GetChild(0);
-            colliderPos = player_object_transform.position + player_object_transform.forward * 10f + new Vector3(0f, 3.2f, 0f);
-        } else
-        {
-            colliderPos = closestCollider.transform.position;
-        }
+        Transform player_object_transform = player.transform.Find("front");
+        colliderPos = player_object_transform.position + player_object_transform.forward * 10f + new Vector3(0f, 3.2f, 0f);
 
         wm = player.GetComponent<WeaponManager>();
         weapon = wm.GetCurrentWeapon();
@@ -46,7 +39,6 @@ public class ProjectileScript : MonoBehaviour
             rb.velocity = ((colliderPos - rb.position).normalized + AddNoiseOnAngle(-weapon.weapon_spread, weapon.weapon_spread)) * speed;
             if(Vector3.Distance(gameObject.transform.position, colliderPos) < 1f)
             {
-                Transform player_object_transform = player.transform.GetChild(0);
                 rb.velocity = player_object_transform.position + player_object_transform.forward * 10f + new Vector3(0f, 3.2f, 0f);
             }
             rb.velocity = new Vector3(rb.velocity.x, 2.5f, rb.velocity.z);
@@ -99,7 +91,6 @@ public class ProjectileScript : MonoBehaviour
                     try
                     {
                         hit.collider.gameObject.GetComponent<CharacterDataController>().character.DamageCharacter(weapon.damage_per_shot / penetrationDepth++);
-                        //hit.collider.gameObject.GetComponent<CharacterDataController>().character.DamageCharacter(0);
                     }
                     catch (MissingReferenceException)
                     {
@@ -134,7 +125,6 @@ public class ProjectileScript : MonoBehaviour
         {
             if(!colliders[i].tag.StartsWith(Character.ZOMBIE)) { continue; }
             float distance = Vector3.Distance(center, colliders[i].transform.position);
-            //float damage = -380 * distance + 2000;
             float damage = -80f * Mathf.Pow(distance, 2f) + 2000f;
             colliders[i].GetComponent<CharacterDataController>().character.DamageCharacter(wm.GetCurrentWeapon().damage_per_shot);
         }
@@ -144,7 +134,6 @@ public class ProjectileScript : MonoBehaviour
 
  public class Projectile
 {
-    //public float speed;
     public Vector3 projectile_scale;
     public GameObject projectile_object;
 }

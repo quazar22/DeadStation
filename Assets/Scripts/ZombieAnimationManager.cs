@@ -51,7 +51,7 @@ public class ZombieAnimationManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (m_cdc.character.isAlive)
+        if (m_cdc.character.m_isAlive)
         {
             if(shouldTakeDamage)
             {
@@ -176,12 +176,6 @@ public class ZombieAnimationManager : MonoBehaviour
         {
             m_anim.SetInteger("AttackState", m_attack_state);
         }
-
-        //if (distance < 3f)
-        //{
-        //    if (!(CharacterMovement.GetMovementMagnitude() > 0f))
-        //        StandStill();
-        //}
     }
 
     public float SetRandomMovementAnim()
@@ -189,7 +183,6 @@ public class ZombieAnimationManager : MonoBehaviour
         float agent_speed = 1f;
 
         m_move_state = Random.Range(2, 8);
-        //m_anim.SetInteger("AnimState", m_attack_state);
 
         if (m_move_state == 2)
         {

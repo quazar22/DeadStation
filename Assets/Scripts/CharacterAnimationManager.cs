@@ -21,7 +21,7 @@ public class CharacterAnimationManager : MonoBehaviour
 
     private GameObject grenade;
     private GameObject grenade_in_hand;
-    private AimTrigger m_at;
+    //private AimTrigger m_at;
     private Stopwatch m_st;
 
     private bool isThrowing;
@@ -33,9 +33,9 @@ public class CharacterAnimationManager : MonoBehaviour
         m_cdc = transform.parent.GetComponent<CharacterDataController>();
         m_wm = transform.parent.GetComponent<WeaponManager>();
         m_cm = transform.parent.GetComponent<CharacterMovement>();
-        aim_angle = GameObject.Find("player/aim_angle").GetComponent<Transform>();
-        m_at = GameObject.Find("player/aim_angle").GetComponent<AimTrigger>();
         m_st = new Stopwatch();
+
+        m_anim.SetFloat("AnimMultiplier", 1f);
 
         grenade = Resources.Load<GameObject>("Prefabs/Weapons/grenade");
         isThrowing = false;
@@ -43,23 +43,21 @@ public class CharacterAnimationManager : MonoBehaviour
     }
 
     
-    void Update()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
-        if(m_at.isShooting && !isThrowing && !shouldTakeDamage)
+        if (m_wm.isShooting && !isThrowing && !shouldTakeDamage)
         {
             BeginShooting();
-        } else if(shouldTakeDamage && !isThrowing)
+        }
+        else if (shouldTakeDamage && !isThrowing)
         {
             BeginDamageAnimation();
-        } else if (isThrowing)
+        }
+        else if (isThrowing)
         {
             BeginThrowingAnimation();
-        } else if(!m_at.isShooting && !isThrowing && !shouldTakeDamage)
+        }
+        else if (!m_wm.isShooting && !isThrowing && !shouldTakeDamage)
         {
             ResetToIdle();
         }
@@ -76,6 +74,16 @@ public class CharacterAnimationManager : MonoBehaviour
         {
             float lw = m_anim.GetLayerWeight(layer);
             m_anim.SetLayerWeight(layer, lw -= 4 * m_anim.GetFloat("AnimMultiplier") * Time.deltaTime);
+            yield return new WaitForSeconds(0.016f);
+        }
+    }
+
+    IEnumerator IncreaseLayerWeight(int layer)
+    {
+        while (m_anim.GetLayerWeight(layer) < 1f)
+        {
+            float lw = m_anim.GetLayerWeight(layer);
+            m_anim.SetLayerWeight(layer, lw += 4 * Time.deltaTime);
             yield return new WaitForSeconds(0.016f);
         }
     }
@@ -131,14 +139,10 @@ public class CharacterAnimationManager : MonoBehaviour
 
     public void BeginShooting()
     {
-        //if (m_anim.GetInteger("UpperBodyAnimState") == 0 && m_wm.GetCurrentWeapon().timer.ElapsedMilliseconds >= m_wm.GetCurrentWeapon().rate_of_fire * 1000f)
-        //{
-        //    m_anim.SetInteger("UpperBodyAnimState", m_wm.GetCurrentWeapon().recoilCount);
-        //}
-        //else if (m_anim.GetInteger("UpperBodyAnimState") == 0)
-        //{
-        //    m_anim.SetInteger("UpperBodyAnimState", 0);
-        //}
+        if(m_anim.GetLayerWeight(1) <= 0f)
+        {
+            StartCoroutine("IncreaseLayerWeight", 1);
+        }
         m_anim.SetInteger("UpperBodyAnimState", m_wm.GetCurrentWeapon().recoilCount);
     }
 
