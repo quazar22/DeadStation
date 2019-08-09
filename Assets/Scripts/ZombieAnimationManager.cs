@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/**
+ * This class controls the animations for the zombie class only,
+ * it mostly reads movement data from the EnemyMovement class
+ * and then reacts accordingly
+ * 
+ * */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

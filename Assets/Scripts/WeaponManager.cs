@@ -12,6 +12,7 @@ public class WeaponManager : MonoBehaviour
     GameObject player;
     public List<Weapon> weapon_list;
     private GameObject grenade;
+    private GameObject explosion;
     Transform fireposition;
     public bool CanFire;
     Animator anim;
@@ -42,11 +43,17 @@ public class WeaponManager : MonoBehaviour
 
         weapon_list = new List<Weapon>(new Weapon[] { new AutoRifle(), new Shotgun(), new LaserCannon()});
         grenade = Resources.Load<GameObject>("Prefabs/Weapons/grenade");
+        explosion = Resources.Load<GameObject>("Prefabs/Explosions/Explosion");
 
         anim = GameObject.Find(Character.PLAYER).GetComponentInChildren<Animator>();
         cam = GameObject.Find(Character.PLAYER).GetComponentInChildren<CharacterAnimationManager>();
 
         SwitchWeapon(weapon_list[Weapon.AUTORIFLE]);
+    }
+
+    public GameObject GetExplosionPrefab()
+    {
+        return explosion;
     }
 
     void Update()

@@ -9,6 +9,8 @@ public class GrenadeScript : MonoBehaviour
     GameObject player;
     GameObject player_mesh;
     CharacterController cc;
+    WeaponManager wm;
+    
     float explosion_radius = 20f;
 
     private Light grenade_light;
@@ -23,6 +25,7 @@ public class GrenadeScript : MonoBehaviour
         player = GameObject.Find(Character.PLAYER);
         cc = player.GetComponent<CharacterController>();
         player_mesh = GameObject.Find(Character.PLAYER + "/SpaceMan@Idle");
+        wm = player.GetComponent<WeaponManager>();
         rb = GetComponent<Rigidbody>();
         rb.useGravity = true;
         rb.AddForce((player.transform.position + player.transform.forward * 2000f) + (cc.velocity * 200));
@@ -79,7 +82,6 @@ public class GrenadeScript : MonoBehaviour
             if (!colliders[i].tag.StartsWith(Character.ZOMBIE)) { continue; }
 
             float distance = Vector3.Distance(gameObject.transform.position, colliders[i].transform.position);
-            //float damage = -80f * Mathf.Pow(distance, 2f) + 2000f; //this equation sucks. plz fix
             int damage = (int)(-200f * Mathf.Log10((distance/2) + 1f) + 200f);
 
             Zombie z = (Zombie)colliders[i].GetComponent<CharacterDataController>().character;
@@ -108,6 +110,8 @@ public class GrenadeScript : MonoBehaviour
             }
         }
 
+        Destroy(Instantiate(wm.GetExplosionPrefab(), gameObject.transform.position, Quaternion.identity), 2.2f);
         Destroy(gameObject);
+
     }
 }

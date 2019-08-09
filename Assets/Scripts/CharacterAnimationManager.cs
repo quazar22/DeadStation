@@ -1,7 +1,14 @@
-﻿using System.Collections;
+﻿/**
+ * This class controls the animations for the player character,
+ * it mostly reads movement data from the CharacterMovement class
+ * and then reacts accordingly
+ * 
+ * */
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+
 
 public class CharacterAnimationManager : MonoBehaviour
 {
