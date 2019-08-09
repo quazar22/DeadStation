@@ -66,7 +66,6 @@ public class WeaponManager : MonoBehaviour
             if (CanFire)
             {
                 isShooting = true;
-                anim.SetInteger("UpperBodyAnimState", currentWeapon.recoilCount);
                 laser_flash.intensity = 1f;
                 currentWeapon.ShootWeapon(fireposition.position);
                 currentWeapon.timer.Restart();
@@ -115,8 +114,6 @@ public class WeaponManager : MonoBehaviour
 abstract public class Weapon
 {
     public static string[] weapons = { "shotgun", "autorifle", "lasercannon", "grenadelauncher" };
-    static public Vector3 default_aim_angle_size = new Vector3(300f, 900f, 15f);
-    static public Vector3 default_aim_angle_location = new Vector3(0, 0.28f, 7.93f);
     static public Vector3 default_fire_pos = new Vector3(0, 3.2f, -0.6f);
 
     public Projectile p = new Projectile();
