@@ -42,7 +42,6 @@ public class CharacterAnimationManager : MonoBehaviour
         shouldTakeDamage = false;
     }
 
-    
     private void FixedUpdate()
     {
         if (m_wm.isShooting && !isThrowing && !shouldTakeDamage)
@@ -135,15 +134,20 @@ public class CharacterAnimationManager : MonoBehaviour
     {
         m_anim.SetInteger("UpperBodyAnimState", 0);
         shouldTakeDamage = false;
+        m_wm.shot_count = 0;
     }
 
     public void BeginShooting()
     {
-        if(m_anim.GetLayerWeight(1) <= 0f)
+        Weapon weapon = m_wm.GetCurrentWeapon();
+
+        if (m_anim.GetLayerWeight(1) <= 0f)
         {
             StartCoroutine("IncreaseLayerWeight", 1);
         }
-        m_anim.SetInteger("UpperBodyAnimState", m_wm.GetCurrentWeapon().recoilCount);
+        
+        m_anim.SetInteger("UpperBodyAnimState", weapon.recoilCount);
+        m_anim.SetFloat("AnimMultiplier", 1f / m_anim.speed);
     }
 
     public void StopSingleShot()

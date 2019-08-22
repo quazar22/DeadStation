@@ -37,10 +37,10 @@ public class ProjectileScript : MonoBehaviour
         } else
         {
             rb.velocity = ((colliderPos - rb.position).normalized + AddNoiseOnAngle(-weapon.weapon_spread, weapon.weapon_spread)) * speed;
-            if(Vector3.Distance(gameObject.transform.position, colliderPos) < 1f)
-            {
-                rb.velocity = player_object_transform.position + player_object_transform.forward * 10f + new Vector3(0f, 3.2f, 0f);
-            }
+            //if(Vector3.Distance(gameObject.transform.position, colliderPos) < 1f)
+            //{
+            //    rb.velocity = player_object_transform.position + player_object_transform.forward * 10f + new Vector3(0f, 3.2f, 0f);
+            //}
             rb.velocity = new Vector3(rb.velocity.x, 2.5f, rb.velocity.z);
             Destroy(gameObject, 1f);
         }

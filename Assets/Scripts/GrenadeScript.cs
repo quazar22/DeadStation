@@ -10,6 +10,9 @@ public class GrenadeScript : MonoBehaviour
     GameObject player_mesh;
     CharacterController cc;
     WeaponManager wm;
+    AudioSource source;
+    AudioClip fast_tick = null;
+    AudioClip long_tick = null;
     
     float explosion_radius = 20f;
 
@@ -21,6 +24,7 @@ public class GrenadeScript : MonoBehaviour
     void Start()
     {
         st = new Stopwatch();
+        source = GetComponent<AudioSource>();
         grenade_light = GetComponent<Light>();
         player = GameObject.Find(Character.PLAYER);
         cc = player.GetComponent<CharacterController>();
@@ -34,6 +38,13 @@ public class GrenadeScript : MonoBehaviour
         st.Start();
 
         grenade_light.intensity = 0f;
+
+        if(fast_tick == null || long_tick == null)
+        {
+            fast_tick = Resources.Load<AudioClip>("Audio/grenade_tick");
+            long_tick = Resources.Load<AudioClip>("Audio/grenade_long_tick");
+            source.clip = fast_tick;
+        }
 
         StartCoroutine("GrenadeTick");
     }
@@ -49,18 +60,54 @@ public class GrenadeScript : MonoBehaviour
         return (value - fromSource) / (toSource - fromSource) * (toTarget - fromTarget) + fromTarget;
     }
 
+    //IEnumerator GrenadeTick()
+    //{
+    //    bool played = false;
+    //    while(!exploded)
+    //    {
+    //        if (st.ElapsedMilliseconds >= 2500)
+    //        {
+    //            grenade_light.intensity = 40f;
+    //        }
+    //        else
+    //        {
+    //            float s_input = 20 * Mathf.Sin(10 * Mathf.Pow(st.ElapsedMilliseconds / 1000f, 2)) + 20;//Mathf.Pow(st.ElapsedMilliseconds / 600f, 3) + 0.5f; //current
+    //            grenade_light.intensity = s_input;
+    //        }
+    //        if (st.ElapsedMilliseconds >= 3000f)
+    //        {
+    //            Explode();
+    //        }
+    //        yield return new WaitForSeconds(0.05f);
+    //    }
+    //}
+
     IEnumerator GrenadeTick()
     {
-        while(!exploded)
+        bool played = false;
+        bool should_continue = true;
+        while (!exploded)
         {
-            if (st.ElapsedMilliseconds >= 2500)
+            if (st.ElapsedMilliseconds >= 2500f && should_continue)
             {
+                source.clip = long_tick;
                 grenade_light.intensity = 40f;
+                should_continue = false;
+                source.Play(0);
             }
-            else
+            else if(st.ElapsedMilliseconds < 2500f)
             {
-                float s_input = 20 * Mathf.Sin(10 * Mathf.Pow(st.ElapsedMilliseconds / 1000f, 2)) + 20;//Mathf.Pow(st.ElapsedMilliseconds / 600f, 3) + 0.5f; //current
+                float s_input = 20f * Mathf.Sin( (2f * Mathf.PI) * ((st.ElapsedMilliseconds / 750f) + 1.25f) ) + 20f;//Mathf.Pow(st.ElapsedMilliseconds / 600f, 3) + 0.5f; //current
                 grenade_light.intensity = s_input;
+                if(s_input >= 39f && !played)
+                {
+                    source.Play(0);
+                    played = true;
+                }
+                if(s_input <= 5f)
+                {
+                    played = false;
+                }
             }
             if (st.ElapsedMilliseconds >= 3000f)
             {

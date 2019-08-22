@@ -191,8 +191,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Shoot Rifle
       takeName: mixamo.com
-      firstFrame: 0
-      lastFrame: 28
+      firstFrame: 3.5
+      lastFrame: 14.2
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

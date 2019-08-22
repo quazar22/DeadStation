@@ -115,6 +115,8 @@ public class CharacterMovement : MonoBehaviour
             pc.SimpleMove(new Vector3(0f, 0f, 0f));
         }
 
+        //Debug.Log(anim.GetFloat("distance"));
+
     }
 
     public float GetMovementMagnitude()
@@ -124,13 +126,16 @@ public class CharacterMovement : MonoBehaviour
 
     public void RotateUpperBody()
     {
-        anim.SetLookAtWeight(1f, 1f, 1f, 1f, .5f);
-        anim.SetLookAtPosition(front.position);
+        if (anim)
+        {
+            anim.SetLookAtWeight(1f, 1f, 1f, 1f, .5f);
+            anim.SetLookAtPosition(front.position);
+        }
     }
 
     public void RotateLowerBody(float angle)
     {
-        if(angle < 180 && angle > 0f)
+        if(angle < 180f && angle > 0f)
         {
             anim.transform.rotation = Quaternion.RotateTowards(anim.transform.rotation, Quaternion.LookRotation(movement), 5f);
         } else if(angle > -180f && angle < 0f)

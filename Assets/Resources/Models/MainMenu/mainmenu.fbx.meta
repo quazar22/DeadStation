@@ -1,0 +1,285 @@
+fileFormatVersion: 2
+guid: 76b629d9b713e554b9b29ca515d55dd2
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Cube.006
+    100002: Cube.011
+    100004: Cube.012
+    100006: Cube.013
+    100008: Cube.015
+    100010: Cube.021
+    100012: Cube.022
+    100014: Cube.023
+    100016: Cube.024
+    100018: Cube.025
+    100020: Cube.026
+    100022: Cube.027
+    100024: Cube.028
+    100026: Cube.029
+    100028: Cube.030
+    100030: Cube.031
+    100032: Cube.032
+    100034: Cylinder.003
+    100036: //RootNode
+    400000: Cube.006
+    400002: Cube.011
+    400004: Cube.012
+    400006: Cube.013
+    400008: Cube.015
+    400010: Cube.021
+    400012: Cube.022
+    400014: Cube.023
+    400016: Cube.024
+    400018: Cube.025
+    400020: Cube.026
+    400022: Cube.027
+    400024: Cube.028
+    400026: Cube.029
+    400028: Cube.030
+    400030: Cube.031
+    400032: Cube.032
+    400034: Cylinder.003
+    400036: //RootNode
+    2100000: Flooring.001
+    2100002: BackgroundWallMaterial.001
+    2100004: FloorSiding.001
+    2100006: FloorTriangles.001
+    2100008: CelingMaterial.001
+    2100010: FloorPanel.001
+    2100012: WindowSIll.001
+    2100014: Window.001
+    2100016: WallPanel.001
+    2100018: WallLargePanel.001
+    2100020: LightPlate.003
+    2100022: HallwayLight.003
+    2300000: Cube.006
+    2300002: Cube.011
+    2300004: Cube.012
+    2300006: Cube.013
+    2300008: Cube.015
+    2300010: Cube.021
+    2300012: Cube.022
+    2300014: Cube.023
+    2300016: Cube.024
+    2300018: Cube.025
+    2300020: Cube.026
+    2300022: Cube.027
+    2300024: Cube.028
+    2300026: Cube.029
+    2300028: Cube.030
+    2300030: Cube.031
+    2300032: Cube.032
+    2300034: Cylinder.003
+    3300000: Cube.006
+    3300002: Cube.011
+    3300004: Cube.012
+    3300006: Cube.013
+    3300008: Cube.015
+    3300010: Cube.021
+    3300012: Cube.022
+    3300014: Cube.023
+    3300016: Cube.024
+    3300018: Cube.025
+    3300020: Cube.026
+    3300022: Cube.027
+    3300024: Cube.028
+    3300026: Cube.029
+    3300028: Cube.030
+    3300030: Cube.031
+    3300032: Cube.032
+    3300034: Cylinder.003
+    4300000: Cube.032
+    4300002: Cube.031
+    4300004: Cube.030
+    4300006: Cube.029
+    4300008: Cube.028
+    4300010: Cube.027
+    4300012: Cube.026
+    4300014: Cube.025
+    4300016: Cube.024
+    4300018: Cube.023
+    4300020: Cube.022
+    4300022: Cube.021
+    4300024: Cube.015
+    4300026: Cube.013
+    4300028: Cube.012
+    4300030: Cube.011
+    4300032: Cube.006
+    4300034: Cylinder.003
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BackgroundWallMaterial.001
+    second: {fileID: 2100000, guid: f265e25fac5b5f94e956a0f3c5af5efc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CelingMaterial.001
+    second: {fileID: 2100000, guid: 17bf466d8c70c794a9a6f34b3d5ae970, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorPanel.001
+    second: {fileID: 2100000, guid: 4f1976ec0210c084eacdbbd75b267220, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorSiding.001
+    second: {fileID: 2100000, guid: c1cc0e0764db223469d4c9b2350e56ca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorTriangles.001
+    second: {fileID: 2100000, guid: f77c15ca9fca49346a2eb2a7ecfef57c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Flooring.001
+    second: {fileID: 2100000, guid: 707b2c4c621ea3e41b172c3e3ac6249f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HallwayLight.003
+    second: {fileID: 2100000, guid: 26506b76df79eb445be63cdccc5126a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightPlate.003
+    second: {fileID: 2100000, guid: eac9a0fae99cf6d4b9f4a17d57889b13, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WallLargePanel.001
+    second: {fileID: 2100000, guid: 64c4c1abc8563154a84000e0cd57e110, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WallPanel.001
+    second: {fileID: 2100000, guid: 8406f7f3b488d944eb55d2ba91d266d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Window.001
+    second: {fileID: 2100000, guid: 8a58b425dd9df2b4fb723ce0de345407, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WindowSIll.001
+    second: {fileID: 2100000, guid: b92bf7e6b8863ec4bb99786aed3a37a8, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: bronze_metal
+    second: {fileID: 2800000, guid: 9584d4bf05c781445b826ddc4cf54ddd, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: brushed_metal
+    second: {fileID: 2800000, guid: bf0c686d9535a8a45b4fd6860ecdd707, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: chrome_metal
+    second: {fileID: 2800000, guid: 5777fdae61f94f64fa96e188f200af5e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: gold_metal
+    second: {fileID: 2800000, guid: e6ac4713bbc9a614ca8d74db30d6ddfd, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: hexagonal_floor
+    second: {fileID: 2800000, guid: 6a49a24f682e9b34a9bce192cd30c905, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: industrial_metal
+    second: {fileID: 2800000, guid: b9baa5de78664b8439864896dc0b7312, type: 3}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

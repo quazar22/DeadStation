@@ -17,10 +17,11 @@ public class WeaponManager : MonoBehaviour
     private CharacterMovement m_cm;
     private Light laser_flash;
     private Stopwatch flash_timer;
+    private AudioSource[] audio_sources;
 
     public bool CanFire;
     public bool isShooting = false;
-
+    public int shot_count;
 
     private void Awake()
     {
@@ -39,6 +40,8 @@ public class WeaponManager : MonoBehaviour
         grenade = Resources.Load<GameObject>("Prefabs/Weapons/grenade");
         explosion = Resources.Load<GameObject>("Prefabs/Explosions/Explosion");
 
+        audio_sources = GetComponents<AudioSource>();
+
         anim = GameObject.Find(Character.PLAYER).GetComponentInChildren<Animator>();
         cam = GameObject.Find(Character.PLAYER).GetComponentInChildren<CharacterAnimationManager>();
         m_cm = GameObject.Find(Character.PLAYER).GetComponentInChildren<CharacterMovement>();
@@ -53,24 +56,54 @@ public class WeaponManager : MonoBehaviour
 
     void Update()
     {
-        if(currentWeapon.timer.ElapsedMilliseconds >= currentWeapon.rate_of_fire * 500f)
+        //if(currentWeapon.timer.ElapsedMilliseconds >= currentWeapon.rate_of_fire * 500f)
+        //{
+        //    laser_flash.intensity = 0f;
+        //}
+        if (currentWeapon.timer.ElapsedMilliseconds >= currentWeapon.rate_of_fire * 1000f)
         {
-            laser_flash.intensity = 0f;
+            CanFire = true;
+            anim.SetBool("CanFire", true);
+        }
+        else
+        {
+            CanFire = false;
+            anim.SetBool("CanFire", false);
         }
     }
 
     public void FireWeapon()
     {
-        if(currentWeapon.timer.ElapsedMilliseconds >= currentWeapon.rate_of_fire * 1000f)
+        if (currentWeapon.timer.ElapsedMilliseconds >= currentWeapon.rate_of_fire * 1000f)
         {
             if (CanFire)
             {
                 isShooting = true;
                 laser_flash.intensity = 1f;
+                if (shot_count == 0)
+                {
+                    cam.BeginShooting();
+                }
                 currentWeapon.ShootWeapon(fireposition.position);
                 currentWeapon.timer.Restart();
+                shot_count++;
+                AudioSource source = GetAvailableAudioSource();
+                source.volume = 0.2f;
+                source.Play(0);
             }
         }
+    }
+
+    AudioSource GetAvailableAudioSource()
+    {
+        foreach(AudioSource source in audio_sources)
+        {
+            if (!source.isPlaying)
+            {
+                return source;
+            }
+        }
+        return audio_sources[0]; //¯\_(ツ)_/¯
     }
 
     public void StopShooting()
@@ -99,9 +132,13 @@ public class WeaponManager : MonoBehaviour
 
     public void SwitchWeapon(Weapon weapon)
     {
+        foreach(AudioSource source in audio_sources)
+        {
+            source.clip = weapon.weapon_sound_clip;
+        }
         currentWeapon = weapon;
         weapon.p.projectile_object.transform.localScale = weapon.p.projectile_scale;
-
+        shot_count = 0;
     }
 
     public void SetCanFire(bool canFire)
@@ -118,13 +155,12 @@ abstract public class Weapon
 
     public Projectile p = new Projectile();
     public Stopwatch timer;
+    public AudioClip weapon_sound_clip;
 
     public int recoilCount;
-    public float animPlayTime;
     public string weapon_name;
     public int damage_per_shot;
     public float rate_of_fire;
-    public float weapon_lock_time;
     public float weapon_spread;
 
     public static int AUTORIFLE = 0;
@@ -142,12 +178,11 @@ public class Shotgun : Weapon
         weapon_name = "shotgun";
         damage_per_shot = 25;
         rate_of_fire = 1f;
-        weapon_lock_time = 0.1f;
         weapon_spread = 15f;
+        weapon_sound_clip = Resources.Load<AudioClip>("Audio/shotgun_shot");
         p.projectile_object = Resources.Load<GameObject>("Prefabs/Projectiles/Laser");
         p.projectile_scale = new Vector3(0.025f, 0.025f, 0.025f);
         recoilCount = 1;
-        animPlayTime = 0.933f;
         timer = new Stopwatch();
         timer.Start();
     }
@@ -173,12 +208,11 @@ public class AutoRifle : Weapon
         weapon_name = "autorifle";
         damage_per_shot = 10;
         rate_of_fire = 0.2f;
-        weapon_lock_time = 1f;
         weapon_spread = 3f;
+        weapon_sound_clip = Resources.Load<AudioClip>("Audio/autorifle_shot_1");
         p.projectile_object = Resources.Load<GameObject>("Prefabs/Projectiles/Laser");
         p.projectile_scale = new Vector3(0.05f, 0.05f, 0.05f);
         recoilCount = 2;
-        animPlayTime = 0.267f;
         timer = new Stopwatch();
         timer.Start();
     }
@@ -196,12 +230,11 @@ public class LaserCannon : Weapon
         weapon_name = "lasercannon";
         damage_per_shot = 100;
         rate_of_fire = 1.5f;
-        weapon_lock_time = 1f;
         weapon_spread = 0.5f;
+        weapon_sound_clip = Resources.Load<AudioClip>("Audio/lasercannon_shot");
         p.projectile_object = Resources.Load<GameObject>("Prefabs/Projectiles/Laser");
         p.projectile_scale = new Vector3(0.1f, 0.1f, 0.1f);
         recoilCount = 1;
-        animPlayTime = 0.933f;
         timer = new Stopwatch();
         timer.Start();
     }
@@ -219,12 +252,10 @@ public class GrenadeLauncher : Weapon
         weapon_name = "grenadelauncher";
         damage_per_shot = 2000;
         rate_of_fire = 4f;
-        weapon_lock_time = 4f;
         weapon_spread = 0f;
         p.projectile_object = Resources.Load<GameObject>("Prefabs/Projectiles/Rocket");
         p.projectile_scale = new Vector3(0.1f, 0.2f, 0.1f);
         recoilCount = 1;
-        animPlayTime = 0.933f;
         timer = new Stopwatch();
         timer.Start();
     }

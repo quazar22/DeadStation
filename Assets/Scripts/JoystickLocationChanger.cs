@@ -49,7 +49,7 @@ public class JoystickLocationChanger : MonoBehaviour, IPointerUpHandler, IPointe
     
     void Update()
     {
-        if (inVector.magnitude > 0.95f && StickSide == 1f)
+        if (inVector.magnitude > 0.75f && StickSide == 1f)
         {
             m_wm.FireWeapon();
             RightBoundImg.color = new Color() { r = 1f, b = 0f, g = 0f, a = 0.25f };

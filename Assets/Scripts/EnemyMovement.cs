@@ -22,7 +22,7 @@ public class EnemyMovement : MonoBehaviour
         //anim = GetComponentInChildren<Animator>();
         zam = GetComponentInChildren<ZombieAnimationManager>();
         cc = GetComponent<CharacterController>(); //wary of deleting
-        cm = GameObject.Find(Character.PLAYER).GetComponent<CharacterMovement>();
+        //cm = GameObject.Find(Character.PLAYER).GetComponent<CharacterMovement>();
         cdc = GetComponent<CharacterDataController>();
         player = GameObject.Find(Character.PLAYER).transform.GetChild(0).gameObject; //"player"
         agent = GetComponent<NavMeshAgent>();

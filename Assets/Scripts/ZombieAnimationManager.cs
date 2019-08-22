@@ -30,8 +30,8 @@ public class ZombieAnimationManager : MonoBehaviour
     float m_lower_anim_speed;
 
     //both
-    int idle_anim;
-    float idle_speed;
+    public int idle_anim = -1;
+    public float idle_speed = -1f;
 
     bool shouldTakeDamage;
 
@@ -41,8 +41,10 @@ public class ZombieAnimationManager : MonoBehaviour
         m_WeightScalar = 0f;
         m_cdc = GetComponentInParent<CharacterDataController>();
         m_em = GetComponentInParent<EnemyMovement>();
-        idle_anim = Random.Range(0, 2);
-        idle_speed = Random.Range(0.75f, 1.5f);
+        if (idle_anim == -1)
+            idle_anim = Random.Range(0, 2);
+        if(idle_speed == -1f)
+            idle_speed = Random.Range(0.75f, 1.5f);
 
         shouldTakeDamage = false;
 
