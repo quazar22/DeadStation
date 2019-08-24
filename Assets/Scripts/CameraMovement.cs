@@ -5,23 +5,27 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour {
 
     private Vector3 offset;
-    private readonly Vector3 default_offset = new Vector3(0.2f, 18.6f, -13.2f);
-    private readonly Vector3 default_offset1 = new Vector3(0.2f, 13.5f, -11.4f);
     private readonly Vector3 default_offset2 = new Vector3(0.5f, 16.3f, -13f);
     private Transform pos;
 
-    //private Transform refCam;
+    private Transform OverheadReference;
+    private Transform AngledReference;
+
+    private Vector3 CurrentLocation;
 
 	void Start ()
     {
         pos = GameObject.Find(Character.PLAYER).transform.GetChild(0).transform; //player object must be first in the hierarchy
-        //pos = GameObject.Find(Character.PLAYER).transform;
-        //refCam = GameObject.Find(Character.PLAYER).transform.Find("refCam");
+        OverheadReference = GameObject.Find("player/overhead_camera_reference").GetComponent<Transform>();
+        AngledReference = GameObject.Find("player/angled_camera_reference").GetComponent<Transform>();
+        CurrentLocation = pos.position + default_offset2;
+        transform.LookAt(pos);
 	}
 	
 	void FixedUpdate () 
 	{
         transform.position = pos.position + default_offset2;
 	}
+
 
 }
