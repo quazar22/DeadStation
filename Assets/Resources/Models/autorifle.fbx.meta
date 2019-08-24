@@ -1,15 +1,54 @@
 fileFormatVersion: 2
-guid: 0bcec30b1cbd2dd488df1ae700980c72
+guid: ab7662aefd9a7be4994f225c34f2184f
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: Material
+    2100000: GunMetalBlack
+    2100002: GunGrey
+    2100004: BatteryPack
+    2100006: sights
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Cube
-  externalObjects: {}
+    4300000: Cube.001
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BatteryPack
+    second: {fileID: 2100000, guid: dd4fe669615032a47a05693bf7efe627, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GunGrey
+    second: {fileID: 2100000, guid: 7137b72fa85c30f469b73f1c90b1ddd5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GunMetalBlack
+    second: {fileID: 2100000, guid: 57fafa55dcb2782429edebbd4fb1534c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sights
+    second: {fileID: 2100000, guid: 4d503aa4e87d8e447a758453bdfc21b7, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: copper_metal
+    second: {fileID: 2800000, guid: 4e338208985cfe7478f8020bee681aab, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: iron_metal
+    second: {fileID: 2800000, guid: 256c7597061cde24b9ebb6758c01ab6b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: scratched_metal
+    second: {fileID: 2800000, guid: 674dbbaf1747ed44a93add815c87340f, type: 3}
   materials:
     importMaterials: 1
     materialName: 0

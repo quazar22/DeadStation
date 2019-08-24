@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    Weapon currentWeapon;
+    private Weapon currentWeapon;
     private GameObject player;
     public List<Weapon> weapon_list;
     private GameObject grenade;
@@ -15,7 +15,7 @@ public class WeaponManager : MonoBehaviour
     private Animator anim;
     private CharacterAnimationManager cam;
     private CharacterMovement m_cm;
-    private Light laser_flash;
+    //private Light laser_flash;
     private Stopwatch flash_timer;
     private AudioSource[] audio_sources;
 
@@ -25,7 +25,13 @@ public class WeaponManager : MonoBehaviour
 
     private void Awake()
     {
-        fireposition = GameObject.Find("player/gun/Bone001/m4a1_upper receiver/fire_position").transform;
+        try
+        {
+            fireposition = GameObject.Find("player/gun/Bone001/m4a1_upper receiver/fire_position").transform;
+        } catch(System.Exception e)
+        {
+            fireposition = GameObject.Find("player/gun/fire_position").transform;
+        }
     }
 
     void Start()
@@ -33,8 +39,8 @@ public class WeaponManager : MonoBehaviour
         CanFire = true;
         player = GameObject.Find(Character.PLAYER);
 
-        laser_flash = fireposition.GetComponent<Light>();
-        laser_flash.intensity = 0f;
+        //laser_flash = fireposition.GetComponent<Light>();
+        //laser_flash.intensity = 0f;
 
         weapon_list = new List<Weapon>(new Weapon[] { new AutoRifle(), new Shotgun(), new LaserCannon()});
         grenade = Resources.Load<GameObject>("Prefabs/Weapons/grenade");
@@ -79,9 +85,10 @@ public class WeaponManager : MonoBehaviour
             if (CanFire)
             {
                 isShooting = true;
-                laser_flash.intensity = 1f;
+                //laser_flash.intensity = 1f;
                 if (shot_count == 0)
                 {
+                    anim.SetBool("CanFire", true);
                     cam.BeginShooting();
                 }
                 currentWeapon.ShootWeapon(fireposition.position);

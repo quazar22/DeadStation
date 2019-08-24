@@ -160,7 +160,42 @@ ModelImporter:
     13700002: Cube.001
     13700004: Cylinder
     13700006: Icosphere
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blue
+    second: {fileID: 2100000, guid: cd6e7c58e8a68df4f9c45e31d5e445bf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GlassMaterial
+    second: {fileID: 2100000, guid: 5bfb3b301ae2d5d43a36dd39c3d7dd67, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: 1823679d3dbd3424eb91d64d17aa42b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Orange
+    second: {fileID: 2100000, guid: 65818ad8b283b144e8aa7802c4ddd48e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red
+    second: {fileID: 2100000, guid: a273a436c96e6c7469ef94ddeaeef806, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tubing
+    second: {fileID: 2100000, guid: 9b6d2d5271b5d514cb3b080441c8aa78, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WhiteMaterial
+    second: {fileID: 2100000, guid: 9a9aaa374986b6c42aa4bed2476763a0, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

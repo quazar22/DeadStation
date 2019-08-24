@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GunParenting : MonoBehaviour
 {
-    public Transform rightgrip;
+    public Transform grip;
 
     // Start is called before the first frame update
     void Start()
     {
-        transform.SetParent(rightgrip);
+        transform.SetParent(grip);
     }
 
 }

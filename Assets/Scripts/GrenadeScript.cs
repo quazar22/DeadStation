@@ -88,7 +88,7 @@ public class GrenadeScript : MonoBehaviour
         bool should_continue = true;
         while (!exploded)
         {
-            if (st.ElapsedMilliseconds >= 2500f && should_continue)
+            if (st.ElapsedMilliseconds >= 2250f && should_continue)
             {
                 source.clip = long_tick;
                 grenade_light.intensity = 40f;
@@ -109,7 +109,7 @@ public class GrenadeScript : MonoBehaviour
                     played = false;
                 }
             }
-            if (st.ElapsedMilliseconds >= 3000f)
+            if (st.ElapsedMilliseconds >= 2750f)
             {
                 Explode();
             }
