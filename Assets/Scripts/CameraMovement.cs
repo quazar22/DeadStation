@@ -11,21 +11,60 @@ public class CameraMovement : MonoBehaviour {
     private Transform OverheadReference;
     private Transform AngledReference;
 
-    private Vector3 CurrentLocation;
+    private Vector3 OverheadOffset;
+    private Vector3 AngledOffset;
+
+    private int CurrentLocation = 0;
+    private Vector3 CurrentOffset;
 
 	void Start ()
     {
         pos = GameObject.Find(Character.PLAYER).transform.GetChild(0).transform; //player object must be first in the hierarchy
         OverheadReference = GameObject.Find("player/overhead_camera_reference").GetComponent<Transform>();
         AngledReference = GameObject.Find("player/angled_camera_reference").GetComponent<Transform>();
-        CurrentLocation = pos.position + default_offset2;
+
+        OverheadOffset = OverheadReference.position - pos.position;
+        AngledOffset = AngledReference.position - pos.position;
+
+        CurrentOffset = AngledOffset;
+
+        CurrentLocation = 0;
         transform.LookAt(pos);
 	}
-	
-	void FixedUpdate () 
+
+    private void Update()
+    {
+        //transform.position = Vector3.MoveTowards(transform.position, pos.position + CurrentOffset, 0.1f);
+        //transform.LookAt(pos);
+    }
+
+    void FixedUpdate () 
 	{
-        transform.position = pos.position + default_offset2;
-	}
+        //transform.position = Vector3.MoveTowards(transform.position, pos.position + CurrentOffset, 0.1f);
+        if (CurrentLocation == 0)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, pos.position + AngledOffset, 0.1f);
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, pos.position + OverheadOffset, 0.1f);
+        }
+        transform.LookAt(pos);
+    }
+
+    public void GoToOverheadRef()
+    {
+        CurrentOffset = OverheadOffset;
+        //CurrentLocation = OverheadReference.position;
+        CurrentLocation = 1;
+    }
+
+    public void GoToAngledRef()
+    {
+        CurrentOffset = AngledOffset;
+        //CurrentLocation = AngledReference.position;
+        CurrentLocation = 0;
+    }
 
 
 }

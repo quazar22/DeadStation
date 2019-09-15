@@ -215,7 +215,7 @@ public class AutoRifle : Weapon
         weapon_name = "autorifle";
         damage_per_shot = 10;
         rate_of_fire = 0.2f;
-        weapon_spread = 3f;
+        weapon_spread = 0f;
         weapon_sound_clip = Resources.Load<AudioClip>("Audio/autorifle_shot_1");
         p.projectile_object = Resources.Load<GameObject>("Prefabs/Projectiles/Laser");
         p.projectile_scale = new Vector3(0.05f, 0.05f, 0.05f);

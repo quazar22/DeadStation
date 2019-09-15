@@ -22,13 +22,13 @@ public class FlatWallAngleChanger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("hi");
+        mainCamera.GoToOverheadRef();
     }
 
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("bye :(");
+        mainCamera.GoToAngledRef();
     }
 
 }
