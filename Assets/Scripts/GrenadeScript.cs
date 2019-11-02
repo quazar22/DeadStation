@@ -60,28 +60,6 @@ public class GrenadeScript : MonoBehaviour
         return (value - fromSource) / (toSource - fromSource) * (toTarget - fromTarget) + fromTarget;
     }
 
-    //IEnumerator GrenadeTick()
-    //{
-    //    bool played = false;
-    //    while(!exploded)
-    //    {
-    //        if (st.ElapsedMilliseconds >= 2500)
-    //        {
-    //            grenade_light.intensity = 40f;
-    //        }
-    //        else
-    //        {
-    //            float s_input = 20 * Mathf.Sin(10 * Mathf.Pow(st.ElapsedMilliseconds / 1000f, 2)) + 20;//Mathf.Pow(st.ElapsedMilliseconds / 600f, 3) + 0.5f; //current
-    //            grenade_light.intensity = s_input;
-    //        }
-    //        if (st.ElapsedMilliseconds >= 3000f)
-    //        {
-    //            Explode();
-    //        }
-    //        yield return new WaitForSeconds(0.05f);
-    //    }
-    //}
-
     IEnumerator GrenadeTick()
     {
         bool played = false;
