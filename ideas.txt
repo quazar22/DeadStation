@@ -30,6 +30,11 @@ where does the difficulty with this game lie?
 	9) health management? (finding health replenishment items, etc)
 	10) Inventory management? (no ammo)
 	11) Temporary powerups, like old school arcade shooters?
+	12) Space related events like solar flares (which would do damage because of shield failure?), hull breaches, 
+	    engine failure, life support failure, general power failure (light failure, door failure)
+	13) Experimental science items that could permanently boost health, movement speed, gun damage, etc
+	14) Have bodies disappear when camera stops seeing them
+	15) Waves where the player fights off enemies. Just a differing game mode.
 	
 There are also story items that players can pick up and read that might give just cool story info or lockbox combinations
 
@@ -76,13 +81,16 @@ List of Rooms:
 	19) Cockpit
 	20) Mechanic Workshop
 	21) Fire Control
+	22) Library
+	23) Church
+	24) Tramway
 	
 Floors - 6 total?
 
 Top	1) Communications, Observation Deck, Bridge, Cockpit
-	2) Lounge, Movie Theater, Crew Quarters, Cafeteria, Gym
-	3) Offices, Research, Engineering/Power Generation
-	4) Hospital, Security, Fire Control
+	2) Lounge, Movie Theater, Crew Quarters, Cafeteria, Gym, Library
+	3) Offices, Research, Engineering/Power Generation, Tramway (connects different parts of ship)
+	4) Hospital, Security, Fire Control, Church
 	5) Life Support, Food Generation
 	6) Engines, Evacuation Pod Room, Hangar, Mechanic Workshop
 	

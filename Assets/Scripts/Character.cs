@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 //generic attributes and animations handling and storage
 abstract public class Character
@@ -110,6 +111,9 @@ public class Player : Character
     private CharacterAnimationManager cam;
     private WeaponManager wm;
     private CharacterMovement cm;
+    private RectTransform subtractionBar;
+    private HealthBarScript health_bar;
+    private int MaxHealth = 100;
 
     public Player(GameObject character_object)
     {
@@ -117,16 +121,22 @@ public class Player : Character
         cam = m_playerobject.GetComponentInChildren<CharacterAnimationManager>();
         wm = m_playerobject.GetComponent<WeaponManager>();
         cm = m_playerobject.GetComponent<CharacterMovement>();
+        subtractionBar = GameObject.Find("Canvas/StatusBar/SubtractionBar").GetComponent<RectTransform>();
+        health_bar = GameObject.Find("Canvas/StatusBar").GetComponent<HealthBarScript>();
+        subtractionBar.localScale = new Vector3(0f, 1f, 1f);
         m_char_name = "player";
-        m_health = 100;
+        m_health = MaxHealth;
         m_interpspeed = 0.02f;
         m_isStanding = true;
     }
 
     public override void DamageCharacter(int damage)
     {
-        m_health -= 0;
+        m_health -= damage;
         cam.TakeDamage();
+        float health_scale = 1 - (m_health / (float)MaxHealth);
+        if (health_scale > 1f) health_scale = 1f;
+        health_bar.BeginHealthInterpolate(health_scale);
         if(m_health <= 0)
         {
             Die();
