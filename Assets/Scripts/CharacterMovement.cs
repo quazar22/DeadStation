@@ -13,7 +13,7 @@ public class CharacterMovement : MonoBehaviour
     private CharacterDataController cdc;
 
     private float interpspeed = 1f;
-    private Animator m_anim; //potentially replace with a new class called AnimationController
+    private Animator anim; //potentially replace with a new class called AnimationController
     private bool shouldWalk;
     public bool canMove;
     //private Transform aim_angle;
@@ -35,7 +35,7 @@ public class CharacterMovement : MonoBehaviour
         pc = GetComponent<CharacterController>();
         cdc = GetComponent<CharacterDataController>();
         interpspeed = cdc.character.GetInterpSpeed();
-        m_anim = GetComponentInChildren<Animator>();
+        anim = GetComponentInChildren<Animator>();
         front = GameObject.Find("player/front").GetComponent<Transform>();
     }
 
@@ -75,10 +75,10 @@ public class CharacterMovement : MonoBehaviour
                 left_stick_distance = 0.5f;
             }
 
-            m_anim.SetFloat("direction_y", direction_y);
-            m_anim.SetFloat("direction_x", direction_x);
-            m_anim.SetFloat("angle", angle);
-            m_anim.SetFloat("distance", left_stick_distance);
+            anim.SetFloat("direction_y", direction_y);
+            anim.SetFloat("direction_x", direction_x);
+            anim.SetFloat("angle", angle);
+            anim.SetFloat("distance", left_stick_distance);
 
             float walking_magnitude = GetWalkingMagnitude2(angle, left_stick_distance);
 
@@ -86,20 +86,20 @@ public class CharacterMovement : MonoBehaviour
 
             if (walking_magnitude > 7.5f)
             {
-                m_anim.speed = 0.75f;
+                anim.speed = 0.75f;
                 movement *= 0.75f;
             }
             else
             {
-                m_anim.speed = 1f;
+                anim.speed = 1f;
             }
 
             if (left_stick_distance <= 0.5f)
             {
-                m_anim.speed = left_stick_distance * 2f;
-                m_anim.speed = Mathf.Clamp(m_anim.speed, 0.5f, 1f);
-                m_anim.SetFloat("AnimMultiplier", 1f / m_anim.speed);
-                movement *= m_anim.speed;
+                anim.speed = left_stick_distance * 2f;
+                anim.speed = Mathf.Clamp(anim.speed, 0.5f, 1f);
+                anim.SetFloat("AnimMultiplier", 1f / anim.speed);
+                movement *= anim.speed;
             }
 
             RotateLowerBody(angle);
@@ -108,12 +108,14 @@ public class CharacterMovement : MonoBehaviour
         }
         else
         {
-            m_anim.SetFloat("direction_y", 0);
-            m_anim.SetFloat("direction_x", 0);
-            m_anim.SetFloat("angle", 0);
-            m_anim.SetFloat("distance", 0);
+            anim.SetFloat("direction_y", 0);
+            anim.SetFloat("direction_x", 0);
+            anim.SetFloat("angle", 0);
+            anim.SetFloat("distance", 0);
             pc.SimpleMove(new Vector3(0f, 0f, 0f));
         }
+
+        //Debug.Log(anim.GetFloat("distance"));
 
     }
 
@@ -124,26 +126,21 @@ public class CharacterMovement : MonoBehaviour
 
     public void RotateUpperBody()
     {
-        if (m_anim && canMove)
+        if (anim)
         {
-            m_anim.SetLookAtWeight(1f, 1f, 1f, 1f, .5f);
-            m_anim.SetLookAtPosition(front.position);
+            anim.SetLookAtWeight(1f, 1f, 1f, 1f, .5f);
+            anim.SetLookAtPosition(front.position);
         }
-    }
-
-    public void ZeroLookAtWeight()
-    {
-        m_anim.SetLookAtWeight(0f);
     }
 
     public void RotateLowerBody(float angle)
     {
         if(angle < 180f && angle > 0f)
         {
-            m_anim.transform.rotation = Quaternion.RotateTowards(m_anim.transform.rotation, Quaternion.LookRotation(movement), 5f);
+            anim.transform.rotation = Quaternion.RotateTowards(anim.transform.rotation, Quaternion.LookRotation(movement), 5f);
         } else if(angle > -180f && angle < 0f)
         {
-            m_anim.transform.rotation = Quaternion.RotateTowards(m_anim.transform.rotation, Quaternion.LookRotation(-movement), 5f);
+            anim.transform.rotation = Quaternion.RotateTowards(anim.transform.rotation, Quaternion.LookRotation(-movement), 5f);
         }
     }
 

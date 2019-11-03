@@ -125,7 +125,6 @@ public class CharacterAnimationManager : MonoBehaviour
     public void BeginDeathAnimation()
     {
         m_anim.speed = 1f;
-        m_cm.ZeroLookAtWeight();
         m_anim.SetLayerWeight(1, 0f);
         m_anim.SetLayerWeight(2, 0f);
         m_anim.SetBool("Alive", false);
