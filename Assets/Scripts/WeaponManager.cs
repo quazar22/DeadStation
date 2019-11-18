@@ -95,6 +95,7 @@ public class WeaponManager : MonoBehaviour
                 currentWeapon.timer.Restart();
                 shot_count++;
                 AudioSource source = GetAvailableAudioSource();
+                source.pitch = Random.Range(0.9f, 1.1f);
                 source.volume = 0.2f;
                 source.Play(0);
             }

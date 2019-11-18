@@ -98,7 +98,7 @@ AnimatorController:
       m_Motion: {fileID: 7400000, guid: 4d9b5d0f753def64e8d639877c9fc299, type: 3}
     m_Behaviours: []
     m_BlendingMode: 0
-    m_SyncedLayerIndex: 0
+    m_SyncedLayerIndex: 1
     m_DefaultWeight: 0
     m_IKPass: 1
     m_SyncedLayerAffectsTiming: 0

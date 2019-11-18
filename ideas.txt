@@ -44,26 +44,22 @@ List of Rooms:
 		b) Tennis court
 		c) Weight Room
 	2) Cafeteria
-	3) Research
-		a) Medical
-			i) Clean room
-			ii) lab
-		b) Robotics
-			i) Clean room
-			ii) lab
-		c) Planetary Resources
+	3) Planet Research
+		a) Planetary Resources
 			i) Planet scanning interfaces
-			ii)
-		d) Xenobiology
-			i) Clean room
+		b) Xenobiology
+			i) sample storage
 			ii) lab
 	4) Engineering/Power Generation
+		a) Management Office
+		b) Reactor room (main room)
 	5) Engines
-	6) Bridge
+	6) Bridge //bridge is where ship is commanded, not needed
 	7) Offices
 		a) Meeting rooms
 		b) Administration offices
 		c) Briefing Room
+		d) Lobby (waiting area)
 	8) Crew Quarters
 	9) Security
 		a) Armory
@@ -74,24 +70,38 @@ List of Rooms:
 	12) Life Support
 	13) Food generation (farm)
 	14) Hospital
-	15) Movie Theater
+		a) Morgue
+		b) Intensive Care Unit (ICU)
+		c) General Care
+		d) Operating Rooms
+		e) Therapy
+		f) Lobby
+	15) Movie Theater (REMOVED)
+		a) Theater 1
+		e) Manager Room
+		f) Projector rooms?
 	16) Evacuation pod room
 	17) Lounge
 	18) Observation Deck
-	19) Cockpit
+		a) Observations decks 1-10
+	19) Cockpit/Bridge (makes more sense)
 	20) Mechanic Workshop
 	21) Fire Control
 	22) Library
 	23) Church
 	24) Tramway
+	25) Waste Treatment
+	26) Docking Terminal
 	
 Floors - 6 total?
 
-Top	1) Communications, Observation Deck, Bridge, Cockpit
-	2) Lounge, Movie Theater, Crew Quarters, Cafeteria, Gym, Library
-	3) Offices, Research, Engineering/Power Generation, Tramway (connects different parts of ship)
-	4) Hospital, Security, Fire Control, Church
-	5) Life Support, Food Generation
+Right Side Of Ship (connected by tram, this side of the ship is higher than the other)	
+	1) Communications, Observation Deck, Lounge, Bridge/Cockpit
+	2) Crew Quarters, Cafeteria, Gym, Library
+	3) Offices, Planet Research, Engineering/Power Generation, Tramway (connects different parts of ship)
+Left
+	4) Church, Hospital, Security, Weapons Research, Fire Control, Docking Terminal
+	5) Life Support, Food Generation, Waste Treatment, Tramway
 	6) Engines, Evacuation Pod Room, Hangar, Mechanic Workshop
 	
 The Story of Holden Maxwell

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 //movement and player animation handler
@@ -21,6 +22,11 @@ public class CharacterMovement : MonoBehaviour
 
     private Transform front;
 
+    float deltaTime = 0.0f;
+    float fps = 0.0f;
+
+    Text t;
+
     //each animation runs at 30fps
     private readonly float RunForward = 9f; //22 frames, 2 steps, 0.733 seconds (30fps / (22frames / 2 strides))  = 2.72 strides/second * 2.661 units/stride = 7.237 units/second
     private readonly float WalkForward = 4.55f; //30 frames, 2 steps, 1 second     (30 fps / (30frames / 2 strides)) = 2.00 strides/second * 2.275 units/stride = 4.55 units/second
@@ -29,7 +35,7 @@ public class CharacterMovement : MonoBehaviour
 
     void Start()
     {
-        Application.targetFrameRate = 30;
+        Application.targetFrameRate = 60;
         shouldWalk = false;
         canMove = true;
         pc = GetComponent<CharacterController>();
@@ -37,11 +43,16 @@ public class CharacterMovement : MonoBehaviour
         interpspeed = cdc.character.GetInterpSpeed();
         m_anim = GetComponentInChildren<Animator>();
         front = GameObject.Find("player/front").GetComponent<Transform>();
+
+        t = GameObject.Find("Canvas/Text").GetComponent<Text>();
     }
 
     void Update()
     {
-
+        deltaTime += Time.deltaTime;
+        deltaTime /= 2.0f;
+        fps = 1.0f / deltaTime;
+        t.text = fps.ToString();
     }
 
     private void FixedUpdate()
