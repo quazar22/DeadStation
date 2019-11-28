@@ -102,7 +102,7 @@ public class CharacterAnimationManager : MonoBehaviour
         {
             isThrowing = true;
             m_anim.SetFloat("AnimMultiplier", 1f / m_anim.speed);
-            Transform pos = gameObject.transform.Find("mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand/mixamorig:RightHandMiddle1");
+            Transform pos = gameObject.transform.Find("Armature/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand/mixamorig:RightHandMiddle1");
             grenade_in_hand = Instantiate(grenade, pos.transform.position, Quaternion.identity, pos.transform);
             grenade_in_hand.transform.localPosition += new Vector3(0.04f, 0f);
         }

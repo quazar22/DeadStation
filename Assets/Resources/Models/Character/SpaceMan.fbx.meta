@@ -193,37 +193,37 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Blue.001
-    second: {fileID: 2100000, guid: 1dfac7f8db249634fa7f59dead22bec0, type: 2}
+    second: {fileID: 2100000, guid: 91fbc3db41bb1b045a4325ede048e261, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: GlassMaterial.001
-    second: {fileID: 2100000, guid: a60a5903719511a409882be2cc3a28a9, type: 2}
+    second: {fileID: 2100000, guid: 2a0bd5a8421d28d4f9fdcde7b1a99d18, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Metal.001
-    second: {fileID: 2100000, guid: ed19c777658e1e3409b770627b3e3918, type: 2}
+    second: {fileID: 2100000, guid: dd0108fbf17f5b24e8fdf76de91fea73, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Orange.001
-    second: {fileID: 2100000, guid: c4ea52c330ee65a43bde4aea7c217e5c, type: 2}
+    second: {fileID: 2100000, guid: 335ef4d17ef8e8f4e94d07f52daa60e1, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Red.001
-    second: {fileID: 2100000, guid: ce38c54e7e4911740842b633aa0b019e, type: 2}
+    second: {fileID: 2100000, guid: b0b2516cb4d51ef418a20eedb898c622, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Tubing.001
-    second: {fileID: 2100000, guid: df3515e5e00a1dd48847fcb0c36e5b75, type: 2}
+    second: {fileID: 2100000, guid: f1845116515a3f44594542a01689a50f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: WhiteMaterial.001
-    second: {fileID: 2100000, guid: e5cd5226ae9e42c4ab60da1f70b3d35d, type: 2}
+    second: {fileID: 2100000, guid: b5ff6e8bf0d0d2646a9e17b880a0692b, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
