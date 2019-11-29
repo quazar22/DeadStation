@@ -9,6 +9,7 @@ public class FPS_Printer : MonoBehaviour
     float fps = 0.0f;
 
     Text t;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,7 @@ public class FPS_Printer : MonoBehaviour
         deltaTime += Time.deltaTime;
         deltaTime /= 2.0f;
         fps = 1.0f / deltaTime;
+
         t.text = fps.ToString();
     }
 }

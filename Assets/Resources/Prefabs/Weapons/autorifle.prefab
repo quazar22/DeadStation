@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff00f7ae1cbd16a418fe5550b31e413a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightgrip: {fileID: 0}
+  grip: {fileID: 0}
 --- !u!1 &8278919848123140806
 GameObject:
   m_ObjectHideFlags: 0
@@ -83,10 +83,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2609435772112432659}
     m_Modifications:
-    - target: {fileID: 100000, guid: ab7662aefd9a7be4994f225c34f2184f, type: 3}
-      propertyPath: m_Name
-      value: autorifle
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ab7662aefd9a7be4994f225c34f2184f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -142,6 +138,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: ab7662aefd9a7be4994f225c34f2184f, type: 3}
       propertyPath: m_LocalScale.x
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ab7662aefd9a7be4994f225c34f2184f, type: 3}
+      propertyPath: m_Name
+      value: autorifle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab7662aefd9a7be4994f225c34f2184f, type: 3}
