@@ -99,7 +99,7 @@ public class ZombieSpawn : MonoBehaviour
         foreach (Collider c in z.colliders)
         {
             if(!(c is CharacterController))
-            c.enabled = false;
+                c.enabled = false;
         }
 
     }

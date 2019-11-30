@@ -17,13 +17,13 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
+  - floor
   - wall
   - aim_trigger
   - player
   - zombie_limbs
-  - 
-  - 
+  - minimap_mask
+  - minimap_character
   - 
   - 
   - 
